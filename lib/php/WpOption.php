@@ -475,5 +475,7 @@ abstract class WpOption
 		$this->require = $require;
 	}
 
+
+  const VERSION = "1.0";
 	
 }
