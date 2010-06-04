@@ -30,34 +30,34 @@ $wpOptions->addCheckOption('check',true,'Check','Toggle Option');
 $wpOptions->addTitle('Complex Types');
 
 $options = array(
-	"Arial (Helvetica, sans serif)"                     => "<strong>Arial</strong> (Helvetica, sans serif)",
-	"'Courier New' (Courier, monospace)"                => "<strong>Courier New</strong> (Courier, monospace)",
-	"Georgia (Times, serif)"                            => "<strong>Georgia</strong> (Times, serif)",
-	"'Lucida Console' (Monaco, monospace)"              => "<strong>Lucida Console</strong> (Monaco, monospace)",
-	"'Lucida Sans Unicode' (Lucida Grande, sans serif)" => "<strong>Lucida Sans Unicode</strong> (Lucida Grande, sans serif)",
-	"Tahoma (Geneva, sans serif)"                       => "<strong>Tahoma</strong> (Geneva, sans serif)",
-	"'Times New Roman' (Times, serif)"                  => "<strong>Times New Roman</strong> (Times, serif)",
-	"'Trebuchet MS' (Helvetica, sans serif)"            => "<strong>Trebuchet MS</strong> (Helvetica, sans serif)",
-	"Verdana (Geneva, sans serif)"                      => "<strong>Verdana</strong> (Geneva, sans serif)"
+    "Arial (Helvetica, sans serif)"                     => "<strong>Arial</strong> (Helvetica, sans serif)",
+    "'Courier New' (Courier, monospace)"                => "<strong>Courier New</strong> (Courier, monospace)",
+    "Georgia (Times, serif)"                            => "<strong>Georgia</strong> (Times, serif)",
+    "'Lucida Console' (Monaco, monospace)"              => "<strong>Lucida Console</strong> (Monaco, monospace)",
+    "'Lucida Sans Unicode' (Lucida Grande, sans serif)" => "<strong>Lucida Sans Unicode</strong> (Lucida Grande, sans serif)",
+    "Tahoma (Geneva, sans serif)"                       => "<strong>Tahoma</strong> (Geneva, sans serif)",
+    "'Times New Roman' (Times, serif)"                  => "<strong>Times New Roman</strong> (Times, serif)",
+    "'Trebuchet MS' (Helvetica, sans serif)"            => "<strong>Trebuchet MS</strong> (Helvetica, sans serif)",
+    "Verdana (Geneva, sans serif)"                      => "<strong>Verdana</strong> (Geneva, sans serif)"
 );
 $wpOptions->addRadioOption('font',$options,'Georgia (Times, serif)','Radio Buttons','Select one font family');
 
 $colors = array(
-	'blue'   => 'Blue',
-	'red'    => 'Red',
-	'green'  => 'Green',
-	'orange' => 'Orange',
-	'yellow' => 'Yellow'
+    'blue'   => 'Blue',
+    'red'    => 'Red',
+    'green'  => 'Green',
+    'orange' => 'Orange',
+    'yellow' => 'Yellow'
 );
 $wpOptions->addCheckBoxOption('checkbox',$colors,array('orange','green'),'CheckBox','Select colors');
 
 $fontSize = array(
-	'10px' => '10px',
-	'11px' => '11px',
-	'12px' => '12px',
-	'13px' => '13px',
-	'14px' => '14px',
-	'15px' => '15px'
+    '10px' => '10px',
+    '11px' => '11px',
+    '12px' => '12px',
+    '13px' => '13px',
+    '14px' => '14px',
+    '15px' => '15px'
 );
 $wpOptions->addSelectOption('select',$fontSize,'13px','Select','Select the font size');
 $wpOptions->addMultipleSelectOption('multipleSelect',$fontSize,array('13px','11px'),'Multiple Select','Select one or more font sizes');
@@ -97,6 +97,7 @@ $wpOptions->addStringOption('GoogleOption','','Google Option');
 $wpOptions->addConditionalMetaBox('GoogleOption','paraMostrar',true);
 
 
+$wpOptions->
 
 /**
  * Dont remove this, this include must be at bottom of the functions.php file

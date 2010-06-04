@@ -15,9 +15,9 @@
  * @return WpOptions $wpOptions by Reference
  */
 function &getWpThemeOption($optionName){
-	global $wpOptions;
-	
-	return $wpOptions->getOption($optionName);
+    global $wpOptions;
+    
+    return $wpOptions->getOption($optionName);
 }
 
 

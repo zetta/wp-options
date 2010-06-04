@@ -43,6 +43,12 @@ class WpOptions
     private $file;
     
     /**
+     * @var strin $basename
+     * @access private
+     */
+    private $basename;
+    
+    /**
      * Theme Name
      * @var string $themeName
      * @access private
@@ -117,18 +123,32 @@ class WpOptions
     private $manualUrl = '';
     
     /**
+     * @var array $subpages
+     * @access private
+     */
+    private $subpages = array();
+    
+    /**
+     * @var string $menuIcon
+     * @access private
+     */
+    private $menuIcon = null;
+    
+    /**
      * Instancía el objeto SpigaThemeOptions
      *
      * @param float $wpVersion
      * @param wpdb $wpdb
+     * @param string $menuIcon
      * @return WpOptions WpOptions
      * @access public
      */
-    public function WpOptions($wpVersion, $wpdb)
+    public function WpOptions($wpVersion, $wpdb, $menuIcon = null)
     {
         $this->wpVersion = $wpVersion;
         $this->wpdb = $wpdb;
         $this->file = __FILE__;
+        $this->menuIcon = $menuIcon;
     }
     
     /**
@@ -148,7 +168,20 @@ class WpOptions
      */
     public function addOptionsPage()
     {
-        add_menu_page(_('Configure ') . $this->themeName, $this->themeName, 'edit_themes', basename(__FILE__), $this->getFunctionScope('render'));
+        if(function_exists(add_object_page))
+        {
+            add_object_page(__('Configure ') . $this->themeName, $this->themeName, 8, basename(__FILE__),  $this->getFunctionScope('render'),  $this->menuIcon);
+        }
+        else
+        {
+            add_menu_page(__('Configure ') . $this->themeName, $this->themeName, 8, basename(__FILE__),  $this->getFunctionScope('render'),  $this->menuIcon);
+        }
+        
+        foreach($this->subpages as $sub)
+        {
+            add_submenu_page(basename(__FILE__), $this->themeName.' '.__($sub['title'],$this->themeName), __($sub['title'],$this->themeName), 8, $sub['slug'], $sub['function']);
+        }
+        
         if ($this->hasMetaBox())
         {
             add_meta_box('new-meta-boxes', $this->themeName . ' :: Post Settings', $this->getFunctionScope('renderMetaBox'), 'post', 'normal', 'high');
@@ -167,6 +200,21 @@ class WpOptions
     private function getFunctionScope($funcName)
     {
         return array($this, $funcName);
+    }
+    
+    /**
+     * Add a subpage
+     * @param string title
+     * @param string $slug
+     * @param string $function
+     **/
+    public function addSubPage($title,$slug,$function)
+    {
+        $this->subpages[] = array(
+            'title' => $title,
+            'slug' => $slug,
+            'function' => $function
+        );
     }
     
     /**
@@ -756,7 +804,7 @@ class WpOptions
         return $this->options[$optionName]->getStoredValue();
     }
     
-    /**	
+    /**    
      * Genera los tags para agregar las hojas de estilo
      * @access private
      */
@@ -794,7 +842,7 @@ class WpOptions
     public function setThemeName($themeName)
     {
         $this->themeName = $themeName;
-        $this->baseThemeName = ereg_replace("[^A-Za-z0-9\\_\\ ]", "", $themeName);
+        $this->baseThemeName = preg_replace("/[^A-Za-z0-9\\_\\ ]/i", "", $themeName);
     }
     
     /**
@@ -915,70 +963,70 @@ class WpOptions
     {
         $this->templateHeader = <<<TPL
 
-			<tr valign="top">
-				<th colspan="2" style="background-image:url(images/menu-bits.gif); background-color:#7F7F7F; color:#FFF; margin:0; padding:5px 0 5px 10px; font:normal 13px/18px Georgia, Times New Roman, Times, serif;">
-					%title%
-				</th>
-			</tr>	
+            <tr valign="top">
+                <th colspan="2" style="background-image:url(images/menu-bits.gif); background-color:#7F7F7F; color:#FFF; margin:0; padding:5px 0 5px 10px; font:normal 13px/18px Georgia, Times New Roman, Times, serif;">
+                    %title%
+                </th>
+            </tr>    
 TPL;
         $this->templateOption = <<<TPL
 
-			<tr%visible% class="%class%">
-				<td style='background:#F7F7F7; border-right:1px solid #F0F0F0; font-weight:bold; text-align:right;' >%title%</td>
-				<td>%input% %description%</td>
-			</tr>
+            <tr%visible% class="%class%">
+                <td style='background:#F7F7F7; border-right:1px solid #F0F0F0; font-weight:bold; text-align:right;' >%title%</td>
+                <td>%input% %description%</td>
+            </tr>
 TPL;
         $this->templateLayout = <<<TPL
 
-			<div class="wrap">
-				<div class="icon32" id="icon-tools"><br /></div>
-				<a style="text-decoration:none; margin:10px 20px 0 0; border:none; float:right;" href="http://storelicious.com" title="Pro Themes"><img src="{$this->themeLocation}/lib/pix/brandstorelicious.gif" alt="Storelicious" /> </a>
-				<h2>Welcome to configuration page of <strong>{$this->themeName}</strong>!</h2>
-				%updatedMessage%
-				
-				<form action=""" method="post" style="margin:20px 0 0 0;">
-				
-				<div style="clear:both;height:20px;"></div>
-    				<div class="info">
-      				<div style="width: 70%; float: left; display: inline;padding-top:4px;">
-      					<strong>Stuck on these options?</strong> <a href="{$this->manualUrl}" target="_blank">Read The Documentation Here</a> or 
-      					<a href="{$this->forumUrl}" target="blank">Visit Our Support Forum</a></div>
-					<div style="width: 30%; float: right; display: inline;text-align: right;">
-        				<input name="save" class="button-primary" type="submit" value="Save changes" />
-      				</div>
-     				 <div style="clear:both;"></div>
-    			</div>
-				
-				
-				
-					<input type="hidden" name="post" value="updateWpOptions">
-					<table class="widefat" id="storelicious">
-						<thead><tr><th colspan="2">{$this->themeName}</th></tr></thead>
-						<tbody>%fields%</tbody>							
-					</table>
-					<p class="submit"><input type="submit" class="button-primary" value="Save changes" />
-				</form>
-				<h2>Delete Theme options</h2>
-				<p>To completely remove these theme options from your database (reminder: they are all stored in Wordpress options table <em>{$this->wpdb->options}</em>), click on
-				the following button. You will be then redirected to the <a href="themes.php">Themes admin interface</a> and the Default theme will have been activated.</p>
-				<p><strong>Special notice for people allowing their readers to change theme</strong> (i.e. using a Theme Switcher on their blog)<br/>
-				Unless you really remove the theme files from your server, this theme will still be available to users, and therefore will self-install again as soon as someone selects it. Also, all custom variables as defined in the above menu will be blank, this could lead to unexpected behaviour.
-				Press "Delete" only if you intend to remove the theme files right after this.</p>
-				<form action="" method="post">
-					<input type="hidden" name="post" value="deleteWpOptions" />
-					<p class="submit"><input type="submit" value="Delete Options" onclick="return confirm('Are you really sure you want to delete ?');"/></p>
-				</form>
-			</div>
+            <div class="wrap">
+                <div class="icon32" id="icon-tools"><br /></div>
+                <a style="text-decoration:none; margin:10px 20px 0 0; border:none; float:right;" href="http://storelicious.com" title="Pro Themes"><img src="{$this->themeLocation}/lib/pix/brandstorelicious.gif" alt="Storelicious" /> </a>
+                <h2>Welcome to configuration page of <strong>{$this->themeName}</strong>!</h2>
+                %updatedMessage%
+                
+                <form action=""" method="post" style="margin:20px 0 0 0;">
+                
+                <div style="clear:both;height:20px;"></div>
+                    <div class="info">
+                      <div style="width: 70%; float: left; display: inline;padding-top:4px;">
+                          <strong>Stuck on these options?</strong> <a href="{$this->manualUrl}" target="_blank">Read The Documentation Here</a> or 
+                          <a href="{$this->forumUrl}" target="blank">Visit Our Support Forum</a></div>
+                    <div style="width: 30%; float: right; display: inline;text-align: right;">
+                        <input name="save" class="button-primary" type="submit" value="Save changes" />
+                      </div>
+                      <div style="clear:both;"></div>
+                </div>
+                
+                
+                
+                    <input type="hidden" name="post" value="updateWpOptions">
+                    <table class="widefat" id="storelicious">
+                        <thead><tr><th colspan="2">{$this->themeName}</th></tr></thead>
+                        <tbody>%fields%</tbody>                            
+                    </table>
+                    <p class="submit"><input type="submit" class="button-primary" value="Save changes" />
+                </form>
+                <h2>Delete Theme options</h2>
+                <p>To completely remove these theme options from your database (reminder: they are all stored in Wordpress options table <em>{$this->wpdb->options}</em>), click on
+                the following button. You will be then redirected to the <a href="themes.php">Themes admin interface</a> and the Default theme will have been activated.</p>
+                <p><strong>Special notice for people allowing their readers to change theme</strong> (i.e. using a Theme Switcher on their blog)<br/>
+                Unless you really remove the theme files from your server, this theme will still be available to users, and therefore will self-install again as soon as someone selects it. Also, all custom variables as defined in the above menu will be blank, this could lead to unexpected behaviour.
+                Press "Delete" only if you intend to remove the theme files right after this.</p>
+                <form action="" method="post">
+                    <input type="hidden" name="post" value="deleteWpOptions" />
+                    <p class="submit"><input type="submit" value="Delete Options" onclick="return confirm('Are you really sure you want to delete ?');"/></p>
+                </form>
+            </div>
 TPL;
         
         $this->templateLayoutMetaBox = <<<TPL
-		
-				<table class="widefat">
-					<tbody>
-						%fields%
-					</tbody>							
-				</table>
-			
+        
+                <table class="widefat">
+                    <tbody>
+                        %fields%
+                    </tbody>                            
+                </table>
+            
 TPL;
     }
 
