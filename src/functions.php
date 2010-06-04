@@ -8,7 +8,7 @@ include_once 'lib/includer.php';
 //basic theme info
 $wpOptions = new WpOptions($wp_version,$wpdb);
 $wpOptions->setThemeName('SpigaTheme');
-$wpOptions->setThemeLocation('/wp-content/themes/spigaWpTheme');
+$wpOptions->setThemeLocation('/wp-content/themes/classic');
 $wpOptions->addCSS('options');
 $wpOptions->setManualUrl('http://google.com');
 $wpOptions->setForumUrl('http://www.google.com');
@@ -23,6 +23,10 @@ $wpOptions->addBooleanOption('boolean1',false,'Boolean','True or False');
 $wpOptions->addBooleanOption('boolean2',true,'Boolean');
 $wpOptions->addNumberOption('number',10,'Number');
 $wpOptions->addCheckOption('check',true,'Check','Toggle Option');
+
+
+$wpOptions->addSubpage('subpage title','my subpage','subpage-slug','subpage_demo_function');
+
 
 
 
@@ -63,6 +67,7 @@ $wpOptions->addSelectOption('select',$fontSize,'13px','Select','Select the font 
 $wpOptions->addMultipleSelectOption('multipleSelect',$fontSize,array('13px','11px'),'Multiple Select','Select one or more font sizes');
 
 
+
 /* Begin Wordpress types */
 $wpOptions->addTitle('WordPress Types');
 $wpOptions->addSelectCategoriesOption('categorySelector',0,false,'WordPress Categories','Select a category');
@@ -97,7 +102,11 @@ $wpOptions->addStringOption('GoogleOption','','Google Option');
 $wpOptions->addConditionalMetaBox('GoogleOption','paraMostrar',true);
 
 
-$wpOptions->
+
+function subpage_demo_function()
+{
+    ?><strong>Hello world</strong><?
+}
 
 /**
  * Dont remove this, this include must be at bottom of the functions.php file
