@@ -585,7 +585,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opción de tipo String (input)
+     * Agrega una opción de tipo DatePicker (input)
      *
      * @param string $name
      * @param string $defaultValue
@@ -602,6 +602,23 @@ class WpOptions
         $this->options[$name] = $spigaOption;
     }
     
+    /**
+     * Agrega una opción de tipo ColorPicker (input)
+     *
+     * @param string $name
+     * @param string $defaultValue
+     * @param string [optional] $title
+     * @param string [optional] $description
+     * @access public
+     */
+    function addColorPickerOption($name, $defaultValue, $title = '', $description = '')
+    {
+        require_once 'WpOption/WpColorPickerOption.php';
+        $spigaOption = new WpColorPickerOption($name, $defaultValue);
+        $spigaOption->setTitle($title);
+        $spigaOption->setDescription($description);
+        $this->options[$name] = $spigaOption;
+    }
     
     /**
      * Envia a pantalla el método __toString y además checa los cambios que se realizaron en los valores

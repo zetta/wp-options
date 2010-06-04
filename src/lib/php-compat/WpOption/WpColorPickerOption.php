@@ -11,17 +11,16 @@
  * @version    1.0
  */
 
-class WpSelectOption extends WpOption
+class WpColorPickerOption extends WpOption
 {
-	
 	/**
 	 * Constructor de la clase
 	 *
 	 * @param string $name
 	 * @param string $defaultValue
-	 * @return WpSelectOption
+	 * @return WpColorPickerOption
 	 */
-	function WpSelectOption($name, $defaultValue)
+	function WpColorPickerOption($name, $defaultValue)
 	{
 		parent::__construct($name, $defaultValue);
 	}
@@ -34,17 +33,9 @@ class WpSelectOption extends WpOption
 	function ___toString()
 	{
 		$this->savedValue = $this->getStoredValue();
-		$value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : '');
+		$value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
 		$formName = $this->getFormName();
 		$idName = $this->getFormId();
-		$input = "<select id=\"{$idName}\" name=\"{$formName}\" value=\"{$value}\" >";
-		foreach($this->options as $optionValue => $optionName)
-		{
-			$input .= "\n<option value=\"{$optionValue}\" " . ($optionValue == $value ? 'selected="selected"' : '') . " > " . _($optionName) . '</option>';
-		}
-		$input .= "</select>";
-		return $input;
+		return "<input id=\"{$idName}\" class=\"wpColorPickerOption\" type=\"text\" maxlength=\"6\" size=\"6\" name=\"{$formName}\" value=\"{$value}\" />";
 	}
 }
-
-

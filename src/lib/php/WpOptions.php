@@ -585,7 +585,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opción de tipo String (input)
+     * Agrega una opción de tipo DatePicker (input)
      *
      * @param string $name
      * @param string $defaultValue
@@ -597,6 +597,24 @@ class WpOptions
     {
         require_once 'WpOption/WpDatePickerOption.php';
         $spigaOption = new WpDatePickerOption($name, $defaultValue);
+        $spigaOption->setTitle($title);
+        $spigaOption->setDescription($description);
+        $this->options[$name] = $spigaOption;
+    }
+    
+    /**
+     * Agrega una opción de tipo ColorPicker (input)
+     *
+     * @param string $name
+     * @param string $defaultValue
+     * @param string [optional] $title
+     * @param string [optional] $description
+     * @access public
+     */
+    public function addColorPickerOption($name, $defaultValue, $title = '', $description = '')
+    {
+        require_once 'WpOption/WpColorPickerOption.php';
+        $spigaOption = new WpColorPickerOption($name, $defaultValue);
         $spigaOption->setTitle($title);
         $spigaOption->setDescription($description);
         $this->options[$name] = $spigaOption;
@@ -691,8 +709,10 @@ class WpOptions
     {
         $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery-1.4.2.min.js'></script>\n");
         $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery-ui-1.8.1.custom.min.js'></script>\n");
+        $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/colorpicker.js'></script>\n");
         $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/actions.js'></script>\n");
         $this->addCSS('ui.all');
+        $this->addCSS('colorpicker');
         
         if (count($this->css) > 0)
             $this->includeStyles();

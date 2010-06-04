@@ -39,10 +39,10 @@ class WpSelectPagesOption extends WpOption
 		
 		if($this->isMultiple)
 		{
-			$input = "<select id=\"{$this->getFormId()}\" name=\"{$this->getFormName()}[]\" multiple=\"multiple\" size=\"5\" value=\"{$value}\" />";
+			$input = "<select id=\"{$this->getFormId()}\" name=\"{$this->getFormName()}[]\" multiple=\"multiple\" size=\"5\" value=\"{$value}\" >";
 			$value = ($value) ? $value : array();
 		} else
-			$input = "<select id=\"{$this->getFormId()}\" name=\"{$this->getFormName()}\" value=\"{$value}\" />";
+			$input = "<select id=\"{$this->getFormId()}\" name=\"{$this->getFormName()}\" value=\"{$value}\" >";
 		
 		if(! $this->isMultiple)
 		{

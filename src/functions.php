@@ -1,5 +1,5 @@
 <?php
-
+//error_reporting(-1);
 /**
  * Dont remove this, this include must be at top of the functions.php file
  */
@@ -86,7 +86,7 @@ $wpOptions->addSelectTagsOption('multipleTagSelector',array(),true,'WordPress Ta
 /* Begin CoolTypes */
 $wpOptions->addTitle('CoolTypes');
 $wpOptions->addDatePickerOption('myDate',date('m/d/Y'),'Select a date','You can control dates');
-
+$wpOptions->addColorPickerOption('myColor','ffdd00','Select color','you can store colors');
 
 
 /* Begin Conditional option types */
