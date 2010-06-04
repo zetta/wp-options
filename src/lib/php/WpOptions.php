@@ -291,7 +291,7 @@ class WpOptions
             throw new Exception(_("Can't add new Metabox if the Option '{$condition}' doesn't exist"));
         
         if (get_class($this->options[$condition]) != 'WpCheckOption')
-            throw new Exception(_("Can't add ConditionalMetaBoxes if the Option '{$condition}' doesn't a WpCheckOption Option"));
+            throw new Exception(_("Can't add ConditionalMetaBoxes if the Option '{$condition}' isn't a WpCheckOption Option"));
         
         $this->options[$metaBoxName]->addMetabox();
         $this->options[$metaBoxName]->setHideInOptions($hideInOptionsPage);
@@ -974,7 +974,7 @@ TPL;
         $this->templateOption = <<<TPL
 
             <tr%visible% class="%class%">
-                <td style='background:#F7F7F7; border-right:1px solid #F0F0F0; font-weight:bold; text-align:right;' >%title%</td>
+                <td style='background:#F7F7F7; border-right:1px solid #F0F0F0; font-weight:bold; text-align:right;' ><label for="%id%">%title%</label></td>
                 <td>%input% %description%</td>
             </tr>
 TPL;

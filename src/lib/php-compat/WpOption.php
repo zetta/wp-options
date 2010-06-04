@@ -22,6 +22,12 @@ class WpOption
 	var $post;
 	
 	/**
+	 * @var string $id
+	 * @access protected
+     */
+	var $id;
+	
+	/**
 	 * De que lugar deberá extraer la información el campo
 	 * @access protected
 	 * @var int 
@@ -152,6 +158,7 @@ class WpOption
 	{
 		$this->name = $name;
 		$this->defaultValue = $defaultValue;
+		$this->id = 
 	}
 	
 	/**
@@ -163,10 +170,11 @@ class WpOption
 	{
 		$this->title = ($this->title) ? $this->title : $this->name;
 		$this->template = str_replace('%title%', $this->title, $this->template);
+		$this->template = str_replace('%id%', $this->getFormId(), $this->template);
 		$this->template = str_replace('%input%', $this->___toString(), $this->template);
 		$this->template = str_replace('%description%', $this->description, $this->template);
 		$this->template = str_replace('%visible%', (! $this->visible ? ' style="display:none;"' : ''), $this->template);
-		$this->template = str_replace('%class%', ($this->parent != '__root__' ? 'child_' . $this->parent : ''), $this->template);
+		$this->template = str_replace('%class%', ($this->parent != '__root__' ? 'child_'. $this->inputName .'_' . $this->parent : ''), $this->template);
 		return $this->template;
 	}
 	
@@ -198,6 +206,16 @@ class WpOption
 			return $this->name.'_value';
 		else
 			return '';
+	}
+
+	/**
+	 * Obtiene el id que se usara en el formulario
+	 * @return string
+	 * @access public
+	 */
+	function getFormId()
+	{
+	    return $this->inputName . '_' . $this->name;
 	}
 	
 	/**

@@ -34,6 +34,6 @@ class WpDatePickerOption extends WpOption
 	{
 		$this->savedValue = $this->getStoredValue();
 		$value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
-		return "<input class=\"wpDatePickerOption\" type=\"text\" size=\"45\" name=\"{$this->getFormName()}\" value=\"{$value}\" />";
+		return "<input  id=\"{$this->getFormId()}\" class=\"wpDatePickerOption\" type=\"text\" size=\"45\" name=\"{$this->getFormName()}\" value=\"{$value}\" />";
 	}
 }

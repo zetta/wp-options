@@ -5,7 +5,7 @@
  */
 include_once 'lib/includer.php';
 
-//basic theme info
+//basic theme info, you MUST modify this information
 $wpOptions = new WpOptions($wp_version,$wpdb);
 $wpOptions->setThemeName('SpigaTheme');
 $wpOptions->setThemeLocation('/wp-content/themes/classic');
@@ -82,7 +82,7 @@ $wpOptions->addSelectUsersOption('multipleUserSelector',array(),true,'WordPress 
 $wpOptions->addSelectTagsOption('tagSelector',0,false,'WordPress Tags');
 $wpOptions->addSelectTagsOption('multipleTagSelector',array(),true,'WordPress Tags');
 
-
+/* Begin Conditional option types */
 $wpOptions->addTitle('Conditional');
 $wpOptions->addStringOption('flickrName','MyName','Flickr Name');
 $wpOptions->addNumberOption('FlickrID',0,'Flickr Number');
@@ -93,7 +93,7 @@ $wpOptions->setConditionalOptions('viewFlickr',array('flickrName','FlickrID'));
 
 
 
-
+/* Begin metabox */
 $wpOptions->addMetaBox('string',false);
 $wpOptions->addMetaBoxes(array('text','number','check','select'),false);
 

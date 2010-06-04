@@ -36,7 +36,8 @@ class WpSelectOption extends WpOption
 		$this->savedValue = $this->getStoredValue();
 		$value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : '');
 		$formName = $this->getFormName();
-		$input = "<select name=\"{$formName}\" value=\"{$value}\" />";
+		$idName = $this->getFormId();
+		$input = "<select id=\"{$idName}\" name=\"{$formName}\" value=\"{$value}\" />";
 		foreach($this->options as $optionValue => $optionName)
 		{
 			$input .= "\n<option value=\"{$optionValue}\" " . ($optionValue == $value ? 'selected="selected"' : '') . " > " . _($optionName) . '</option>';

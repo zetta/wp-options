@@ -33,6 +33,7 @@ class WpBooleanOption extends WpOption
 	{
 		$this->savedValue = $this->getStoredValue();
 		$formName = $this->getFormName();
+		$idName = $this->getFormId();
 		$value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : 'false');
 		$input = "\n<input type=\"radio\" name=\"{$formName}\" value=\"true\" " . ($this->cast($value) ? 'checked="checked"' : '') . " /> " . _('Yes') . " &nbsp;";
 		$input .= "\n<input type=\"radio\" name=\"{$formName}\" value=\"false\" " . (! $this->cast($value) ? 'checked="checked"' : '') . " /> " . _('No');

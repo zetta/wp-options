@@ -37,12 +37,13 @@ class WpSelectPagesOption extends WpOption
 		$this->savedValue = $this->getStoredValue();
 		$value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : '');
 		$formName = $this->getFormName();
+		$idName = $this->getFormId();
 		if($this->isMultiple)
 		{
-			$input = "<select name=\"{$formName}[]\" multiple=\"multiple\" size=\"5\" value=\"{$value}\" />";
+			$input = "<select id=\"{$idName}\" name=\"{$formName}[]\" multiple=\"multiple\" size=\"5\" value=\"{$value}\" />";
 			$value = ($value) ? $value : array();
 		} else
-			$input = "<select name=\"{$formName}\" value=\"{$value}\" />";
+			$input = "<select id=\"{$idName}\" name=\"{$formName}\" value=\"{$value}\" />";
 		
 		if(! $this->isMultiple)
 		{

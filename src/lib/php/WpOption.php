@@ -22,6 +22,12 @@ abstract class WpOption
 	protected $post = null;
 	
 	/**
+	 * @var string $id
+	 * @access protected
+     */
+	protected $id;
+	
+	/**
 	 * De que lugar deberá extraer la información el campo
 	 * @access protected
 	 * @var int 
@@ -163,10 +169,11 @@ abstract class WpOption
 	{
 		$this->title = ($this->title) ? $this->title : $this->name;
 		$this->template = str_replace('%title%', $this->title, $this->template);
+		$this->template = str_replace('%id%', $this->getFormId(), $this->template);
 		$this->template = str_replace('%input%', $this->___toString(), $this->template);
 		$this->template = str_replace('%description%', $this->description, $this->template);
 		$this->template = str_replace('%visible%', (! $this->visible ? ' style="display:none;"' : ''), $this->template);
-		$this->template = str_replace('%class%', ($this->parent != '__root__' ? 'child_' . $this->parent : ''), $this->template);
+		$this->template = str_replace('%class%', ($this->parent != '__root__' ? 'child_'. $this->inputName .'_' . $this->parent : ''), $this->template);
 		return $this->template;
 	}
 	
@@ -187,7 +194,7 @@ abstract class WpOption
 	
 	/**
 	 * Obtiene el nombre que utilizará en el formulario
-	 * @return sttring
+	 * @return string
 	 * @access public
 	 */
 	public function getFormName()
@@ -198,6 +205,16 @@ abstract class WpOption
 			return $this->name.'_value';
 		else
 			return '';
+	}
+		
+	/**
+	 * Obtiene el id que se usara en el formulario
+	 * @return string
+	 * @access public
+	 */
+	public function getFormId()
+	{
+	    return $this->inputName . '_' . $this->name;
 	}
 	
 	/**
@@ -476,6 +493,6 @@ abstract class WpOption
 	}
 
 
-  const VERSION = "1.0";
+  const VERSION = "1.1";
 	
 }
