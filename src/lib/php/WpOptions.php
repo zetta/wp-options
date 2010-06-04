@@ -689,8 +689,8 @@ class WpOptions
      */
     public function __toString()
     {
-        $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery-1.3.js'></script>\n");
-        $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery.ui.all.js'></script>\n");
+        $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery-1.4.2.min.js'></script>\n");
+        $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery-ui-1.8.1.custom.min.js'></script>\n");
         $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/actions.js'></script>\n");
         $this->addCSS('ui.all');
         

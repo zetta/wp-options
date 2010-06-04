@@ -82,6 +82,13 @@ $wpOptions->addSelectUsersOption('multipleUserSelector',array(),true,'WordPress 
 $wpOptions->addSelectTagsOption('tagSelector',0,false,'WordPress Tags');
 $wpOptions->addSelectTagsOption('multipleTagSelector',array(),true,'WordPress Tags');
 
+
+/* Begin CoolTypes */
+$wpOptions->addTitle('CoolTypes');
+$wpOptions->addDatePickerOption('myDate',date('m/d/Y'),'Select a date','You can control dates');
+
+
+
 /* Begin Conditional option types */
 $wpOptions->addTitle('Conditional');
 $wpOptions->addStringOption('flickrName','MyName','Flickr Name');
@@ -89,6 +96,7 @@ $wpOptions->addNumberOption('FlickrID',0,'Flickr Number');
 $wpOptions->addCheckOption('viewFlickr',false,'View Flickr');
 
 $wpOptions->setConditionalOptions('viewFlickr',array('flickrName','FlickrID'));
+
 
 
 
