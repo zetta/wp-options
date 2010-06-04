@@ -701,10 +701,12 @@ class WpOptions
      */
     function __toString()
     {
-        $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery-1.3.js'></script>\n");
-        $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery.ui.all.js'></script>\n");
+        $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery-1.4.2.min.js'></script>\n");
+        $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery-ui-1.8.2.custom.min.js'></script>\n");
+        $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/colorpicker.js'></script>\n");
         $this->addContent("<script type='text/javascript' src='{$this->themeLocation}/lib/js/actions.js'></script>\n");
-        $this->addCSS('ui.all');
+        $this->addCSS('jquery-ui-1.8.2.custom');
+        $this->addCSS('colorpicker');
         
         if(count($this->css) > 0)
             $this->includeStyles();
