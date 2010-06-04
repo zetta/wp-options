@@ -204,6 +204,7 @@ class WpOptions
     
     /**
      * Add a subpage
+     * @param string $pageTitle
      * @param string title
      * @param string $slug
      * @param string $function
