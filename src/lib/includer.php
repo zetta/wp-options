@@ -7,4 +7,4 @@
 if (version_compare(PHP_VERSION, '5.0.0', '<')) 
     include_once 'php-compat/WpOptions.php';
 else
-	include_once 'php/WpOptions.php';
+    include_once 'php/WpOptions.php';

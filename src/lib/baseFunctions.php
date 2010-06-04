@@ -3,7 +3,7 @@
 
 
 /**
- * No Remover esto, porque de otra forma la variable $spigaTheme se pierde ¬¬
+ * No Remover esto, porque de otra forma la variable $wpOptions se pierde ¬¬
  * puesto que dentro de los archivos del template el scope es diferente
  * o.O!!! Damn Wp!
  * por lo tanto:::
