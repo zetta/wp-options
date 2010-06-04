@@ -179,7 +179,7 @@ class WpOptions
         
         foreach($this->subpages as $sub)
         {
-            add_submenu_page(basename(__FILE__), $this->themeName.' '.__($sub['pageTitle'],$this->themeName), __($sub['title'],$this->themeName), 8, $sub['slug'], $sub['function']);
+            add_submenu_page(basename(__FILE__), __($sub['pageTitle'],$this->themeName), __($sub['title'],$this->themeName), 8, $sub['slug'], $sub['function']);
         }
         
         if ($this->hasMetaBox())
