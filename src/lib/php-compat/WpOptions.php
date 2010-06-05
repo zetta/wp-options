@@ -935,6 +935,13 @@ class WpOptions
     var $templateOption = "";
     
     /**
+     * Variable que almacena el layout de las opciones que se 'wrappean' en el formulario
+     * @var string
+     * @access private
+     */
+    var $templateWrappedOption = "";
+
+    /**
      * Variable que almacena el layout para el diseño de los headers
      * @var string
      * @access private
@@ -975,6 +982,13 @@ TPL;
             <tr%visible% class="%class%">
                 <td style='background:#F7F7F7; border-right:1px solid #F0F0F0; font-weight:bold; text-align:right;' ><label for="%id%">%title%</label></td>
                 <td>%input% %description%</td>
+            </tr>
+TPL;
+        $this->templateWrappedOption = <<<TPL
+
+            <tr%visible% class="%class%">
+                <td style='background:#F7F7F7; border-right:1px solid #F0F0F0; font-weight:bold; text-align:right;' >%title%</td>
+                <td><label for="%id%">%input% %description%</label></td>
             </tr>
 TPL;
         $this->templateLayout = <<<TPL
