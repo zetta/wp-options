@@ -12,7 +12,6 @@ $wpOptions->setManualUrl('http://google.com');
 $wpOptions->setForumUrl('http://www.google.com');
 
 
-
 /*Begin Basic types*/
 $wpOptions->addTitle('Basic Types');
 $wpOptions->addStringOption('string','this is the default string...','String','You can store strings in this option');
