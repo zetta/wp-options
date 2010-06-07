@@ -171,11 +171,11 @@ class WpOptions
     {
         if(function_exists(add_object_page))
         {
-            add_object_page(__('Configure ') . $this->themeName, $this->themeName, 8, basename(__FILE__),  $this->getFunctionScope('render'),  $this->menuIcon);
+            add_object_page(_s('Configure ') . $this->themeName, $this->themeName, 8, basename(__FILE__),  $this->getFunctionScope('render'),  $this->menuIcon);
         }
         else
         {
-            add_menu_page(__('Configure ') . $this->themeName, $this->themeName, 8, basename(__FILE__),  $this->getFunctionScope('render'),  $this->menuIcon);
+            add_menu_page(_s('Configure ') . $this->themeName, $this->themeName, 8, basename(__FILE__),  $this->getFunctionScope('render'),  $this->menuIcon);
         }
         
         foreach($this->subpages as $sub)
@@ -720,7 +720,7 @@ class WpOptions
         
         $fields = $this->getChilds($this->options, '__root__');
         $this->templateLayout = str_replace('%fields%', $fields, $this->templateLayout);
-        $this->templateLayout = str_replace('%updatedMessage%', ($this->updated ? "<div class='updated'><p><b>" . _('Updated Options') . "</b></p></div>\n" : ''), $this->templateLayout);
+        $this->templateLayout = str_replace('%updatedMessage%', ($this->updated ? "<div class='updated'><p><strong>" . _s('Updated Options') . "</strong></p></div>" : ''), $this->templateLayout);
         $this->addContent($this->templateLayout);
         return $this->content;
     }
@@ -986,6 +986,7 @@ class WpOptions
      */
     private $templateLayoutMetaBox = '';
     
+    
     /**
      * Guarda el template a utilizar en los headers
      * @access private
@@ -995,7 +996,7 @@ class WpOptions
         $this->templateHeader = <<<TPL
 
             <tr valign="top">
-                <th colspan="2" style="background-image:url(images/menu-bits.gif); background-color:#7F7F7F; color:#FFF; margin:0; padding:5px 0 5px 10px; font:normal 13px/18px Georgia, Times New Roman, Times, serif;">
+                <th colspan="2">
                     %title%
                 </th>
             </tr>    
@@ -1003,36 +1004,35 @@ TPL;
         $this->templateOption = <<<TPL
 
             <tr%visible% class="%class%">
-                <td style='background:#F7F7F7; border-right:1px solid #F0F0F0; font-weight:bold; text-align:right;' ><label for="%id%">%title%</label></td>
-                <td>%input% %description%</td>
+                <td class="option-title"><label for="%id%">%title%</label></td>
+                <td class="%id%">%input% %description%</td>
             </tr>
 TPL;
         $this->templateLayout = <<<TPL
 
             <div class="wrap">
                 <div class="icon32" id="icon-tools"><br /></div>
-                <a style="text-decoration:none; margin:10px 20px 0 0; border:none; float:right;" href="http://storelicious.com" title="Pro Themes"><img src="{$this->themeLocation}/lib/pix/brandstorelicious.gif" alt="Storelicious" /> </a>
+                <a href="http://storelicious.com" title="Premium WordPress Themes" id="storelicious_logo"><img src="{$this->themeLocation}/lib/pix/brandstorelicious.gif" alt="Storelicious" /> </a>
                 <h2>Welcome to configuration page of <strong>{$this->themeName}</strong>!</h2>
                 %updatedMessage%
                 
-                <form action=""" method="post" style="margin:20px 0 0 0;">
+                <form action=""" method="post">
                 
-                <div style="clear:both;height:20px;"></div>
-                    <div class="info">
-                      <div style="width: 70%; float: left; display: inline;padding-top:4px;">
+                 <div class="info">
+                       <input name="save" class="button-primary floatRight" type="submit" value="_s('Save changes')" />
                           <strong>Stuck on these options?</strong> <a href="{$this->manualUrl}" target="_blank">Read The Documentation Here</a> or 
-                          <a href="{$this->forumUrl}" target="blank">Visit Our Support Forum</a></div>
-                    <div style="width: 30%; float: right; display: inline;text-align: right;">
-                        <input name="save" class="button-primary" type="submit" value="Save changes" />
-                      </div>
-                      <div style="clear:both;"></div>
+                          <a href="{$this->forumUrl}" target="blank">Visit Our Support Forum</a>
                 </div>
-                
-                
                 
                     <input type="hidden" name="post" value="updateWpOptions">
                     <table class="widefat" id="storelicious">
                         <thead><tr><th colspan="2">{$this->themeName}</th></tr></thead>
+						<tfoot>
+							<tr>
+								<th>End Storelicious Options</th>
+								<th align="right"><a href='#storelicious'>Back to top</a></th>
+							</tr>
+						</tfoot>
                         <tbody>%fields%</tbody>                            
                     </table>
                     <p class="submit"><input type="submit" class="button-primary" value="Save changes" />
@@ -1052,7 +1052,7 @@ TPL;
         
         $this->templateLayoutMetaBox = <<<TPL
         
-                <table class="widefat">
+                <table class="widefat" id="storelicious_metabox">
                     <tbody>
                         %fields%
                     </tbody>                            
@@ -1062,21 +1062,6 @@ TPL;
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

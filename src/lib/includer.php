@@ -1,5 +1,5 @@
 <?php 
-
+load_theme_textdomain('storelicious',get_template_directory().'/lang');
 
 /**
  * Checamos que la version de php sea la adecuada

@@ -1,12 +1,11 @@
 <?php
-//error_reporting(-1);
 /**
  * Dont remove this, this include must be at top of the functions.php file
  */
 include_once 'lib/includer.php';
 
 //basic theme info, you MUST modify this information
-$wpOptions = new WpOptions($wp_version,$wpdb);
+$wpOptions = new WpOptions($wp_version,$wpdb,get_bloginfo('template_url').'/lib/pix/storelicious.png');
 $wpOptions->setThemeName('SpigaTheme');
 $wpOptions->addCSS('options');
 $wpOptions->setManualUrl('http://google.com');
@@ -109,7 +108,10 @@ $wpOptions->addStringOption('GoogleOption','','Google Option');
 $wpOptions->addConditionalMetaBox('GoogleOption','paraMostrar',true);
 
 
-
+/**
+ * Subpage demo function 
+ * used in $wpOptions->addSubpage();
+ */
 function subpage_demo_function()
 {
     ?><strong>Hello world</strong><?

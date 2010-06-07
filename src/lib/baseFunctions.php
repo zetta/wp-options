@@ -16,14 +16,16 @@
  */
 function &getWpThemeOption($optionName){
     global $wpOptions;
-    
     return $wpOptions->getOption($optionName);
 }
 
-
-
- 
-
 add_action('admin_menu', array($wpOptions, 'addOptionsPage'));
 
+/**
+ *  localization function 
+ */
+function _s($string, $namespace = 'storelicious')
+{
+    return __($string,$namespace);
+}
 
