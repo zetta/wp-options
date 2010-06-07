@@ -180,7 +180,7 @@ class WpOptions
         
         foreach($this->subpages as $sub)
         {
-            add_submenu_page(basename(__FILE__), __($sub['pageTitle'],$this->themeName), __($sub['title'],$this->themeName), 8, $sub['slug'], $sub['function']);
+            add_submenu_page(basename(__FILE__), _s($sub['pageTitle']), _s($sub['title']), 8, $sub['slug'], $sub['function']);
         }
         
         if ($this->hasMetaBox())
@@ -244,7 +244,7 @@ class WpOptions
     public function addMetaBox($metaBoxName, $hideInOptionsPage = true)
     {
         if (! isset($this->options[$metaBoxName]))
-            throw new Exception(_("Can't add new Metabox if the Option '{$metaBoxName}' doesn't exist"));
+            throw new Exception(_s("Can't add new Metabox if the Option '{$metaBoxName}' doesn't exist"));
         
         $this->options[$metaBoxName]->addMetabox();
         $this->options[$metaBoxName]->setHideInOptions($hideInOptionsPage);
@@ -266,7 +266,7 @@ class WpOptions
         {
             
             if (! isset($this->options[$metaBoxName]))
-                throw new Exception(_("Can't add new Metabox if the Option '{$metaBoxName}' doesn't exist"));
+                throw new Exception(_s("Can't add new Metabox if the Option '{$metaBoxName}' doesn't exist"));
             
             $this->options[$metaBoxName]->addMetabox();
             $this->options[$metaBoxName]->setHideInOptions($hideInOptionsPage);
@@ -286,13 +286,13 @@ class WpOptions
     public function addConditionalMetaBox($metaBoxName, $condition, $hideInOptionsPage = true)
     {
         if (! isset($this->options[$metaBoxName]))
-            throw new Exception(_("Can't add new Metabox if the Option '{$metaBoxName}' doesn't exist"));
+            throw new Exception(_s("Can't add new Metabox if the Option '{$metaBoxName}' doesn't exist"));
         
         if (! isset($this->options[$condition]))
-            throw new Exception(_("Can't add new Metabox if the Option '{$condition}' doesn't exist"));
+            throw new Exception(_s("Can't add new Metabox if the Option '{$condition}' doesn't exist"));
         
         if (get_class($this->options[$condition]) != 'WpCheckOption')
-            throw new Exception(_("Can't add ConditionalMetaBoxes if the Option '{$condition}' isn't a WpCheckOption Option"));
+            throw new Exception(_s("Can't add ConditionalMetaBoxes if the Option '{$condition}' isn't a WpCheckOption Option"));
         
         $this->options[$metaBoxName]->addMetabox();
         $this->options[$metaBoxName]->setHideInOptions($hideInOptionsPage);
@@ -312,18 +312,18 @@ class WpOptions
     public function setConditionalOptions($condition, $options)
     {
         if (! isset($this->options[$condition]))
-            throw new Exception(_("Can't add ConditionalOptions if the Option '{$condition}' doesn't exist"));
+            throw new Exception(_s("Can't add ConditionalOptions if the Option '{$condition}' doesn't exist"));
         
         if (! isset($this->options[$condition]))
-            throw new Exception(_("Can't add new Metabox if the Option '{$condition}' doesn't exist"));
+            throw new Exception(_s("Can't add new Metabox if the Option '{$condition}' doesn't exist"));
         
         if (get_class($this->options[$condition]) != 'WpCheckOption')
-            throw new Exception(_("Can't add ConditionalOptions if the Option '{$condition}' doesn't a WpCheckOption Option"));
+            throw new Exception(_s("Can't add ConditionalOptions if the Option '{$condition}' doesn't a WpCheckOption Option"));
         
         foreach ( $options as $option )
         {
             if (! isset($this->options[$option]))
-                throw new Exception(_("Can't add ConditionalOption if the Option '{$option}' doesn't exist"));
+                throw new Exception(_s("Can't add ConditionalOption if the Option '{$option}' doesn't exist"));
             $this->options[$option]->setParent($condition);
             $this->options[$condition]->addChild($this->options[$option]);
         }
@@ -807,7 +807,7 @@ class WpOptions
     public function getOption($optionName)
     {
         if (! isset($this->options[$optionName]))
-            throw new Exception(_("The option {$optionName} doesn't exists"));
+            throw new Exception(_s("The option {$optionName} doesn't exists"));
         $this->options[$optionName]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
         return $this->options[$optionName]->getValue();
     }
@@ -820,7 +820,7 @@ class WpOptions
     {
         global $post;
         if (! isset($this->options[$optionName]))
-            throw new Exception(_("The option {$optionName} doesn't exists"));
+            throw new Exception(_s("The option {$optionName} doesn't exists"));
         $this->options[$optionName]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
         $this->options[$optionName]->setPost($post);
         $this->options[$optionName]->setDbSource(WpOption::$Sources['POST_META']);
@@ -1057,7 +1057,6 @@ TPL;
                         %fields%
                     </tbody>                            
                 </table>
-            
 TPL;
     }
 

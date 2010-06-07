@@ -34,6 +34,6 @@ class WpColorPickerOption extends WpOption
 	{
 		$this->savedValue = $this->getStoredValue();
 		$value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
-		return "<input  id=\"{$this->getFormId()}\" class=\"wpColorPickerOption\" type=\"text\" maxlength=\"6\" size=\"6\" name=\"{$this->getFormName()}\" value=\"{$value}\" />";
+		return "<input  id='{$this->getFormId()}' class='wpColorPickerOption' type='text' maxlength='6' size='6' name='{$this->getFormName()}' value='{$value}' />";
 	}
 }

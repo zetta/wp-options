@@ -33,8 +33,8 @@ class WpBooleanOption extends WpOption
 	{
 		$this->savedValue = $this->getStoredValue();
 		$value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : 'false');
-		$input = "\n<label for='{$this->getFormId()}_true'><input type='radio' id='{$this->getFormId()}_true' name='{$this->getFormName()}' value='true' " . ($this->cast($value) ? 'checked="checked"' : '') . " /> " . _('Yes') . "</label>&nbsp;";
-		$input .= "\n<label for='{$this->getFormId()}_false'><input type='radio' id='{$this->getFormId()}_false' name='{$this->getFormName()}' value='false' " . (! $this->cast($value) ? 'checked="checked"' : '') . " /> " . _('No'). '</label>';
+		$input = "\n<label for='{$this->getFormId()}_true'><input type='radio' id='{$this->getFormId()}_true' name='{$this->getFormName()}' value='true' " . ($this->cast($value) ? 'checked="checked"' : '') . " /> " . _s('Yes') . "</label>&nbsp;";
+		$input .= "\n<label for='{$this->getFormId()}_false'><input type='radio' id='{$this->getFormId()}_false' name='{$this->getFormName()}' value='false' " . (! $this->cast($value) ? 'checked="checked"' : '') . " /> " . _s('No'). '</label>';
 		return $input;
 	}
 	

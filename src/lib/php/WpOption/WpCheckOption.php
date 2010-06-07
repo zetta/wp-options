@@ -35,7 +35,7 @@ class WpCheckOption extends WpOption
 		$this->savedValue = $this->getStoredValue();
 		$value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : 'false');
 		$class = $this->hasChilds() ? 'optionParent' : '';
-		$input = "\n<input type='checkbox' class='{$class}' id='{$this->getFormId()}'  name='{$this->getFormName()}' value='true' " . ($this->cast($value) ? 'checked="checked"' : '') . " /> " . _(substr($this->description, 3, - 4));
+		$input = "\n<input type='checkbox' class='{$class}' id='{$this->getFormId()}'  name='{$this->getFormName()}' value='true' " . ($this->cast($value) ? 'checked="checked"' : '') . " /> " . _s(substr($this->description, 3, - 4));
 		$this->description = '';
 		return $input;
 	}

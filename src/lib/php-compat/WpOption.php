@@ -260,7 +260,7 @@ class WpOption
 	 */
 	function setDescription($description)
 	{
-		$this->description = $description ? '<p>' . _($description) . '</p>' : '';
+		$this->description = $description ? '<p>' . _s($description) . '</p>' : '';
 	}
 	
 	/**
@@ -278,7 +278,7 @@ class WpOption
 	 */
 	function setTitle($title)
 	{
-		$this->title = _($title);
+		$this->title = _s($title);
 	}
 	
 	/**

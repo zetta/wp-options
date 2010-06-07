@@ -47,12 +47,12 @@ class WpSelectPagesOption extends WpOption
 		
 		if(! $this->isMultiple)
 		{
-			$input .= "<option value=\"0\">" . _('Select one page') . "</option>";
+			$input .= "<option value=\"0\">" . _s('Select one page') . "</option>";
 			foreach($this->options as $page)
-				$input .= "\n<option value=\"{$page->ID}\" " . ($page->ID == $value ? 'selected="selected"' : '') . " >" . _($page->post_title) . '</option>';
+				$input .= "\n<option value=\"{$page->ID}\" " . ($page->ID == $value ? 'selected="selected"' : '') . " >" . _s($page->post_title) . '</option>';
 		} else
 			foreach($this->options as $page)
-				$input .= "\n<option value=\"{$page->ID}\" " . (in_array($page->ID, $value) ? 'selected="selected"' : '') . " >" . _($page->post_title) . '</option>';
+				$input .= "\n<option value=\"{$page->ID}\" " . (in_array($page->ID, $value) ? 'selected="selected"' : '') . " >" . _s($page->post_title) . '</option>';
 		
 		$input .= "</select>";
 		return $input;

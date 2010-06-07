@@ -45,12 +45,12 @@ class WpSelectUsersOption extends WpOption
 		
 		if(! $this->isMultiple)
 		{
-			$input .= "<option value=\"0\">" . _('Select one page') . "</option>";
+			$input .= "<option value=\"0\">" . _s('Select one page') . "</option>";
 			foreach($this->options as $user)
-				$input .= "\n<option value=\"{$user->user_id}\" " . ($user->user_id == $value ? 'selected="selected"' : '') . " >" . _($user->display_name) . '</option>';
+				$input .= "\n<option value=\"{$user->user_id}\" " . ($user->user_id == $value ? 'selected="selected"' : '') . " >" . _s($user->display_name) . '</option>';
 		} else
 			foreach($this->options as $user)
-				$input .= "\n<option value=\"{$user->user_id}\" " . (in_array($user->user_id, $value) ? 'selected="selected"' : '') . " >" . _($user->display_name) . '</option>';
+				$input .= "\n<option value=\"{$user->user_id}\" " . (in_array($user->user_id, $value) ? 'selected="selected"' : '') . " >" . _s($user->display_name) . '</option>';
 		
 		$input .= "</select>";
 		return $input;

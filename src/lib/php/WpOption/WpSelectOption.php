@@ -38,7 +38,7 @@ class WpSelectOption extends WpOption
 		$input = "<select id=\"{$this->getFormId()}\" name=\"{$this->getFormName()}\" value=\"{$value}\" >";
 		foreach($this->options as $optionValue => $optionName)
 		{
-			$input .= "\n<option value=\"{$optionValue}\" " . ($optionValue == $value ? 'selected="selected"' : '') . " > " . _($optionName) . '</option>';
+			$input .= "\n<option value=\"{$optionValue}\" " . ($optionValue == $value ? 'selected="selected"' : '') . " > " . _s($optionName) . '</option>';
 		}
 		$input .= "</select>";
 		return $input;

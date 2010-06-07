@@ -39,7 +39,7 @@ class WpMultipleSelectOption extends WpOption
 		$input = "<select name=\"{$formName}[]\" value=\"{$value}\" multiple size=\"5\">";
 		foreach($this->options as $optionValue => $optionName)
 		{
-			$input .= "\n<option value=\"{$optionValue}\" " . (in_array($optionValue, $value) ? 'selected="selected"' : '') . " > " . _($optionName) . '</option>';
+			$input .= "\n<option value=\"{$optionValue}\" " . (in_array($optionValue, $value) ? 'selected="selected"' : '') . " > " . _s($optionName) . '</option>';
 		}
 		$input .= "</select>";
 		return $input;

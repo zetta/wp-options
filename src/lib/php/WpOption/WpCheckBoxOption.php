@@ -46,7 +46,7 @@ class WpCheckBoxOption extends WpOption
 		$i=0;
 		foreach ( $this->options as $optionValue => $optionName )
 		{
-			$input .= "\n<label for='{$this->getFormId()}_{$i}'><input type='checkbox' id='{$this->getFormId()}_{$i}' name='{$this->getFormName()}[{$optionValue}]' value='{$optionValue}' ".( in_array($optionValue,$value) ? 'checked="checked"' : '')." /> "._($optionName) . '</label>';
+			$input .= "\n<label for='{$this->getFormId()}_{$i}'><input type='checkbox' id='{$this->getFormId()}_{$i}' name='{$this->getFormName()}[{$optionValue}]' value='{$optionValue}' ".( in_array($optionValue,$value) ? 'checked="checked"' : '')." /> "._s($optionName) . '</label>';
 			if ($this->onePerLine) $input .= '<br/>';
 			$i++;
 		}

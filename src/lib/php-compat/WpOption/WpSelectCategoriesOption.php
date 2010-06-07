@@ -47,12 +47,12 @@ class WpSelectCategoriesOption extends WpOption
 		
 		if(! $this->isMultiple)
 		{
-			$input .= "<option value=\"0\">" . _('Select one category') . "</option>";
+			$input .= "<option value=\"0\">" . _s('Select one category') . "</option>";
 			foreach($this->options as $category)
-				$input .= "\n<option value=\"{$category->cat_ID}\" " . ($category->cat_ID == $value ? 'selected="selected"' : '') . " >" . _($category->name) . '</option>';
+				$input .= "\n<option value=\"{$category->cat_ID}\" " . ($category->cat_ID == $value ? 'selected="selected"' : '') . " >" . _s($category->name) . '</option>';
 		} else
 			foreach($this->options as $category)
-				$input .= "\n<option value=\"{$category->cat_ID}\" " . (in_array($category->cat_ID, $value) ? 'selected="selected"' : '') . " >" . _($category->name) . '</option>';
+				$input .= "\n<option value=\"{$category->cat_ID}\" " . (in_array($category->cat_ID, $value) ? 'selected="selected"' : '') . " >" . _s($category->name) . '</option>';
 		
 		$input .= "</select>";
 		return $input;
