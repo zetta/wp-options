@@ -44,12 +44,13 @@ class WpRadioOption extends WpOption
 		$this->savedValue = $this->getStoredValue();
 		$value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : 'false');
 		$formName = $this->getFormName();
-		$idName = $this->getFormId();
+		$id = $this->getFormId();
+		$i = 0;
 		foreach($this->options as $optionValue => $optionName)
 		{
-			$input .= "\n<input type=\"radio\"  name=\"{$formName}\" value=\"{$optionValue}\" " . ($value == $optionValue ? 'checked="checked"' : '') . " /> " . _($optionName);
-			if($this->onePerLine)
-				$input .= '<br/>';
+			$input .= "\n<label for='{$id}_{$i}'><input type='radio' id='{$id}_{$i}' name='{$formName}' value='{$optionValue}' " . ($value == $optionValue ? 'checked="checked"' : '') . " /> " . _($optionName).'</label>';
+			if($this->onePerLine) $input .= '<br/>';
+			$i++;
 		}
 		return $input;
 	}

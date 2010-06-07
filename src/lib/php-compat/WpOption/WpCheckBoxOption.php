@@ -38,16 +38,19 @@ class WpCheckBoxOption extends WpOption
 	 * @return string
 	 * @access public
 	 */
-	 function ___toString()
+	function ___toString()
 	{
 		$input = '';
 		$this->savedValue = $this->getStoredValue();
 		$value = ($this->savedValue!==false) ? $this->savedValue : (($this->defaultValue!==null) ? $this->defaultValue : 'false');
 		$formName = $this->getFormName();
+		$id = $this->getFormId();
+		$i=0;
 		foreach ( $this->options as $optionValue => $optionName )
 		{
-			$input .= "\n<input type=\"checkbox\" name=\"{$formName}[{$optionValue}]\" value=\"{$optionValue}\" ".( in_array($optionValue,$value) ? 'checked="checked"' : '')." /> "._($optionName);
+			$input .= "\n<label for='{$id}_{$i}'><input type='checkbox' id='{$id}_{$i}' name='{$formName}[{$optionValue}]' value='{$optionValue}' ".( in_array($optionValue,$value) ? 'checked="checked"' : '')." /> "._($optionName).'</label>';
 			if ($this->onePerLine) $input .= '<br/>';
+			$i++;
 		}
 		return $input;
 	}

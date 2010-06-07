@@ -37,7 +37,7 @@ class WpCheckOption extends WpOption
 		$formName = $this->getFormName();
 		$idName = $this->getFormId();
 		$class = $this->hasChilds() ? 'optionParent' : '';
-		$input = "\n<input  type=\"checkbox\" class=\"{$class}\" id=\"{$idName}\"  name=\"{$formName}\" value=\"true\" " . ($this->cast($value) ? 'checked="checked"' : '') . " /> " . _(substr($this->description, 3, - 4));
+		$input = "\n<input  type='checkbox' class='{$class}' id='{$idName}'  name='{$formName}' value='true' " . ($this->cast($value) ? 'checked="checked"' : '') . " /> " . _(substr($this->description, 3, - 4));
 		$this->description = '';
 		return $input;
 	}
