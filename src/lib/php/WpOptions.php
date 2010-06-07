@@ -80,7 +80,7 @@ class WpOptions
      * @var string $content
      * @access private
      */
-    private $content = "\n\n<!-- SpigaThemeOptions Generator v1 -->\n\n\t\t";
+    private $content = "\n\n<!-- wp-options Generator v1 -->\n\n\t\t";
     
     /**
      * Hojas de estilo utilizadas
@@ -149,7 +149,7 @@ class WpOptions
         $this->wpdb = $wpdb;
         $this->file = __FILE__;
         $this->menuIcon = $menuIcon;
-        $this->templateLocation = get_bloginfo('template_directory');
+        $this->themeLocation = get_bloginfo('template_directory');
     }
     
     /**
@@ -698,7 +698,6 @@ class WpOptions
                 update_post_meta($idPost, $option->getName() . '_value', $data);
             elseif ($data == "")
                 delete_post_meta($idPost, $option->getName() . '_value', get_post_meta($idPost, $option->getName() . '_value', true));
-              
         }
     }
     

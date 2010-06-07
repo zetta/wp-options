@@ -80,7 +80,7 @@ class WpOptions
      * @var string $content
      * @access private
      */
-    var $content = "\n\n<!-- SpigaThemeOptions Generator v1 -->\n\n\t\t";
+    var $content = "\n\n<!-- wp-options Generator v1 -->\n\n\t\t";
     
     /**
      * Hojas de estilo utilizadas
@@ -149,7 +149,7 @@ class WpOptions
         $this->wpdb = $wpdb;
         $this->file = __FILE__;
         $this->menuIcon = $menuIcon;
-        $this->templateLocation = get_bloginfo('template_directory');
+        $this->themeLocation = get_bloginfo('template_directory');
     }
     
     /**
