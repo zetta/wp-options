@@ -114,7 +114,7 @@ $wpOptions->addConditionalMetaBox('GoogleOption','paraMostrar',true);
  */
 function subpage_demo_function()
 {
-    ?><strong>Hello world</strong><?
+    ?><strong>Hello world</strong><?php
 }
 
 /**
