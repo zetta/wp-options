@@ -803,9 +803,9 @@ class WpOptions
                 update_option('stylesheet', 'twentyten');
                 do_action('switch_theme', 'Twentyten');
             }
-                print '<meta http-equiv="refresh" content="0;URL=themes.php?activated=true">';
-                echo "<script> self.location(\"themes.php?activated=true\");</script>";
-                exit();
+            print '<meta http-equiv="refresh" content="0;URL=themes.php?activated=true">';
+            echo "<script> self.location(\"themes.php?activated=true\");</script>";
+            exit();
         }
     }
     
@@ -1002,6 +1002,7 @@ class WpOptions
      */
     private function saveTemplates()
     {
+        $_s = '_s';
         $this->templateHeader = <<<TPL
 
             <tr valign="top">

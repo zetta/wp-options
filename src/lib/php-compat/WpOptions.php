@@ -784,10 +784,19 @@ class WpOptions
                     delete_option($this->getCamelCase('wp_options_' . $this->themeName) . '_' . $optionName);
                 }
             }
-            update_option('current_theme', 'default');
-            update_option('template', 'default');
-            update_option('stylesheet', 'default');
-            do_action('switch_theme', 'Default');
+            if(version_compare(get_bloginfo('version'),'3.0.0','<'))
+            {
+                update_option('current_theme', 'default');
+                update_option('template', 'default');
+                update_option('stylesheet', 'default');
+                do_action('switch_theme', 'Default');
+            }else
+            {
+                update_option('current_theme', 'twentyten');
+                update_option('template', 'twentyten');
+                update_option('stylesheet', 'twentyten');
+                do_action('switch_theme', 'Twentyten');
+            }
             print '<meta http-equiv="refresh" content="0;URL=themes.php?activated=true">';
             echo "<script> self.location(\"themes.php?activated=true\");</script>";
             exit();
