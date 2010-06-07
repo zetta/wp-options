@@ -670,9 +670,9 @@ class WpOptions
     {
         if(isset($_POST['post_type']) && $_POST['post_type'] == 'page')
             if(! current_user_can('edit_page', $idPost))
-                die('Usted no tiene permisos para editar la página');
+                die(_s('Usted no tiene permisos para editar la página'));
             else if(! current_user_can('edit_post', $idPost))
-                die('Usted no tiene permisos para editar el post');
+                die(_s('Usted no tiene permisos para editar el post'));
         
         foreach($this->optionsInMetaBox as $option)
         {

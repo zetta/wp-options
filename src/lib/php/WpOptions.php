@@ -673,10 +673,10 @@ class WpOptions
         {
             if (! current_user_can('edit_page', $idPost))
             {
-                throw new Exception('Usted no tiene permisos para editar la página');
+                throw new Exception(_s('Usted no tiene permisos para editar la pagina'));
             } else if (! current_user_can('edit_post', $idPost))
             {
-                throw new Exception('Usted no tiene permisos para editar el post');
+                throw new Exception(_s('Usted no tiene permisos para editar el post'));
             }
         }
         foreach ( $this->optionsInMetaBox as $option )
