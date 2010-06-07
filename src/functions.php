@@ -8,7 +8,6 @@ include_once 'lib/includer.php';
 //basic theme info, you MUST modify this information
 $wpOptions = new WpOptions($wp_version,$wpdb);
 $wpOptions->setThemeName('SpigaTheme');
-$wpOptions->setThemeLocation('/wp-content/themes/classic');
 $wpOptions->addCSS('options');
 $wpOptions->setManualUrl('http://google.com');
 $wpOptions->setForumUrl('http://www.google.com');

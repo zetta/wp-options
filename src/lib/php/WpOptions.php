@@ -149,6 +149,7 @@ class WpOptions
         $this->wpdb = $wpdb;
         $this->file = __FILE__;
         $this->menuIcon = $menuIcon;
+        $this->templateLocation = get_bloginfo('template_directory');
     }
     
     /**
@@ -871,6 +872,7 @@ class WpOptions
     /**
      * @param string $themeLocation
      * @access public
+     * @deprecated
      */
     public function setThemeLocation($themeLocation)
     {
