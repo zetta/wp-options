@@ -650,7 +650,7 @@ class WpOptions
                     continue;
             }
             $option->setDbSource(WpOption::$Sources['POST_META']);
-            $this->determineTemplate($option);
+            $option->setTemplate($this->templateOption);
             $option->setDefaultValue('');
             $option->setValue('');
             $option->setPost($post);
@@ -659,16 +659,7 @@ class WpOptions
         $this->templateLayoutMetaBox = str_replace('%fields%', $fields, $this->templateLayoutMetaBox);
         echo $this->templateLayoutMetaBox;
     }
-    
-    /**
-     * Determina que template se usara para mostrar la opcion
-     * @param WpOption $option
-     */
-    private function determineTemplate(WpOption $option)
-    {
-        $tpl = ($option instanceof WpRadioOption || $option instanceof WpCheckBoxOption) ? $this->templateWrappedOption : $this->templateOption ;
-        $option->setTemplate($tpl);
-    }
+
     
     /**
      * Guarda la metadata del post, (metabox)
@@ -755,7 +746,7 @@ class WpOptions
                     continue;
                 
                 $option->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
-                $this->determineTemplate($option);
+                $option->setTemplate($this->templateOption);
                 $option->setDbSource(WpOption::$Sources['OPTION']);
                 if ($parentName != '__root__' && $this->options[$parentName]->getValue() == false)
                     $option->setVisible(false);
@@ -1013,13 +1004,6 @@ TPL;
             <tr%visible% class="%class%">
                 <td style='background:#F7F7F7; border-right:1px solid #F0F0F0; font-weight:bold; text-align:right;' ><label for="%id%">%title%</label></td>
                 <td>%input% %description%</td>
-            </tr>
-TPL;
-        $this->templateWrappedOption = <<<TPL
-
-            <tr%visible% class="%class%">
-                <td style='background:#F7F7F7; border-right:1px solid #F0F0F0; font-weight:bold; text-align:right;' >%title%</td>
-                <td><label for="%id%">%input% %description%</label></td>
             </tr>
 TPL;
         $this->templateLayout = <<<TPL

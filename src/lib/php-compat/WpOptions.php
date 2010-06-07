@@ -984,13 +984,6 @@ TPL;
                 <td>%input% %description%</td>
             </tr>
 TPL;
-        $this->templateWrappedOption = <<<TPL
-
-            <tr%visible% class="%class%">
-                <td style='background:#F7F7F7; border-right:1px solid #F0F0F0; font-weight:bold; text-align:right;' >%title%</td>
-                <td><label for="%id%">%input% %description%</label></td>
-            </tr>
-TPL;
         $this->templateLayout = <<<TPL
 
             <div class="wrap">
