@@ -32,6 +32,6 @@ add_action('admin_head', array($wpOptions, 'addMetaData'));
 function &setWpThemeOption($optionName, $optionValue)
 {
     global $wpOptions;
-    $wpOptions->setOptionValue($option,$value);
+    $wpOptions->setOptionValue($optionName,$optionValue);
     return $wpOptions;
 }
