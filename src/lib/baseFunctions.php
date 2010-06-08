@@ -14,7 +14,8 @@
  * @param string $optionName Nombre de la opcion
  * @return WpOptions $wpOptions by Reference
  */
-function &getWpThemeOption($optionName){
+function &getWpThemeOption($optionName)
+{
     global $wpOptions;
     return $wpOptions->getOption($optionName);
 }
@@ -22,3 +23,15 @@ function &getWpThemeOption($optionName){
 add_action('admin_menu', array($wpOptions, 'addOptionsPage'));
 add_action('admin_head', array($wpOptions, 'addMetaData'));
 
+/**
+ * settea el valor de una opción 
+ * @param string $optionName
+ * @param mixed $optionValue
+ * @return WpOptions $wpOptions
+ */
+function &setWpThemeOption($optionName, $optionValue)
+{
+    global $wpOptions;
+    $wpOptions->setOptionValue($option,$value);
+    return $wpOptions;
+}

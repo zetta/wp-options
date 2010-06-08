@@ -107,6 +107,9 @@ $wpOptions->addStringOption('GoogleOption','','Google Option');
 $wpOptions->addConditionalMetaBox('GoogleOption','paraMostrar',true);
 
 
+$wpOptions->addStringOption('time','1','Time','esta deberia actualizarse');
+$wpOptions->setOptionValue('time',time());
+
 /**
  * Subpage demo function 
  * used in $wpOptions->addSubpage();
