@@ -6,7 +6,7 @@ include_once 'lib/includer.php';
 
 //basic theme info, you MUST modify this information
 $wpOptions = new WpOptions($wp_version,$wpdb,get_bloginfo('template_url').'/lib/pix/storelicious.png');
-$wpOptions->setThemeName('SpigaTheme');
+$wpOptions->setThemeName('wp-options');
 $wpOptions->addCSS('options');
 $wpOptions->setManualUrl('http://google.com');
 $wpOptions->setForumUrl('http://www.google.com');

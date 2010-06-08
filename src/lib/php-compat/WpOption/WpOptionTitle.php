@@ -2,13 +2,13 @@
 /**
  * Spiga
  *
- * SpigaTheme
+ * wp-options
  *
  * @category   Wordpress
  * @package    WordPress_Themes
- * @copyright  Copyright (c) 2008-2009 Spiga (http://www.spiga.com.mx)
+ * @copyright  Copyright (c) 2008-2010 Spiga (http://www.spiga.mx)
  * @author     zetta (http://www.ctrl-zetta.com)
- * @version    1.0
+ * @version    1.1
  */
 
 class WpOptionTitle
@@ -29,7 +29,7 @@ class WpOptionTitle
 	 * Constructor de la clase
 	 *
 	 * @param string $title
-	 * @return SpigaThemeOptionTitle
+	 * @return wp-optionsOptionTitle
 	 * @access public
 	 */
 	function WpOptionTitle($title)

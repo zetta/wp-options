@@ -2,17 +2,17 @@
 /**
  * Spiga
  *
- * SpigaTheme
+ * wp-options
  *
  * @category   Wordpress
  * @package    WordPress_Themes
- * @copyright  Copyright (c) 2008-2009 Spiga (http://www.spiga.com.mx)
+ * @copyright  Copyright (c) 2008-2010 Spiga (http://www.spiga.mx)
  * @author     zetta (http://www.ctrl-zetta.com)
- * @version    1.0
+ * @version    1.1
  */
 
 /**
- * SpigaThemeOption
+ * wp-optionsOption
  */
 require_once 'WpOption.php';
 
@@ -135,7 +135,7 @@ class WpOptions
     private $menuIcon = null;
     
     /**
-     * Instancía el objeto SpigaThemeOptions
+     * Instancía el objeto wp-optionsOptions
      *
      * @param float $wpVersion
      * @param wpdb $wpdb
