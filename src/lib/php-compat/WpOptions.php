@@ -191,6 +191,20 @@ class WpOptions
     }
     
     /**
+     * Agrega los css y js
+     */
+    function addMetaData()
+    {
+        echo "<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery-1.4.2.min.js'></script>\n";
+        echo "<script type='text/javascript' src='{$this->themeLocation}/lib/js/jquery-ui-1.8.2.custom.min.js'></script>\n";
+        echo "<script type='text/javascript' src='{$this->themeLocation}/lib/js/colorpicker.js'></script>\n";
+        echo "<script type='text/javascript' src='{$this->themeLocation}/lib/js/actions.js'></script>\n";
+        $this->addCSS('jquery-ui-1.8.2.custom');
+        $this->addCSS('colorpicker');
+        $this->includeStyles();
+    }
+    
+    /**
      * Para aquello del callback, esta function no deberia existir, pero no me gusta como se formatea mi código
      * con el ZendStuio cuando utilizo arrays tan pequeños... pero ya ni modo =P 
      *
@@ -823,7 +837,7 @@ class WpOptions
     {
         foreach($this->css as $css)
         {
-            $this->content .= "<link rel='stylesheet' href='{$this->themeLocation}/lib/css/{$css}.css' type='text/css' media='all' />";
+            echo "<link rel='stylesheet' href='{$this->themeLocation}/lib/css/{$css}.css' type='text/css' media='all' />";
         }
     }
     

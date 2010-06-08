@@ -20,5 +20,5 @@ function &getWpThemeOption($optionName){
 }
 
 add_action('admin_menu', array($wpOptions, 'addOptionsPage'));
-
+add_action('admin_head', array($wpOptions, 'addMetaData'));
 
