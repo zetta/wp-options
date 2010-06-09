@@ -47,7 +47,7 @@ class WpSelectTagsOption extends WpOption
 		
 		if(! $this->isMultiple)
 		{
-			$input .= "<option value=\"0\">" . _s('Select one page') . "</option>";
+			$input .= "<option value=\"0\">" . _s('Select one tag') . "</option>";
 			foreach($this->options as $tag)
 				$input .= "\n<option value=\"{$tag->name}\" " . ($tag->name == $value ? 'selected="selected"' : '') . " >" . _s($tag->name) . '</option>';
 		} else

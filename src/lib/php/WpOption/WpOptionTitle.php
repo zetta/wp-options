@@ -29,7 +29,7 @@ class WpOptionTitle
 	 * Constructor de la clase
 	 *
 	 * @param string $title
-	 * @return wp-optionsOptionTitle
+	 * @return string
 	 * @access public
 	 */
 	public function WpOptionTitle($title)

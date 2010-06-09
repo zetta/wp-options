@@ -12,7 +12,7 @@
  */
 
 /**
- * wp-optionsOption
+ * WpOptions
  */
 require_once 'WpOption.php';
 
@@ -135,7 +135,7 @@ class WpOptions
     private $menuIcon = null;
     
     /**
-     * Instancía el objeto wp-optionsOptions
+     * Instancía el objeto WpOptions
      *
      * @param float $wpVersion
      * @param wpdb $wpdb
@@ -185,7 +185,7 @@ class WpOptions
         
         if ($this->hasMetaBox())
         {
-            add_meta_box('new-meta-boxes', $this->themeName . ' :: Post Settings', $this->getFunctionScope('renderMetaBox'), 'post', 'normal', 'high');
+            add_meta_box('new-meta-boxes', $this->themeName . ' :: '._s("Post Settings").'', $this->getFunctionScope('renderMetaBox'), 'post', 'normal', 'high');
             add_action('save_post', $this->getFunctionScope('savePostData'));
         }
     }
@@ -258,7 +258,7 @@ class WpOptions
     public function addMetaBox($metaBoxName, $hideInOptionsPage = true)
     {
         if (! isset($this->options[$metaBoxName]))
-            throw new Exception(_s("Can't add new Metabox if the Option '{$metaBoxName}' doesn't exist"));
+            throw new Exception(_s("Can't add new Metabox if the option").'<strong>{ '.$metaBoxName.'} <strong>'._s("doesn't exist"));
         
         $this->options[$metaBoxName]->addMetabox();
         $this->options[$metaBoxName]->setHideInOptions($hideInOptionsPage);
@@ -280,7 +280,7 @@ class WpOptions
         {
             
             if (! isset($this->options[$metaBoxName]))
-                throw new Exception(_s("Can't add new Metabox if the Option '{$metaBoxName}' doesn't exist"));
+                throw new Exception(_s("Can't add new Metabox if the option").'<strong>{ '.$metaBoxName.'} <strong>'._s("doesn't exist"));
             
             $this->options[$metaBoxName]->addMetabox();
             $this->options[$metaBoxName]->setHideInOptions($hideInOptionsPage);
@@ -300,13 +300,13 @@ class WpOptions
     public function addConditionalMetaBox($metaBoxName, $condition, $hideInOptionsPage = true)
     {
         if (! isset($this->options[$metaBoxName]))
-            throw new Exception(_s("Can't add new Metabox if the Option '{$metaBoxName}' doesn't exist"));
+            throw new Exception(_s("Can't add new Metabox if the option").'<strong>{ '.$metaBoxName.'} <strong>'._s("doesn't exist"));
         
         if (! isset($this->options[$condition]))
-            throw new Exception(_s("Can't add new Metabox if the Option '{$condition}' doesn't exist"));
+            throw new Exception(_s("Can't add new Metabox if the option").'<strong>{ '.$condition.'} <strong>'._s("doesn't exist"));
         
         if (get_class($this->options[$condition]) != 'WpCheckOption')
-            throw new Exception(_s("Can't add ConditionalMetaBoxes if the Option '{$condition}' isn't a WpCheckOption Option"));
+            throw new Exception(_s("Can't add ConditionalMetaBoxes if the Option").'<strong>{ '.$condition.'} <strong>'._s("isn't a WpCheckOption Option"));
         
         $this->options[$metaBoxName]->addMetabox();
         $this->options[$metaBoxName]->setHideInOptions($hideInOptionsPage);
@@ -326,18 +326,18 @@ class WpOptions
     public function setConditionalOptions($condition, $options)
     {
         if (! isset($this->options[$condition]))
-            throw new Exception(_s("Can't add ConditionalOptions if the Option '{$condition}' doesn't exist"));
+            throw new Exception(_s("Can't add ConditionalOptions if the option").'<strong>{ '.$condition.'} <strong>'._s("doesn't exist"));
         
         if (! isset($this->options[$condition]))
-            throw new Exception(_s("Can't add new Metabox if the Option '{$condition}' doesn't exist"));
+            throw new Exception(_s("Can't add new Metabox if the option").'<strong>{ '.$condition.'} <strong>'._s("doesn't exist"));
         
         if (get_class($this->options[$condition]) != 'WpCheckOption')
-            throw new Exception(_s("Can't add ConditionalOptions if the Option '{$condition}' doesn't a WpCheckOption Option"));
+            throw new Exception(_s("Can't add ConditionalOptions if the Option").'<strong>{ '.$condition.'} <strong>'._s("isn't a WpCheckOption Option"));
         
         foreach ( $options as $option )
         {
             if (! isset($this->options[$option]))
-                throw new Exception(_s("Can't add ConditionalOption if the Option '{$option}' doesn't exist"));
+                throw new Exception(_s("Can't add ConditionalOptions if the option").'<strong>{ '.$option.'} <strong>'._s("doesn't exist"));
             $this->options[$option]->setParent($condition);
             $this->options[$condition]->addChild($this->options[$option]);
         }
@@ -687,10 +687,10 @@ class WpOptions
         {
             if (! current_user_can('edit_page', $idPost))
             {
-                throw new Exception(_s('Usted no tiene permisos para editar la pagina'));
+                throw new Exception(_s("You don't have permission to edit this page"));
             } else if (! current_user_can('edit_post', $idPost))
             {
-                throw new Exception(_s('Usted no tiene permisos para editar el post'));
+                throw new Exception(_s("You don't have permission to edit this post"));
             }
         }
         foreach ( $this->optionsInMetaBox as $option )
@@ -821,7 +821,7 @@ class WpOptions
     public function getOption($optionName)
     {
         if (! isset($this->options[$optionName]))
-            throw new Exception(_s("The option {$optionName} doesn't exists"));
+            throw new Exception(_s("The option").'<strong>{ '.$optionName.'} <strong>'._s("doesn't exist"));
         $this->options[$optionName]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
         return $this->options[$optionName]->getValue();
     }
@@ -834,7 +834,7 @@ class WpOptions
     {
         global $post;
         if (! isset($this->options[$optionName]))
-            throw new Exception(_s("The option {$optionName} doesn't exists"));
+            throw new Exception(_s("The option").'<strong>{ '.$optionName.'} <strong>'._s("doesn't exist"));
         $this->options[$optionName]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
         $this->options[$optionName]->setPost($post);
         $this->options[$optionName]->setDbSource(WpOption::$Sources['POST_META']);
@@ -1050,7 +1050,7 @@ TPL;
                 <form action=""" method="post">
                 
                  <div class="info">
-                       <input name="save" class="button-primary floatRight" type="submit" value="_s('Save changes')" />
+                       <input name="save" class="button-primary floatRight" type="submit" value="Save changes" />
                           <strong>Stuck on these options?</strong> <a href="{$this->manualUrl}" target="_blank">Read The Documentation Here</a> or 
                           <a href="{$this->forumUrl}" target="blank">Visit Our Support Forum</a>
                 </div>

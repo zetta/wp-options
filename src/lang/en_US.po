@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Storelicious\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-07 03:04-0600\n"
+"POT-Creation-Date: 2010-06-08 11:38-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Staff Storelicious <staff@storelicious.com>\n"
 "Language-Team: Storelicious <staff@storeilcious.com>\n"
@@ -12,69 +12,72 @@ msgstr ""
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: UNITED STATES\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-KeywordsList: _e;__;_s\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
-#: ../lib/php/WpOptions.php:173
-#: ../lib/php/WpOptions.php:177
+#: ../lib/php/WpOptions.php:174
+#: ../lib/php/WpOptions.php:178
 msgid "Configure "
 msgstr ""
 
-#: ../lib/php/WpOptions.php:187
+#: ../lib/php/WpOptions.php:188
 msgid "Post Settings"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:246
-#: ../lib/php/WpOptions.php:268
-#: ../lib/php/WpOptions.php:288
-#: ../lib/php/WpOptions.php:291
-#: ../lib/php/WpOptions.php:317
+#: ../lib/php/WpOptions.php:261
+#: ../lib/php/WpOptions.php:283
+#: ../lib/php/WpOptions.php:303
+#: ../lib/php/WpOptions.php:306
+#: ../lib/php/WpOptions.php:332
 msgid "Can't add new Metabox if the option"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:246
-#: ../lib/php/WpOptions.php:268
-#: ../lib/php/WpOptions.php:288
-#: ../lib/php/WpOptions.php:291
-#: ../lib/php/WpOptions.php:314
-#: ../lib/php/WpOptions.php:317
-#: ../lib/php/WpOptions.php:325
-#: ../lib/php/WpOptions.php:819
-#: ../lib/php/WpOptions.php:832
+#: ../lib/php/WpOptions.php:261
+#: ../lib/php/WpOptions.php:283
+#: ../lib/php/WpOptions.php:303
+#: ../lib/php/WpOptions.php:306
+#: ../lib/php/WpOptions.php:329
+#: ../lib/php/WpOptions.php:332
+#: ../lib/php/WpOptions.php:340
+#: ../lib/php/WpOptions.php:824
+#: ../lib/php/WpOptions.php:837
 msgid "doesn't exist"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:294
-#: ../lib/php/WpOptions.php:320
+#: ../lib/php/WpOptions.php:309
 msgid "Can't add ConditionalMetaBoxes if the Option"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:294
-#: ../lib/php/WpOptions.php:320
+#: ../lib/php/WpOptions.php:309
+#: ../lib/php/WpOptions.php:335
 msgid "isn't a WpCheckOption Option"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:314
-#: ../lib/php/WpOptions.php:325
+#: ../lib/php/WpOptions.php:329
+#: ../lib/php/WpOptions.php:340
 msgid "Can't add ConditionalOptions if the option"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:684
+#: ../lib/php/WpOptions.php:335
+msgid "Can't add ConditionalOptions if the Option"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:690
 msgid "You don't have permission to edit this page"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:687
+#: ../lib/php/WpOptions.php:693
 msgid "You don't have permission to edit this post"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:732
+#: ../lib/php/WpOptions.php:728
 msgid "Updated Options"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:819
-#: ../lib/php/WpOptions.php:832
+#: ../lib/php/WpOptions.php:824
+#: ../lib/php/WpOptions.php:837
 msgid "The option"
 msgstr ""
 
@@ -95,22 +98,10 @@ msgid "Select one page"
 msgstr ""
 
 #: ../lib/php/WpOption/WpSelectTagsOption.php:49
-msgid "Select tag"
+msgid "Select one tag"
 msgstr ""
 
 #: ../lib/php/WpOption/WpSelectUsersOption.php:48
-msgid "Select user"
-msgstr ""
-
-#: ../lib/php-compat/WpOption/WpSelectPagesOption.php:50
-msgid "Select pages"
-msgstr ""
-
-#: ../lib/php-compat/WpOption/WpSelectTagsOption.php:50
-msgid "Select tags"
-msgstr ""
-
-#: ../lib/php-compat/WpOption/WpSelectUsersOption.php:49
-msgid "Select users"
+msgid "Select one user"
 msgstr ""
 
