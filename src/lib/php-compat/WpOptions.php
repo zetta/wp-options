@@ -783,8 +783,8 @@ class WpOptions
             {
                 if(is_subclass_of($option, 'WpOption'))
                 {
-                    $value = (is_string($_POST[$prefix][$optionName])) ? stripslashes($_POST[$prefix][$optionName]) : $_POST[$prefix][$optionName]; 
-                    update_option($prefix . '_' . $optionName, $option->set( $value ));
+                    $value = (is_string($_POST[$prefix][$optionName])) ? stripslashes($_POST[$prefix][$optionName]) : $_POST[$prefix][$optionName];
+                    $this->setOptionValue($optionName, $value);
                 }
             }
             $this->updated = true;
@@ -827,6 +827,37 @@ class WpOptions
             die(_s("The option").'<strong>{ '.$optionName.'} <strong>'._s("doesn't exist"));
         $this->options[$optionName]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
         return $this->options[$optionName]->getValue();
+    }
+    
+    /**
+     * Regresa el valor de una opción almacenada en el post
+     * @access public
+     */
+    function getPostOption($optionName)
+    {
+        global $post;
+        if (! isset($this->options[$optionName]))
+            die(_s("The option").'<strong>{ '.$optionName.'} <strong>'._s("doesn't exist"));
+        $this->options[$optionName]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
+        $this->options[$optionName]->setPost($post);
+        $this->options[$optionName]->setDbSource(WpOption::$Sources['POST_META']);
+        return $this->options[$optionName]->getStoredValue();
+        
+    }
+    
+    /**
+     * Guarda el valor a una opción
+     * @param string $optionName
+     * @param mixed $value
+     */
+    function setOptionValue($optionName, $value)
+    {
+        if (! isset($this->options[$optionName]))
+           die(_s("The option").'<strong>{ '.$optionName.'} <strong>'._s("doesn't exist"));
+        $prefix = $this->getCamelCase('wp_options_' . $this->baseThemeName);
+        $this->options[$optionName]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
+        $this->options[$optionName]->set($value);
+        update_option($prefix . '_' . $optionName, $this->options[$optionName]->set( $value ));
     }
     
     /**    
