@@ -659,7 +659,7 @@ class WpOptions
         {
             if ($option->getRequire() != null)
             {
-                $this->options[$option->getRequire()]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
+                $this->options[$option->getRequire()]->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
                 $this->options[$option->getRequire()]->setDbSource(WpOption::$Sources['OPTION']);
                 if ($this->options[$option->getRequire()]->getValue() == false)
                     continue;
@@ -697,7 +697,7 @@ class WpOptions
         {
 
             $option->setDbSource(WpOption::$Sources['POST_META']);
-            $option->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
+            $option->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
             $option->setDefaultValue('');
             $option->setValue('');
             if(is_array($_POST[$option->getFormName()]))
@@ -750,7 +750,7 @@ class WpOptions
                 if ($option->getParent() != $parentName)
                     continue;
                 
-                $option->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
+                $option->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
                 $option->setTemplate($this->templateOption);
                 $option->setDbSource(WpOption::$Sources['OPTION']);
                 if ($parentName != '__root__' && $this->options[$parentName]->getValue() == false)
@@ -775,7 +775,7 @@ class WpOptions
     {
         if (isset($_POST['post']) && $_POST['post'] == 'updateWpOptions')
         {
-            $prefix = $this->getCamelCase('wp_options_' . $this->baseThemeName);
+            $prefix = $this->getCamelCase('wp_options') . '_' . $this->baseThemeName;
             foreach ( $this->options as $optionName => $option )
             {
                 if (is_subclass_of($option, 'WpOption'))
@@ -822,7 +822,7 @@ class WpOptions
     {
         if (! isset($this->options[$optionName]))
             throw new Exception(_s("The option").'<strong>{ '.$optionName.'} <strong>'._s("doesn't exist"));
-        $this->options[$optionName]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
+        $this->options[$optionName]->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
         return $this->options[$optionName]->getValue();
     }
     
@@ -835,7 +835,7 @@ class WpOptions
         global $post;
         if (! isset($this->options[$optionName]))
             throw new Exception(_s("The option").'<strong>{ '.$optionName.'} <strong>'._s("doesn't exist"));
-        $this->options[$optionName]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
+        $this->options[$optionName]->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
         $this->options[$optionName]->setPost($post);
         $this->options[$optionName]->setDbSource(WpOption::$Sources['POST_META']);
         return $this->options[$optionName]->getStoredValue();
@@ -852,7 +852,7 @@ class WpOptions
         if (! isset($this->options[$optionName]))
             throw new Exception(_s("The option").'<strong>{ '.$optionName.'} <strong>'._s("doesn't exist"));
         $prefix = $this->getCamelCase('wp_options');
-        $this->options[$optionName]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
+        $this->options[$optionName]->setInputName($this->getCamelCase('wp_options') .'_' . $this->baseThemeName);
         $this->options[$optionName]->set($value);
         update_option($prefix . '_' . $this->baseThemeName .'_' . $optionName, $this->options[$optionName]->set( $value ));
     }
@@ -1058,12 +1058,12 @@ TPL;
                     <input type="hidden" name="post" value="updateWpOptions">
                     <table class="widefat" id="storelicious">
                         <thead><tr><th colspan="2">{$this->themeName}</th></tr></thead>
-						<tfoot>
-							<tr>
-								<th>End Storelicious Options</th>
-								<th align="right"><a href='#storelicious'>Back to top</a></th>
-							</tr>
-						</tfoot>
+                        <tfoot>
+                            <tr>
+                                <th>End Storelicious Options</th>
+                                <th align="right"><a href='#storelicious'>Back to top</a></th>
+                            </tr>
+                        </tfoot>
                         <tbody>%fields%</tbody>                            
                     </table>
                     <p class="submit"><input type="submit" class="button-primary" value="Save changes" />
