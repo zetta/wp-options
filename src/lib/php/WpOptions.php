@@ -809,7 +809,7 @@ class WpOptions
                 do_action('switch_theme', 'Twentyten');
             }
             print '<meta http-equiv="refresh" content="0;URL=themes.php?activated=true">';
-            echo "<script> self.location(\"themes.php?activated=true\");</script>";
+            echo "<script> self.location('themes.php?activated=true');</script>";
             exit();
         }
     }

@@ -40,19 +40,19 @@ class WpSelectTagsOption extends WpOption
         $idName = $this->getFormId();
         if($this->isMultiple)
         {
-            $input = "<select id=\"{$idName}\" name=\"{$formName}[]\" multiple=\"multiple\" size=\"5\" value=\"{$value}\" >";
+            $input = "<select id='{$idName}' name='{$formName}[]' multiple='multiple' size='5' value='{$value}' >";
             $value = ($value) ? $value : array();
         } else
-            $input = "<select id=\"{$idName}\" name=\"{$formName}\" value=\"{$value}\" >";
+            $input = "<select id='{$idName}' name='{$formName}' value='{$value}' >";
         
         if(! $this->isMultiple)
         {
-            $input .= "<option value=\"0\">" . _s('Select one tag') . "</option>";
+            $input .= "<option value='0'>" . _s('Select one tag') . "</option>";
             foreach($this->options as $tag)
-                $input .= "\n<option value=\"{$tag->name}\" " . ($tag->name == $value ? 'selected="selected"' : '') . " >" . _s($tag->name) . '</option>';
+                $input .= "\n<option value='{$tag->name}' " . ($tag->name == $value ? 'selected="selected"' : '') . " >" . _s($tag->name) . '</option>';
         } else
             foreach($this->options as $tag)
-                $input .= "\n<option value=\"{$tag->name}\" " . (in_array($tag->name, $value) ? 'selected="selected"' : '') . " >" . _s($tag->name) . '</option>';
+                $input .= "\n<option value='{$tag->name}' " . (in_array($tag->name, $value) ? 'selected="selected"' : '') . " >" . _s($tag->name) . '</option>';
         
         $input .= "</select>";
         return $input;

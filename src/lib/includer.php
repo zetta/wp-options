@@ -17,3 +17,4 @@ function _s($string, $namespace = 'storelicious')
     return __($string,$namespace);
 }
 
+define('WP_OPTIONS_VERSION',1.1);

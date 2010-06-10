@@ -40,19 +40,19 @@ class WpSelectPagesOption extends WpOption
         $idName = $this->getFormId();
         if($this->isMultiple)
         {
-            $input = "<select id=\"{$idName}\" name=\"{$formName}[]\" multiple=\"multiple\" size=\"5\" value=\"{$value}\" >";
+            $input = "<select id='{$idName}' name='{$formName}[]' multiple='multiple' size='5' value='{$value}' >";
             $value = ($value) ? $value : array();
         } else
-            $input = "<select id=\"{$idName}\" name=\"{$formName}\" value=\"{$value}\" >";
+            $input = "<select id='{$idName}' name='{$formName}' value='{$value}' >";
         
         if(! $this->isMultiple)
         {
-            $input .= "<option value=\"0\">" . _s('Select one page') . "</option>";
+            $input .= "<option value='0'>" . _s('Select one page') . "</option>";
             foreach($this->options as $page)
-                $input .= "\n<option value=\"{$page->ID}\" " . ($page->ID == $value ? 'selected="selected"' : '') . " >" . _s($page->post_title) . '</option>';
+                $input .= "\n<option value='{$page->ID}' " . ($page->ID == $value ? 'selected="selected"' : '') . " >" . _s($page->post_title) . '</option>';
         } else
             foreach($this->options as $page)
-                $input .= "\n<option value=\"{$page->ID}\" " . (in_array($page->ID, $value) ? 'selected="selected"' : '') . " >" . _s($page->post_title) . '</option>';
+                $input .= "\n<option value='{$page->ID}' " . (in_array($page->ID, $value) ? 'selected="selected"' : '') . " >" . _s($page->post_title) . '</option>';
         
         $input .= "</select>";
         return $input;

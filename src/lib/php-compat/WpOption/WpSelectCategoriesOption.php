@@ -40,19 +40,19 @@ class WpSelectCategoriesOption extends WpOption
         $idName = $this->getFormId();
         if($this->isMultiple)
         {
-            $input = "<select id=\"{$idName}\" name=\"{$formName}[]\" multiple=\"multiple\" size=\"5\" value=\"{$value}\" >";
+            $input = "<select id='{$idName}' name='{$formName}[]' multiple='multiple' size='5' value='{$value}' >";
             $value = ($value) ? $value : array();
         } else
-            $input = "<select id=\"{$idName}\" name=\"{$formName}\" value=\"{$value}\" >";
+            $input = "<select id='{$idName}' name='{$formName}' value='{$value}' >";
         
         if(! $this->isMultiple)
         {
-            $input .= "<option value=\"0\">" . _s('Select one category') . "</option>";
+            $input .= "<option value='0'>" . _s('Select one category') . "</option>";
             foreach($this->options as $category)
-                $input .= "\n<option value=\"{$category->cat_ID}\" " . ($category->cat_ID == $value ? 'selected="selected"' : '') . " >" . _s($category->name) . '</option>';
+                $input .= "\n<option value='{$category->cat_ID}' " . ($category->cat_ID == $value ? 'selected="selected"' : '') . " >" . _s($category->name) . '</option>';
         } else
             foreach($this->options as $category)
-                $input .= "\n<option value=\"{$category->cat_ID}\" " . (in_array($category->cat_ID, $value) ? 'selected="selected"' : '') . " >" . _s($category->name) . '</option>';
+                $input .= "\n<option value='{$category->cat_ID}' " . (in_array($category->cat_ID, $value) ? 'selected="selected"' : '') . " >" . _s($category->name) . '</option>';
         
         $input .= "</select>";
         return $input;

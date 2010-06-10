@@ -34,6 +34,6 @@ class WpNumberOption extends WpOption
     {
         $this->savedValue = $this->getStoredValue();
         $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
-        return "<input type='text' id='{$this->getFormId()}' size='5' name='{$this->getFormName()}' value='{$value}' />";
+        return "<input type='text' id='{$this->getFormId()}' size='6' name='{$this->getFormName()}' value='{$value}' />";
     }
 }
