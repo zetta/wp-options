@@ -1,6 +1,6 @@
 <?php
 
-
+global $pagenow;
 
 /**
  * No Remover esto, porque de otra forma la variable $wpOptions se pierde ¬¬
@@ -20,9 +20,18 @@ function &getWpThemeOption($optionName)
     return $wpOptions->getOption($optionName);
 }
 
+/**
+ * main action
+ */
 add_action('admin_menu', array($wpOptions, 'addOptionsPage'));
-add_action('admin_head', array($wpOptions, 'addMetaData'));
 
+/**
+ * Javascript and css just when options page is current
+ */
+if (($pagenow == 'admin.php') && ($_GET['page'] == 'WpOptions.php'))
+{
+    add_action('admin_head', array($wpOptions, 'addMetaData'));
+}
 /**
  * settea el valor de una opción 
  * @param string $optionName

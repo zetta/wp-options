@@ -23,5 +23,4 @@ jQuery(document).ready( function($) {
     .bind('keyup', function(){
 	    $(this).ColorPickerSetColor(this.value);
     });
-	
 });
