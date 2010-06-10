@@ -5,7 +5,7 @@
  * wp-options
  *
  * @category   Wordpress
- * @package    WordPress_Themes
+ * @package    Storelicious_Themes
  * @copyright  Copyright (c) 2008-2010 Spiga (http://www.spiga.mx)
  * @author     zetta (http://www.ctrl-zetta.com)
  * @version    1.1
