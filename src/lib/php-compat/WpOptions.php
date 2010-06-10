@@ -795,7 +795,7 @@ class WpOptions
             {
                 if(is_subclass_of($option, 'WpOption'))
                 {
-                    delete_option($this->getCamelCase('wp_options_' . $this->themeName) . '_' . $optionName);
+                    delete_option($this->getCamelCase('wp_options') . '_' . $this->baseThemeName .'_' . $optionName);
                 }
             }
             if(version_compare(get_bloginfo('version'),'3.0.0','<'))
@@ -857,7 +857,7 @@ class WpOptions
         $prefix = $this->getCamelCase('wp_options_' . $this->baseThemeName);
         $this->options[$optionName]->setInputName($this->getCamelCase('wp_options_' . $this->baseThemeName));
         $this->options[$optionName]->set($value);
-        update_option($prefix . '_' . $optionName, $this->options[$optionName]->set( $value ));
+        update_option($prefix . '_' . $this->baseThemeName .'_' . $optionName, $this->options[$optionName]->set( $value ));
     }
     
     /**    
