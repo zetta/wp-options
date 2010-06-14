@@ -148,6 +148,12 @@ abstract class WpOption
     protected $visible = true;
     
     /**
+     * @var mixex
+     * @access protected
+     */
+    protected $emptyValue = '';
+    
+    /**
      * Constructor de la clase
      *
      * @param string $name
@@ -193,6 +199,22 @@ abstract class WpOption
     }
     
     /**
+     * Regresa el valor guardado o el default si no existe
+     * @access public 
+     */
+    public function getValue()
+    {
+        if($this->value == null)
+        {
+            $this->savedValue = $this->getStoredValue();
+            $this->value = ($this-savedValue === false) ? $this->defatultValue : (
+                ($this->savedValue) ? ($this->savedValue) : $this->emptyValue
+            );
+        }
+        return $this->value;
+    }
+    
+    /**
      * Obtiene el nombre que utilizará en el formulario
      * @return string
      * @access public
@@ -234,21 +256,7 @@ abstract class WpOption
     {
         return $value;
     }
-    
-    /**
-     * Regresa el valor guardado o el default si no existe
-     * @access public 
-     */
-    public function getValue()
-    {
-        if($this->value == null)
-        {
-            $this->savedValue = get_option($this->inputName . '_' . $this->name);
-            $this->value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
-        }
-        return $this->value;
-    }
-    
+        
     /**
      * Guarda el nombre de la variable que almacena el formulario completo
      * @param string $inputName

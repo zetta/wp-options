@@ -13,6 +13,8 @@
 
 class WpCheckBoxOption extends WpOption
 {
+    protected $emptyValue = array();
+    
     /**
      * @var boolean
      */
@@ -41,8 +43,7 @@ class WpCheckBoxOption extends WpOption
     public function ___toString()
     {
         $input = '';
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue!=false) ? $this->savedValue : (($this->defaultValue!=null) ? $this->defaultValue : array());
+        $value = $this->getValue();
         $i=0;
         foreach ( $this->options as $optionValue => $optionName )
         {

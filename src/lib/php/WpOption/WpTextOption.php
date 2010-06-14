@@ -32,8 +32,7 @@ class WpTextOption extends WpOption
      */
     public function ___toString()
     {
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
+        $value = $this->getValue();
         return "<textarea name='{$this->getFormName()}' id='{$this->getFormId()}' cols='80' rows='6' >{$value}</textarea>";
     }
 }

@@ -13,6 +13,8 @@
 
 class WpCheckOption extends WpOption
 {
+    var $emptyValue = 'false';
+    
     /**
      * Constructor de la clase
      *
@@ -32,8 +34,7 @@ class WpCheckOption extends WpOption
      */
     function ___toString()
     {
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : 'false');
+        $value = $this->getValue();
         $formName = $this->getFormName();
         $idName = $this->getFormId();
         $class = $this->hasChilds() ? 'optionParent' : '';
@@ -76,15 +77,9 @@ class WpCheckOption extends WpOption
      * Regresa el valor guardado o el default si no existe
      * @access public 
      */
-    function getValue()
+    public function getValue()
     {
-        if($this->value == null)
-        {
-            $this->savedValue = get_option($this->inputName . '_' . $this->name);
-            $this->value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
-            $this->value = $this->cast($this->value);
-        }
-        return $this->value;
+        return $this->cast( parent::getValue() );
     }
 
 }

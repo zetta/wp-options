@@ -13,7 +13,7 @@
 
 class WpSelectOption extends WpOption
 {
-    
+    var $emptyValue = 0;
     /**
      * Constructor de la clase
      *
@@ -33,8 +33,7 @@ class WpSelectOption extends WpOption
      */
     function ___toString()
     {
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : '');
+        $value = $this->getValue();
         $formName = $this->getFormName();
         $idName = $this->getFormId();
         $input = "<select id='{$idName}' name='{$formName}' value='{$value}' >";

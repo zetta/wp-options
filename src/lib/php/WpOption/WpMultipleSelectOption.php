@@ -13,6 +13,7 @@
 
 class WpMultipleSelectOption extends WpOption
 {
+    protected $emptyValue = array();
     
     /**
      * Constructor de la clase
@@ -33,10 +34,7 @@ class WpMultipleSelectOption extends WpOption
      */
     public function ___toString()
     {
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this-savedValue === false) ? $this->defatultValue : (
-            ($this->savedValue) ? ($this->savedValue) : array()
-        );
+        $value = $this->getValue();
         $input = "<select id='{$this->getFormId()}' name='{$this->getFormName()}[]' value='{$value}' multiple size='5' >";
         foreach($this->options as $optionValue => $optionName)
         {

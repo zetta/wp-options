@@ -13,6 +13,8 @@
 
 class WpCheckBoxOption extends WpOption
 {
+    var $emptyValue = 'false';
+    
     /**
      * @var boolean
      */
@@ -41,8 +43,7 @@ class WpCheckBoxOption extends WpOption
     function ___toString()
     {
         $input = '';
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue!==false) ? $this->savedValue : (($this->defaultValue!==null) ? $this->defaultValue : 'false');
+        $value = $this->getValue();
         $formName = $this->getFormName();
         $id = $this->getFormId();
         $i=0;
@@ -53,6 +54,21 @@ class WpCheckBoxOption extends WpOption
             $i++;
         }
         return $input;
+    }
+
+    /**
+     * Obtiene el valor almacenado en la base de datos
+     * @return string|mixed|int
+     * @access protected
+     */
+    public function getStoredValue()
+    {
+        if($this->dbSource == self::$Sources['OPTION'])
+            return get_option($this->inputName . '_' . $this->name);
+        else if($this->dbSource == self::$Sources['POST_META'])
+            return unserialize(get_post_meta($this->post->ID, $this->name . '_value', true));
+        else
+            return '';
     }
 }
 

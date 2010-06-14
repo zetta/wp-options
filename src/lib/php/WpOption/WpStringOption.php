@@ -32,8 +32,7 @@ class WpStringOption extends WpOption
      */
     public function ___toString()
     {
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
+        $value = $this->getValue();
         return "<input type='text' size='85' name='{$this->getFormName()}' id='{$this->getFormId()}' value='{$value}' />";
     }
 }

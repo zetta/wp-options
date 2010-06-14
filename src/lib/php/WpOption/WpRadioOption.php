@@ -13,6 +13,8 @@
 
 class WpRadioOption extends WpOption
 {
+    protected $emptyValue = 'false';
+    
     /**
      * @var boolean
      */
@@ -41,8 +43,7 @@ class WpRadioOption extends WpOption
     public function ___toString()
     {
         $input = '';
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : 'false');
+        $value = $this->getValue();
         $i=0;
         foreach($this->options as $optionValue => $optionName)
         {

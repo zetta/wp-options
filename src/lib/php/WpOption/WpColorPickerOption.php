@@ -13,6 +13,8 @@
 
 class WpColorPickerOption extends WpOption
 {
+    protected $emptyValue = '000000';
+    
     /**
      * Constructor de la clase
      *
@@ -32,8 +34,7 @@ class WpColorPickerOption extends WpOption
      */
     public function ___toString()
     {
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
+        $value = $this->getValue();
         return "<input  id='{$this->getFormId()}' class='wpColorPickerOption' type='text' maxlength='6' size='6' name='{$this->getFormName()}' value='{$value}' />";
     }
 }

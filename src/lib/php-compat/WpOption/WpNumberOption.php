@@ -13,6 +13,7 @@
 
 class WpNumberOption extends WpOption
 {
+    var $emptyValue = '0';
     /**
      * Constructor de la clase
      *
@@ -32,8 +33,7 @@ class WpNumberOption extends WpOption
      */
     function ___toString()
     {
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
+        $value = $this->getValue();
         $formName = $this->getFormName();
         $idName = $this->getFormId();
         return "<input type='text' id='{$idName}' size='6' name='{$formName}' value='{$value}' />";

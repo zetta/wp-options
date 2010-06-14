@@ -13,6 +13,8 @@
 
 class WpBooleanOption extends WpOption
 {
+    var $emptyValue = 'false';
+    
     /**
      * Constructor de la clase
      *
@@ -31,10 +33,9 @@ class WpBooleanOption extends WpOption
      */
     function ___toString()
     {
-        $this->savedValue = $this->getStoredValue();
+        $value = $this->getValue();
         $formName = $this->getFormName();
         $idName = $this->getFormId();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : 'false');
         $input = "\n<label for='{$idName}_true'><input type='radio' name='{$formName}' id='{$idName}_true' value='true' " . ($this->cast($value) ? 'checked="checked"' : '') . " /> " . _s('Yes') . "</label> &nbsp;";
         $input .= "\n<label for='{$idName}_false'><input type='radio' name='{$formName}' id='{$idName}_false' value='false' " . (! $this->cast($value) ? 'checked="checked"' : '') . " /> " . _s('No') .'</label>';
         return $input;

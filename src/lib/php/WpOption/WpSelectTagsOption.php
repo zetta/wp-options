@@ -32,16 +32,11 @@ class WpSelectTagsOption extends WpOption
      */
     public function ___toString()
     {
-        $this->options = get_tags(array(
-            'hide_empty' => false));
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : '');
-        
+        $this->options = get_tags(array('hide_empty' => false));
+        $value = $this->getValue();
         if($this->isMultiple)
-        {
             $input = "<select id='{$this->getFormId()}' name='{$this->getFormName()}[]' multiple='multiple' size='5' value='{$value}' >";
-            $value = ($value) ? $value : array();
-        } else
+        else
             $input = "<select id='{$this->getFormId()}' name='{$this->getFormName()}' value='{$value}' >";
         
         if(! $this->isMultiple)
@@ -55,6 +50,18 @@ class WpSelectTagsOption extends WpOption
         
         $input .= "</select>";
         return $input;
+    }
+
+    /**
+     * Get the value
+     */
+    public function getValue()
+    {
+        $val = parent::getValue();
+        $val = ($val) ? $val : (
+            ($this->isMultiple) ? array() : 0
+        );
+        return $val;
     }
 }
 

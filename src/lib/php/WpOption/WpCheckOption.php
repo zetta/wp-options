@@ -13,6 +13,8 @@
 
 class WpCheckOption extends WpOption
 {
+    protected $emptyValue = 'false';
+    
     /**
      * Constructor de la clase
      *
@@ -32,8 +34,7 @@ class WpCheckOption extends WpOption
      */
     public function ___toString()
     {
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : 'false');
+        $value = $this->getValue();
         $class = $this->hasChilds() ? 'optionParent' : '';
         $input = "\n<input type='checkbox' class='{$class}' id='{$this->getFormId()}'  name='{$this->getFormName()}' value='true' " . ($this->cast($value) ? 'checked="checked"' : '') . " /> " . _s(substr($this->description, 3, - 4));
         $this->description = '';
@@ -76,13 +77,7 @@ class WpCheckOption extends WpOption
      */
     public function getValue()
     {
-        if($this->value == null)
-        {
-            $this->savedValue = get_option($this->inputName . '_' . $this->name);
-            $this->value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
-            $this->value = $this->cast($this->value);
-        }
-        return $this->value;
+        return $this->cast( parent::getValue() );
     }
 
 }

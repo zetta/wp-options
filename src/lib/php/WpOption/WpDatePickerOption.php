@@ -13,6 +13,8 @@
 
 class WpDatePickerOption extends WpOption
 {
+    protected $emptyValue = '';
+    
     /**
      * Constructor de la clase
      *
@@ -32,8 +34,7 @@ class WpDatePickerOption extends WpOption
      */
     public function ___toString()
     {
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== false) ? $this->defaultValue : '');
+        $value = $this->getValue();
         return "<input  id='{$this->getFormId()}' class='wpDatePickerOption' type='text' size='45' name='{$this->getFormName()}' value='{$value}' />";
     }
 }

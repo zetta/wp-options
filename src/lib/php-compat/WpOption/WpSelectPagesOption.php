@@ -34,8 +34,7 @@ class WpSelectPagesOption extends WpOption
     function ___toString()
     {
         $this->options = get_pages();
-        $this->savedValue = $this->getStoredValue();
-        $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : '');
+        $value = $this->getValue();
         $formName = $this->getFormName();
         $idName = $this->getFormId();
         if($this->isMultiple)
@@ -56,9 +55,19 @@ class WpSelectPagesOption extends WpOption
         
         $input .= "</select>";
         return $input;
-    
     }
 
+    /**
+     * Get the value
+     */
+    public function getValue()
+    {
+        $val = parent::getValue();
+        $val = ($val) ? $val : (
+            ($this->isMultiple) ? array() : 0
+        );
+        return $val;
+    }
 }
 
 
