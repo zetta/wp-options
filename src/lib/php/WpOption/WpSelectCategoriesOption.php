@@ -32,11 +32,9 @@ class WpSelectCategoriesOption extends WpOption
      */
     public function ___toString()
     {
-        $this->options = get_categories(array(
-            'hide_empty' => false));
+        $this->options = get_categories(array('hide_empty' => false));
         $this->savedValue = $this->getStoredValue();
         $value = ($this->savedValue !== false) ? $this->savedValue : (($this->defaultValue !== null) ? $this->defaultValue : '');
-        
         if($this->isMultiple)
         {
             $input = "<select id='{$this->getFormId()}' name='{$this->getFormName()}[]' multiple='multiple' size='5' value='{$value}' >";
