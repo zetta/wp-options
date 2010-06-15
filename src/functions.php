@@ -131,6 +131,9 @@ function subpage_demo_function()
         <p>Slide : <?php echo var_dump(getWpThemeOption('mySlider')) ?></p>
         <p>Color : <?php echo var_dump(getWpThemeOption('myColor')) ?></p>
         <p>Date : <?php echo var_dump(getWpThemeOption('myDate')) ?></p>
+        <hr />
+        
+        <p>Categories : <?php echo var_dump(getWpThemeOption('multipleCategorySelector')) ?></p>
     <?php
 }
 
