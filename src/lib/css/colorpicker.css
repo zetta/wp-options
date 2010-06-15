@@ -3,6 +3,7 @@
 	height: 176px;
 	overflow: hidden;
 	position: absolute;
+	z-index: 100;
 	background: url(../pix/colorpicker_background.png);
 	font-family: Arial, Helvetica, sans-serif;
 	display: none;
