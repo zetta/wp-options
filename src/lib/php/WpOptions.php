@@ -633,6 +633,24 @@ class WpOptions
     }
     
     /**
+     * Agrega una opción de tipo Slider (input)
+     *
+     * @param string $name
+     * @param string $defaultValue
+     * @param string [optional] $title
+     * @param string [optional] $description
+     * @access public
+     */
+    public function addSliderOption($name, $defaultValue, $max, $min, $title = '', $description = '')
+    {
+        require_once 'WpOption/WpSliderOption.php';
+        $spigaOption = new WpSliderOption($name, $defaultValue);
+        $spigaOption->setTitle($title);
+        $spigaOption->setDescription($description);
+        $this->options[$name] = $spigaOption;
+    }
+    
+    /**
      * Envia a pantalla el método __toString y además checa los cambios que se realizaron en los valores
      * @access public
      */

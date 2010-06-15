@@ -84,6 +84,7 @@ $wpOptions->addSelectTagsOption('multipleTagSelector',array(),true,'WordPress Ta
 $wpOptions->addTitle('CoolTypes');
 $wpOptions->addDatePickerOption('myDate',date('m/d/Y'),'Select a date','You can control dates');
 $wpOptions->addColorPickerOption('myColor','ffdd00','Select color','you can store colors');
+//$wpOptions->addSliderOption('mySlider',5,'');
 
 
 /* Begin Conditional option types */
@@ -122,7 +123,12 @@ $wpOptions->setOptionValue('time',time());
  */
 function subpage_demo_function()
 {
-    ?><strong>Hello world</strong><?php
+    
+    
+    ?>
+    <p><strong>Hello world</strong></p>
+    <p>String : <?php echo var_dump(getWpThemeOption('string')) ?></p>
+    <?php
 }
 
 /**

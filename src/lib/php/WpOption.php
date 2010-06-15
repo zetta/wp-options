@@ -195,7 +195,7 @@ abstract class WpOption
         else if($this->dbSource == self::$Sources['POST_META'])
             return get_post_meta($this->post->ID, $this->name . '_value', true);
         else
-            return '';
+            return 'LOL';
     }
     
     /**
@@ -206,6 +206,7 @@ abstract class WpOption
     {
         if($this->value == null)
         {
+            $this->dbSource = self::$Sources['OPTION'];
             $this->savedValue = $this->getStoredValue();
             $this->value = ($this->savedValue === false) ? $this->defaultValue : (
                 ($this->savedValue) ? ($this->savedValue) : $this->emptyValue

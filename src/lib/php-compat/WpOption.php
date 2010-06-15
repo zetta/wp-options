@@ -206,6 +206,7 @@ class WpOption
     {
         if($this->value == null)
         {
+            $this->dbSource = $this->Sources['OPTION'];
             $this->savedValue = $this->getStoredValue();
             $this->value = ($this->savedValue === false) ? $this->defaultValue : (
                 ($this->savedValue) ? ($this->savedValue) : $this->emptyValue
