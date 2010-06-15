@@ -132,7 +132,7 @@ class WpOptions
      * @var string $menuIcon
      * @access private
      */
-    private $menuIcon = null;
+    var $menuIcon = null;
     
     /**
      * Instancía el objeto WpOptions
@@ -835,9 +835,11 @@ class WpOptions
         global $post;
         if (! isset($this->options[$optionName]))
             wp_die(_s("The option").'<strong>{ '.$optionName.'} <strong>'._s("doesn't exist"));
+        $option = $this->options[$optionName];
         $this->options[$optionName]->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
         $this->options[$optionName]->setPost($post);
-        $this->options[$optionName]->setDbSource(WpOption::$Sources['POST_META']);
+        //$meta = $::$Sources['POST_META'];
+        $this->options[$optionName]->setDbSource( $option->Sources['POST_META'] );
         return $this->options[$optionName]->getStoredValue();
         
     }

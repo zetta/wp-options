@@ -59,7 +59,7 @@ class WpSelectCategoriesOption extends WpOption
     /**
      * Get the value
      */
-    public function getValue()
+    function getValue()
     {
         $val = parent::getValue();
         $val = ($val) ? $val : (

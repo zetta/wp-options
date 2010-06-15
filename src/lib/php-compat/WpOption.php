@@ -493,6 +493,6 @@ class WpOption
     {
         $this->require = $require;
     }
-
-  const VERSION = "1.0";
+    
+    var $VERSION = "1.0";
 }

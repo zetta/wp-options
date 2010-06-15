@@ -61,11 +61,11 @@ class WpCheckBoxOption extends WpOption
      * @return string|mixed|int
      * @access protected
      */
-    public function getStoredValue()
+    function getStoredValue()
     {
-        if($this->dbSource == self::$Sources['OPTION'])
+        if($this->dbSource == $this->Sources['OPTION'])
             return get_option($this->inputName . '_' . $this->name);
-        else if($this->dbSource == self::$Sources['POST_META'])
+        else if($this->dbSource == $this->Sources['POST_META'])
             return unserialize(get_post_meta($this->post->ID, $this->name . '_value', true));
         else
             return '';

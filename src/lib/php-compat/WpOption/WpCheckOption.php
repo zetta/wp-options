@@ -77,7 +77,7 @@ class WpCheckOption extends WpOption
      * Regresa el valor guardado o el default si no existe
      * @access public 
      */
-    public function getValue()
+    function getValue()
     {
         return $this->cast( parent::getValue() );
     }
