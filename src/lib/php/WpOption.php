@@ -207,7 +207,7 @@ abstract class WpOption
         if($this->value == null)
         {
             $this->savedValue = $this->getStoredValue();
-            $this->value = ($this-savedValue === false) ? $this->defatultValue : (
+            $this->value = ($this->savedValue === false) ? $this->defaultValue : (
                 ($this->savedValue) ? ($this->savedValue) : $this->emptyValue
             );
         }
