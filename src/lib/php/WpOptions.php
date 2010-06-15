@@ -740,7 +740,7 @@ class WpOptions
         $fields = '';
         foreach ( $options as $option )
         {
-            if (is_subclass_of($option, 'WpOption'))
+            if ($option instanceof WpOption)
             {
                 if ($option->getHideInOptions())
                     continue;
@@ -753,11 +753,11 @@ class WpOptions
                 if ($parentName != '__root__' && $this->options[$parentName]->getValue() == false)
                     $option->setVisible(false);
             }
-            if (get_class($option) == 'WpOptionTitle')
+            if ($option instanceof WpOptionTitle)
                 $option->setTemplate($this->templateHeader);
             $fields .= ($option->__toString());
             
-            if (is_subclass_of($option, 'WpOption') && $option->hasChilds())
+            if (($option instanceof WpOption) && $option->hasChilds())
                 $fields .= (string) $this->getChilds($option->getChilds(), $option->getName());
         }
         return $fields;

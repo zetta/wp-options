@@ -756,7 +756,7 @@ class WpOptions
                 if($parentName != '__root__' && $this->options[$parentName]->getValue() == false)
                     $option->setVisible(false);
             }
-            if(get_class($option) == 'WpOptionTitle')
+            if(get_class($option) == 'wpoptiontitle')
                 $option->setTemplate($this->templateHeader);
             $fields .= $option->__toString();
             
