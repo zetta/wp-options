@@ -637,15 +637,21 @@ class WpOptions
      *
      * @param string $name
      * @param string $defaultValue
+     * @param int $max
+     * @param int [optional] $min
+     * @param int [optional] $step
      * @param string [optional] $title
      * @param string [optional] $description
      * @access public
      */
-    public function addSliderOption($name, $defaultValue, $max, $min, $title = '', $description = '')
+    public function addSliderOption($name, $defaultValue, $max, $min = 0, $step = 1, $title = '', $description = '')
     {
         require_once 'WpOption/WpSliderOption.php';
         $spigaOption = new WpSliderOption($name, $defaultValue);
         $spigaOption->setTitle($title);
+        $spigaOption->setMax($max);
+        $spigaOption->setStep($step);
+        $spigaOption->setMin($min);
         $spigaOption->setDescription($description);
         $this->options[$name] = $spigaOption;
     }
