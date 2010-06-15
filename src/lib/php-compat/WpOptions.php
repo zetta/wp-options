@@ -853,7 +853,7 @@ class WpOptions
     {
         if (! isset($this->options[$optionName]))
            wp_die(_s("The option").'<strong>{ '.$optionName.'} <strong>'._s("doesn't exist"));
-        $prefix = $this->getCamelCase('wp_options_' . $this->baseThemeName);
+        $prefix = $this->getCamelCase('wp_options');
         $this->options[$optionName]->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
         $this->options[$optionName]->set($value);
         update_option($prefix . '_' . $this->baseThemeName .'_' . $optionName, $this->options[$optionName]->set( $value ));

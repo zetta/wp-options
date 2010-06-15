@@ -775,7 +775,7 @@ class WpOptions
             $prefix = $this->getCamelCase('wp_options') . '_' . $this->baseThemeName;
             foreach ( $this->options as $optionName => $option )
             {
-                if (is_subclass_of($option, 'WpOption'))
+                if ($option instanceof WpOption)
                 {
                     $value = (is_string($_POST[$prefix][$optionName])) ? stripslashes($_POST[$prefix][$optionName]) : $_POST[$prefix][$optionName]; 
                     $this->setOptionValue($optionName, $value);
