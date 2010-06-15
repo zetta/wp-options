@@ -56,7 +56,7 @@ class WpSliderOption extends WpOption
         return "<div id='slider_{$this->getFormId()}' class='wpSliderDiv'></div>
        <script type='text/javascript'>
 	$(function() {
-		$('#slider_{$this->getFormId()}').slider({ value : {$value}, min : {$this->min}, max : {$this->max}, step : {$this->step}, slide: function(event, ui) {
+		$('#slider_{$this->getFormId()}').slider({ range: 'min', value : {$value}, min : {$this->min}, max : {$this->max}, step : {$this->step}, slide: function(event, ui) {
 				$('#{$this->getFormId()}').val(ui.value);
 			} });
 	});
