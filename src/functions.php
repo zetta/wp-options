@@ -90,11 +90,17 @@ $wpOptions->addColorPickerOption('myColor','ffdd00','Select color','you can stor
 $wpOptions->addTitle('Conditional');
 $wpOptions->addStringOption('flickrName','MyName','Flickr Name');
 $wpOptions->addNumberOption('FlickrID',0,'Flickr Number');
-//$wpOptions->addCheckOption('viewFlickr',false,'View Flickr');
+$wpOptions->addCheckOption('viewFlickr',false,'View Flickr');
 
 $wpOptions->setConditionalOptions('viewFlickr',array('flickrName','FlickrID'));
 
 
+$wpOptions->addStringOption('testa','Test','Test A');
+$wpOptions->addStringOption('testb','Test','Test B');
+$wpOptions->addCheckOption('testcheck',false,'View Test A');
+$wpOptions->addCheckOption('testbcheck',false,'View Test B');
+$wpOptions->setConditionalOptions('testcheck',array('testa','testbcheck'));
+$wpOptions->setConditionalOptions('testbcheck',array('testb'));
 
 
 

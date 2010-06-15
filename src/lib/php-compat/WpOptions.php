@@ -1034,7 +1034,7 @@ class WpOptions
 TPL;
         $this->templateOption = <<<TPL
 
-            <tr%visible% class="%class%">
+            <tr%visible% class="%class%" id="tr_%id%">
                 <td class="option-title"><label for="%id%">%title%</label></td>
                 <td class="%id%">%input% %description%</td>
             </tr>
