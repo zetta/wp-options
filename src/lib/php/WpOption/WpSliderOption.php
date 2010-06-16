@@ -38,7 +38,7 @@ class WpSliderOption extends WpOption
      *
      * @param string $name
      * @param string $defaultValue
-     * @return WpColorPickerOption
+     * @return WpSliderOption
      */
     public function WpSliderOption($name, $defaultValue)
     {

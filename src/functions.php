@@ -21,7 +21,7 @@ $wpOptions->addBooleanOption('boolean2',true,'Boolean');
 $wpOptions->addNumberOption('number',10,'Number');
 $wpOptions->addCheckOption('check',true,'Check','Toggle Option');
 
-
+/* You can add subpages */
 $wpOptions->addSubpage('subpage title','my subpage','subpage-slug','subpage_demo_function');
 
 
@@ -85,6 +85,7 @@ $wpOptions->addTitle('CoolTypes');
 $wpOptions->addDatePickerOption('myDate',date('m/d/Y'),'Select a date','You can control dates');
 $wpOptions->addColorPickerOption('myColor','ffdd00','Select color','you can store colors');
 $wpOptions->addSliderOption('mySlider',6,10,0,2,'Select quantity','You can slide this');
+$wpOptions->addRangeSliderOption('myRangeSlider',array(6,15),30,0,2,'Select quantity','You can slide this');
 
 
 /* Begin Conditional option types */
@@ -124,16 +125,23 @@ $wpOptions->setOptionValue('time',time());
 function subpage_demo_function()
 {
     
-    
+    /**
+     * you DONT need to add this page, this is for testing purposes only
+     */
     ?>
     <p><strong>Hello world</strong></p>
-        <p>String : <?php echo var_dump(getWpThemeOption('string')) ?></p>
-        <p>Slide : <?php echo var_dump(getWpThemeOption('mySlider')) ?></p>
-        <p>Color : <?php echo var_dump(getWpThemeOption('myColor')) ?></p>
-        <p>Date : <?php echo var_dump(getWpThemeOption('myDate')) ?></p>
+        <p><strong>String</strong> : <?php echo var_dump(getWpThemeOption('string')) ?></p>
+        <p><strong>Color</strong> : <?php echo var_dump(getWpThemeOption('myColor')) ?></p>
+        <p><strong>Date</strong> : <?php echo var_dump(getWpThemeOption('myDate')) ?></p>
+        
         <hr />
         
         <p>Categories : <?php echo var_dump(getWpThemeOption('multipleCategorySelector')) ?></p>
+        
+        <hr />
+        
+        <p><strong>Slide</strong> : <?php echo var_dump(getWpThemeOption('mySlider')) ?></p>
+        <p><strong>RangeSlide</strong> : <?php echo var_dump(getWpThemeOption('myRangeSlider')) ?></p>
     <?php
 }
 

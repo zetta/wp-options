@@ -657,6 +657,30 @@ class WpOptions
     }
     
     /**
+     * Agrega una opción de tipo RangeSlider (input)
+     *
+     * @param string $name
+     * @param string $defaultValue
+     * @param int $max
+     * @param int [optional] $min
+     * @param int [optional] $step
+     * @param string [optional] $title
+     * @param string [optional] $description
+     * @access public
+     */
+    function addRangeSliderOption($name, $def, $max, $min = 0, $step = 1, $title = '', $description = '')
+    {
+        require_once 'WpOption/WpRangeSliderOption.php';
+        $spigaOption = new WpRangeSliderOption($name, array('min'=> $def[0], 'max' => $def[1]));
+        $spigaOption->setTitle($title);
+        $spigaOption->setMax($max);
+        $spigaOption->setStep($step);
+        $spigaOption->setMin($min);
+        $spigaOption->setDescription($description);
+        $this->options[$name] = $spigaOption;
+    }
+    
+    /**
      * Envia a pantalla el método __toString y además checa los cambios que se realizaron en los valores
      * @access public
      */

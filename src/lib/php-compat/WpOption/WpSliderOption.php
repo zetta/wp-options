@@ -37,7 +37,7 @@ class WpSliderOption extends WpOption
      *
      * @param string $name
      * @param string $defaultValue
-     * @return WpColorPickerOption
+     * @return WpSliderOption
      */
     function WpSliderOption($name, $defaultValue)
     {
@@ -52,7 +52,6 @@ class WpSliderOption extends WpOption
     function ___toString()
     {
         $value = $this->getValue();
-        echo var_dump( $value );
         $name = $this->getFormName();
         $id = $this->getFormId();
         return "<div id='slider_{$id}' class='wpSliderDiv'></div>

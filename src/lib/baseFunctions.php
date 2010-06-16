@@ -12,12 +12,18 @@ global $pagenow;
  * echo getWpThemeOption('string'); 
  * </code>
  * @param string $optionName Nombre de la opcion
+ * @param int|string $index
  * @return WpOptions $wpOptions by Reference
  */
-function &getWpThemeOption($optionName)
+function &getWpThemeOption($optionName,$index = null)
 {
     global $wpOptions;
-    return $wpOptions->getOption($optionName);
+    $val = $wpOptions->getOption($optionName);
+    return is_null($index) ? $val : (
+        !is_array($val) ? $val : (
+            isset($val[$index]) ? $val[$index] : $val
+        )
+    );
 }
 
 /**
