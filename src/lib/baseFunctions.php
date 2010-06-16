@@ -3,12 +3,12 @@
 global $pagenow;
 
 /**
- * No Remover esto, porque de otra forma la variable $wpOptions se pierde ¬¬
+ * No Remover esto, porque de otra forma la variable $wpOptions se pierde Â¬Â¬
  * puesto que dentro de los archivos del template el scope es diferente
  * o.O!!! Damn Wp!
  * por lo tanto:::
  * @example <code>
- * //Retornará el valor guardado en la opción 'string'
+ * //RetornarÃ¡ el valor guardado en la opciÃ³n 'string'
  * echo getWpThemeOption('string'); 
  * </code>
  * @param string $optionName Nombre de la opcion
@@ -39,7 +39,7 @@ if (($pagenow == 'admin.php') && ($_GET['page'] == 'WpOptions.php'))
     add_action('admin_head', array($wpOptions, 'addMetaData'));
 }
 /**
- * settea el valor de una opción 
+ * settea el valor de una opciÃ³n 
  * @param string $optionName
  * @param mixed $optionValue
  * @return WpOptions $wpOptions

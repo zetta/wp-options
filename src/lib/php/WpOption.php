@@ -28,7 +28,7 @@ abstract class WpOption
     protected $id;
     
     /**
-     * De que lugar deber· extraer la informaciÛn el campo
+     * De que lugar deber√° extraer la informaci√≥n el campo
      * @access protected
      * @var int 
      */
@@ -61,7 +61,7 @@ abstract class WpOption
     protected $require = null;
     
     /**
-     * Valor por default de la opciÛn
+     * Valor por default de la opci√≥n
      * @var string|int|boolean
      * @access protected
      */
@@ -76,14 +76,14 @@ abstract class WpOption
     protected $savedValue;
     
     /**
-     * Titulo de la opciÛn
+     * Titulo de la opci√≥n
      * @var string
      * @access protected
      */
     protected $title;
     
     /**
-     * DescripciÛn de la opciÛn almacenada
+     * Descripci√≥n de la opci√≥n almacenada
      *
      * @var string
      * @access protected
@@ -98,14 +98,14 @@ abstract class WpOption
     protected $inputName;
     
     /**
-     * DiseÒo con el cual se generar· la vista
+     * Dise√±o con el cual se generar√° la vista
      * @var string
      * @access protected
      */
     protected $template;
     
     /**
-     * Determina si la opciÛn aparecer· en el metabox
+     * Determina si la opci√≥n aparecer√° en el metabox
      *
      * @var boolean
      * @access protected
@@ -167,7 +167,7 @@ abstract class WpOption
     }
     
     /**
-     * Regresa la opciÛn para ser impresa en el formulario
+     * Regresa la opci√≥n para ser impresa en el formulario
      * @return  string $template
      * @access public
      */
@@ -216,7 +216,7 @@ abstract class WpOption
     }
     
     /**
-     * Obtiene el nombre que utilizar· en el formulario
+     * Obtiene el nombre que utilizar√° en el formulario
      * @return string
      * @access public
      */
@@ -247,7 +247,7 @@ abstract class WpOption
     public abstract function ___toString();
     
     /**
-     * MÈtodo que regresa el valor que se almacenar· en la base de datos, 
+     * M√©todo que regresa el valor que se almacenar√° en la base de datos, 
      * dependiendo de la forma en que necesita ser guardado
      * @param int|string|mixed $value
      * @return int|string|mixed
@@ -349,7 +349,7 @@ abstract class WpOption
     }
     
     /**
-     * Agrega una opcion dentro del arbol jer·rquico
+     * Agrega una opcion dentro del arbol jer√°rquico
      *
      * @param WpOption $child
      * @access public

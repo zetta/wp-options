@@ -28,7 +28,7 @@ class WpCheckOption extends WpOption
     }
     
     /**
-     * Genera el html de la opción
+     * Genera el html de la opciÃ³n
      * @return string
      * @access public
      */
@@ -58,7 +58,7 @@ class WpCheckOption extends WpOption
     }
     
     /**
-     * Método para castear el valor de la opcion y poder almacenarla en la base de datos
+     * MÃ©todo para castear el valor de la opcion y poder almacenarla en la base de datos
      * @param int|string|mixed $value
      * @return string
      * @access public

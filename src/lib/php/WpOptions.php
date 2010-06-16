@@ -135,7 +135,7 @@ class WpOptions
     private $menuIcon = null;
     
     /**
-     * InstancÌa el objeto WpOptions
+     * Instanc√≠a el objeto WpOptions
      *
      * @param float $wpVersion
      * @param wpdb $wpdb
@@ -164,7 +164,7 @@ class WpOptions
     }
     
     /**
-     * Agrega la p·gina de opciones en el administrador y la funcion del metabox si es necesaria
+     * Agrega la p√°gina de opciones en el administrador y la funcion del metabox si es necesaria
      * @access public
      */
     public function addOptionsPage()
@@ -205,8 +205,8 @@ class WpOptions
     }
     
     /**
-     * Para aquello del callback, esta function no deberia existir, pero no me gusta como se formatea mi cÛdigo
-     * con el ZendStuio cuando utilizo arrays tan pequeÒos... pero ya ni modo =P 
+     * Para aquello del callback, esta function no deberia existir, pero no me gusta como se formatea mi c√≥digo
+     * con el ZendStuio cuando utilizo arrays tan peque√±os... pero ya ni modo =P 
      *
      * @param string $funcName
      * @return mixed
@@ -250,8 +250,8 @@ class WpOptions
     /**
      * Agrega un metabox en la pagina de post
      * @param string $metaBoxName Tiene que ser un nombre de opcion previamente creado
-     * @param boolean $hideInOptionsPage Si es verdadero la opcion solo se mostrar· en el metabox y se ocultar· en la
-     *        p·gina de opciones, en caso contrario se mostrar· en ambas
+     * @param boolean $hideInOptionsPage Si es verdadero la opcion solo se mostrar√° en el metabox y se ocultar√° en la
+     *        p√°gina de opciones, en caso contrario se mostrar√° en ambas
      * @access public
      */
     public function addMetaBox($metaBoxName, $hideInOptionsPage = true)
@@ -268,8 +268,8 @@ class WpOptions
     /**
      * Agrega un metabox en la pagina de post
      * @param mixed $metaBoxName Arreglo con los nombres de las opciones previamente creadas
-     * @param boolean $hideInOptionsPage Si es verdadero la opcion solo se mostrar· en el metabox y se ocultar· en la
-     *        p·gina de opciones, en caso contrario se mostrar· en ambas
+     * @param boolean $hideInOptionsPage Si es verdadero la opcion solo se mostrar√° en el metabox y se ocultar√° en la
+     *        p√°gina de opciones, en caso contrario se mostrar√° en ambas
      * @access public
      */
     public function addMetaBoxes($metaBoxNames, $hideInOptionsPage = true)
@@ -288,10 +288,10 @@ class WpOptions
     }
     
     /**
-     * Agrega un metabox en la pagina de post con un campo que condiciona si este se mostrar· o no
+     * Agrega un metabox en la pagina de post con un campo que condiciona si este se mostrar√° o no
      *
-     * @param string $metaBoxName El nombre de una opciÛn previamente almacenada
-     * @param string $condition El nombre de una opciÛn previamente almacenada
+     * @param string $metaBoxName El nombre de una opci√≥n previamente almacenada
+     * @param string $condition El nombre de una opci√≥n previamente almacenada
      * @param boolean $hideInOptionsPage
      * @access public
      */
@@ -314,9 +314,9 @@ class WpOptions
     }
     
     /**
-     * Agrega una condiciÛn a algunas opciones previamente almacenadas
+     * Agrega una condici√≥n a algunas opciones previamente almacenadas
      *
-     * @param string $condition El nombre de una opciÛn previamente almacenada
+     * @param string $condition El nombre de una opci√≥n previamente almacenada
      * @param mixed $options
      * @access public
      */
@@ -341,7 +341,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opciÛn de tipo String (input)
+     * Agrega una opci√≥n de tipo String (input)
      *
      * @param string $name
      * @param string $defaultValue
@@ -359,7 +359,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opciÛn de tipo String (textarea)
+     * Agrega una opci√≥n de tipo String (textarea)
      *
      * @param string $name
      * @param string $defaultValue
@@ -377,7 +377,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opciÛn de tipo Boleano (input - radio [2 opciones])
+     * Agrega una opci√≥n de tipo Boleano (input - radio [2 opciones])
      *
      * @param string $name
      * @param boolean $defaultValue
@@ -395,7 +395,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opciÛn de tipo Entero (input)
+     * Agrega una opci√≥n de tipo Entero (input)
      *
      * @param string $name
      * @param int $defaultValue
@@ -413,7 +413,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opciÛn multiple (input - radio [x opciones])
+     * Agrega una opci√≥n multiple (input - radio [x opciones])
      *
      * @param string $name
      * @param mixed $options Array asociativo con los valores a mostrar
@@ -434,7 +434,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opciÛn multiple (input - checkbox [x opciones])
+     * Agrega una opci√≥n multiple (input - checkbox [x opciones])
      *
      * @param string $name
      * @param mixed $selectedValues
@@ -455,7 +455,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opciÛn de tipo checkbox que regresa un boleano
+     * Agrega una opci√≥n de tipo checkbox que regresa un boleano
      *
      * @param string $name
      * @param mixed $defaultValue
@@ -493,7 +493,7 @@ class WpOptions
     }
     
     /**
-     * Agrega un dropdown/pulldown/combobox como quieras llamarle de selecciÛn m˙ltiple
+     * Agrega un dropdown/pulldown/combobox como quieras llamarle de selecci√≥n m√∫ltiple
      *
      * @param string $name
      * @param mixed $selectedValues
@@ -516,7 +516,7 @@ class WpOptions
      * Agrega un dropdown/pulldown/combobox que lista las categorias
      *
      * @param string $name
-     * @param int|mixed [optional] $selectedValue Si el campo ser· de opciÛn multiple, 
+     * @param int|mixed [optional] $selectedValue Si el campo ser√° de opci√≥n multiple, 
      *   se necesita enviar un arreglo en caso contrario se envia un entero
      * @param boolean [optional] $isMultiple 
      * @param string [optional] $title
@@ -534,10 +534,10 @@ class WpOptions
     }
     
     /**
-     * Agrega un dropdown/pulldown/combobox que lista las p·ginas
+     * Agrega un dropdown/pulldown/combobox que lista las p√°ginas
      *
      * @param string $name
-     * @param int|mixed [optional] $selectedValue Si el campo ser· de opciÛn multiple, 
+     * @param int|mixed [optional] $selectedValue Si el campo ser√° de opci√≥n multiple, 
      *   se necesita enviar un arreglo en caso contrario se envia un entero
      * @param boolean [optional] $isMultiple 
      * @param string [optional] $title
@@ -558,7 +558,7 @@ class WpOptions
      * Agrega un dropdown/pulldown/combobox que lista los usuarios del blog
      *
      * @param string $name
-     * @param int|mixed [optional] $selectedValue Si el campo ser· de opciÛn multiple, 
+     * @param int|mixed [optional] $selectedValue Si el campo ser√° de opci√≥n multiple, 
      *   se necesita enviar un arreglo en caso contrario se envia un entero
      * @param boolean [optional] $isMultiple 
      * @param string [optional] $title
@@ -579,7 +579,7 @@ class WpOptions
      * Agrega un dropdown/pulldown/combobox que lista los tags
      *
      * @param string $name
-     * @param int|mixed [optional] $selectedValue Si el campo ser· de opciÛn multiple, 
+     * @param int|mixed [optional] $selectedValue Si el campo ser√° de opci√≥n multiple, 
      *   se necesita enviar un arreglo en caso contrario se envia un entero
      * @param boolean [optional] $isMultiple 
      * @param string [optional] $title
@@ -597,7 +597,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opciÛn de tipo DatePicker (input)
+     * Agrega una opci√≥n de tipo DatePicker (input)
      *
      * @param string $name
      * @param string $defaultValue
@@ -615,7 +615,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opciÛn de tipo ColorPicker (input)
+     * Agrega una opci√≥n de tipo ColorPicker (input)
      *
      * @param string $name
      * @param string $defaultValue
@@ -633,7 +633,7 @@ class WpOptions
     }
     
     /**
-     * Agrega una opciÛn de tipo Slider (input)
+     * Agrega una opci√≥n de tipo Slider (input)
      *
      * @param string $name
      * @param string $defaultValue
@@ -657,7 +657,7 @@ class WpOptions
     }
 
     /**
-     * Agrega una opciÛn de tipo RangeSlider (input)
+     * Agrega una opci√≥n de tipo RangeSlider (input)
      *
      * @param string $name
      * @param string $defaultValue
@@ -681,7 +681,7 @@ class WpOptions
     }
     
     /**
-     * Envia a pantalla el mÈtodo __toString y adem·s checa los cambios que se realizaron en los valores
+     * Envia a pantalla el m√©todo __toString y adem√°s checa los cambios que se realizaron en los valores
      * @access public
      */
     public function render()
@@ -776,7 +776,7 @@ class WpOptions
     }
     
     /**
-     * Muesta las opciones que son dependientes de una opciÛn
+     * Muesta las opciones que son dependientes de una opci√≥n
      *
      * @param mixed $options
      * @param string $parentName
@@ -860,7 +860,7 @@ class WpOptions
     }
     
     /**
-     * Regresa el valor de una opciÛn almacenada
+     * Regresa el valor de una opci√≥n almacenada
      * @access public
      */
     public function getOption($optionName)
@@ -872,7 +872,7 @@ class WpOptions
     }
     
     /**
-     * Regresa el valor de una opciÛn almacenada en el post
+     * Regresa el valor de una opci√≥n almacenada en el post
      * @access public
      */
     public function getPostOption($optionName)
@@ -888,7 +888,7 @@ class WpOptions
     }
     
     /**
-     * Guarda el valor a una opciÛn
+     * Guarda el valor a una opci√≥n
      * @param string $optionName
      * @param mixed $value
      */
@@ -1040,21 +1040,21 @@ class WpOptions
     private $templateWrappedOption = "";
     
     /**
-     * Variable que almacena el layout para el diseÒo de los headers
+     * Variable que almacena el layout para el dise√±o de los headers
      * @var string
      * @access private
      */
     private $templateHeader = "";
     
     /**
-     * Variable que almacena el layout para el diseÒo en general
+     * Variable que almacena el layout para el dise√±o en general
      * @var string
      * @access private
      */
     private $templateLayout = '';
     
     /**
-     * El diseÒo del metabox
+     * El dise√±o del metabox
      *
      * @var string
      * @access private

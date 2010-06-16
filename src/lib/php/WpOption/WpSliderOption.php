@@ -46,7 +46,7 @@ class WpSliderOption extends WpOption
     }
     
     /**
-     * Genera el html de la opción
+     * Genera el html de la opciÃ³n
      * @return string
      * @access public
      */
