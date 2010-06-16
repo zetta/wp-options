@@ -681,6 +681,24 @@ class WpOptions
     }
     
     /**
+     * Agrega una opción de tipo File (input)
+     *
+     * @param string $name
+     * @param string $defaultValue
+     * @param string [optional] $title
+     * @param string [optional] $description
+     * @access public
+     */
+    function addFileOption($name, $defaultValue, $title = '', $description = '')
+    {
+        require_once 'WpOption/WpFileOption.php';
+        $spigaOption = new WpFileOption($name, $defaultValue);
+        $spigaOption->setTitle($title);
+        $spigaOption->setDescription($description);
+        $this->options[$name] = $spigaOption;
+    }
+    
+    /**
      * Envia a pantalla el método __toString y además checa los cambios que se realizaron en los valores
      * @access public
      */
@@ -1072,73 +1090,68 @@ class WpOptions
      */
     function saveTemplates()
     {
-        $this->templateHeader = <<<TPL
-
-            <tr valign="top">
-                <th colspan="2">
+        $this->templateHeader = "
+            <tr valign='top'>
+                <th colspan='2'>
                     %title%
                 </th>
-            </tr>    
-TPL;
-        $this->templateOption = <<<TPL
+            </tr>";
 
-            <tr%visible% class="%class%" id="tr_%id%">
-                <td class="option-title"><label for="%id%">%title%</label></td>
-                <td class="%id%">%input% %description%</td>
-            </tr>
-TPL;
-        $this->templateLayout = <<<TPL
+        $this->templateOption = "
+            <tr%visible% class='%class%' id='tr_%id%'>
+                <td class='option-title'><label for='%id%'>%title%</label></td>
+                <td class='%id%'>%input% %description%</td>
+            </tr>";
 
-            <div class="wrap">
-                <div class="icon32" id="icon-tools"><br /></div>
-                <a href="http://storelicious.com" title="Premium WordPress Themes" id="storelicious_logo"><img src="{$this->themeLocation}/lib/pix/brandstorelicious.gif" alt="Storelicious" /> </a>
-                <h2>Welcome to configuration page of <strong>{$this->themeName}</strong>!</h2>
+        $this->templateLayout = "
+            <div class='wrap'>
+                <div class='icon32' id='icon-tools'><br /></div>
+                <a href='http://storelicious.com' title='"._s('Premium WordPress Themes')."' id='storelicious_logo'><img src='{$this->themeLocation}/lib/pix/brandstorelicious.gif' alt='Storelicious' /> </a>
+                <h2>"._s('Welcome to configuration page of')." <strong>{$this->themeName}</strong>!</h2>
                 %updatedMessage%
                 
-                <form action=""" method="post">
+                <form action='' method='post' enctype='multipart/form-data'>
                 
-                 <div class="info">
-                       <input name="save" class="button-primary floatRight" type="submit" value="Save changes" />
-                          <strong>Stuck on these options?</strong> <a href="{$this->manualUrl}" target="_blank">Read The Documentation Here</a> or 
-                          <a href="{$this->forumUrl}" target="blank">Visit Our Support Forum</a>
+                 <div class='info'>
+                       <input name='save' class='button-primary floatRight' type='submit' value='"._s('Save changes')."' />
+                          <strong>"._s('Stuck on these options?')."</strong> <a href='{$this->manualUrl}' target='_blank'>"._s('Read The Documentation Here')."</a>
+                          "._s('or')." <a href='{$this->forumUrl}' target='blank'>"._s('Visit Our Support Forum')."</a>
                 </div>
                 
-                    <input type="hidden" name="post" value="updateWpOptions">
-                    <table class="widefat" id="storelicious">
-                        <thead><tr><th colspan="2">{$this->themeName}</th></tr></thead>
+                    <input type='hidden' name='post' value='updateWpOptions'>
+                    <table class='widefat' id='storelicious'>
+                        <thead><tr><th colspan='2'>{$this->themeName}</th></tr></thead>
                         <tfoot>
                             <tr>
-                                <th>End Storelicious Options</th>
-                                <th align="right"><a href='#storelicious'>Back to top</a></th>
+                                <th>"._s('End Storelicious Options')."</th>
+                                <th align='right'><a href='#storelicious'>"._s('Back to top')."</a></th>
                             </tr>
                         </tfoot>
                         <tbody>%fields%</tbody>                            
                     </table>
-                    <p class="submit"><input type="submit" class="button-primary" value="Save changes" />
+                    <p class='submit'><input type='submit' class='button-primary' value='"._s('Save changes')."' />
                 </form>
-                <h2>Delete Theme options</h2>
-                <p>To completely remove these theme options from your database (reminder: they are all stored in Wordpress options table <em>{$this->wpdb->options}</em>), click on
-                the following button. You will be then redirected to the <a href="themes.php">Themes admin interface</a> and the Default theme will have been activated.</p>
-                <p><strong>Special notice for people allowing their readers to change theme</strong> (i.e. using a Theme Switcher on their blog)<br/>
-                Unless you really remove the theme files from your server, this theme will still be available to users, and therefore will self-install again as soon as someone selects it. Also, all custom variables as defined in the above menu will be blank, this could lead to unexpected behaviour.
-                Press "Delete" only if you intend to remove the theme files right after this.</p>
-                <form action="" method="post">
-                    <input type="hidden" name="post" value="deleteWpOptions" />
-                    <p class="submit"><input type="submit" value="Delete Options" onclick="return confirm('Are you really sure you want to delete ?');"/></p>
+                <h2>"._s('Delete Theme options')."</h2>
+                <p>"._s('To completely remove these theme options from your database (reminder: they are all stored in Wordpress options table')." <em>{$this->wpdb->options}</em>),
+                "._s('click on the following button. You will be then redirected to the')." <a href='themes.php'>"._s('Themes admin interface')."</a> "._s('and the Default theme will have been activated').".</p>
+                <p><strong>"._s('Special notice for people allowing their readers to change theme')."</strong> ("._s('i.e. using a Theme Switcher on their blog').")<br/>
+                "._s('Unless you really remove the theme files from your server, this theme will still be available to users, and therefore will self-install again as soon as someone selects it.')." 
+                "._s('Also, all custom variables as defined in the above menu will be blank, this could lead to unexpected behaviour.')."
+                "._s("Press 'Delete' only if you intend to remove the theme files right after this.")."</p>
+                <form action='' method='post'>
+                    <input type='hidden' name='post' value='deleteWpOptions' />
+                    <p class='submit'><input type='submit' value='"._s('Delete Options')."' onclick='return confirm(\""._s('Are you really sure you want to delete ?')."\");'/></p>
                 </form>
-            </div>
-TPL;
-        
-        $this->templateLayoutMetaBox = <<<TPL
-        
-                <table class="widefat" id="storelicious_metabox">
-                    <tbody>
-                        %fields%
-                    </tbody>                            
-                </table>
-TPL;
-}
+            </div>";
 
+        $this->templateLayoutMetaBox = "
+            <table class='widefat' id='storelicious_metabox'>
+                <tbody>
+                    %fields%
+                </tbody>                            
+            </table>";
+
+    }
 }
 
 

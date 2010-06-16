@@ -18,3 +18,8 @@ function _s($string, $namespace = 'storelicious')
 }
 
 define('WP_OPTIONS_VERSION',1.1);
+
+/**
+ * pages
+ */
+include_once 'wp-options.pages.php';

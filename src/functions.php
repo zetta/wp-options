@@ -27,6 +27,7 @@ $wpOptions->addSubpage('subpage title','my subpage','subpage-slug','subpage_demo
 
 
 
+
 /*Begin complex types*/
 $wpOptions->addTitle('Complex Types');
 
@@ -62,6 +63,8 @@ $fontSize = array(
 );
 $wpOptions->addSelectOption('select',$fontSize,'13px','Select','Select the font size');
 $wpOptions->addMultipleSelectOption('multipleSelect',$fontSize,array('13px','11px'),'Multiple Select','Select one or more font sizes');
+
+$wpOptions->addFileOption('myFile','','Choose a File','You can upload files');
 
 
 

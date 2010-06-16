@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Storelicious\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-08 11:38-0600\n"
+"POT-Creation-Date: 2010-06-16 18:40-0600\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Staff Storelicious <staff@storelicious.com>\n"
+"Last-Translator: Juan Carlos Clemente <zetaweb@gmail.com>\n"
 "Language-Team: Storelicious <staff@storeilcious.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,82 +26,169 @@ msgstr ""
 msgid "Post Settings"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:261
-#: ../lib/php/WpOptions.php:283
-#: ../lib/php/WpOptions.php:303
-#: ../lib/php/WpOptions.php:306
-#: ../lib/php/WpOptions.php:332
+#: ../lib/php/WpOptions.php:260
+#: ../lib/php/WpOptions.php:281
+#: ../lib/php/WpOptions.php:301
+#: ../lib/php/WpOptions.php:304
+#: ../lib/php/WpOptions.php:329
 msgid "Can't add new Metabox if the option"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:261
-#: ../lib/php/WpOptions.php:283
-#: ../lib/php/WpOptions.php:303
-#: ../lib/php/WpOptions.php:306
+#: ../lib/php/WpOptions.php:260
+#: ../lib/php/WpOptions.php:281
+#: ../lib/php/WpOptions.php:301
+#: ../lib/php/WpOptions.php:304
+#: ../lib/php/WpOptions.php:326
 #: ../lib/php/WpOptions.php:329
-#: ../lib/php/WpOptions.php:332
-#: ../lib/php/WpOptions.php:340
-#: ../lib/php/WpOptions.php:824
-#: ../lib/php/WpOptions.php:837
+#: ../lib/php/WpOptions.php:337
+#: ../lib/php/WpOptions.php:887
+#: ../lib/php/WpOptions.php:900
+#: ../lib/php/WpOptions.php:916
 msgid "doesn't exist"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:309
+#: ../lib/php/WpOptions.php:307
 msgid "Can't add ConditionalMetaBoxes if the Option"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:309
-#: ../lib/php/WpOptions.php:335
+#: ../lib/php/WpOptions.php:307
+#: ../lib/php/WpOptions.php:332
 msgid "isn't a WpCheckOption Option"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:329
-#: ../lib/php/WpOptions.php:340
+#: ../lib/php/WpOptions.php:326
+#: ../lib/php/WpOptions.php:337
 msgid "Can't add ConditionalOptions if the option"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:335
+#: ../lib/php/WpOptions.php:332
 msgid "Can't add ConditionalOptions if the Option"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:690
+#: ../lib/php/WpOptions.php:753
 msgid "You don't have permission to edit this page"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:693
+#: ../lib/php/WpOptions.php:756
 msgid "You don't have permission to edit this post"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:728
+#: ../lib/php/WpOptions.php:791
 msgid "Updated Options"
 msgstr ""
 
-#: ../lib/php/WpOptions.php:824
-#: ../lib/php/WpOptions.php:837
+#: ../lib/php/WpOptions.php:887
+#: ../lib/php/WpOptions.php:900
+#: ../lib/php/WpOptions.php:916
 msgid "The option"
 msgstr ""
 
-#: ../lib/php/WpOption/WpBooleanOption.php:36
-msgid "Yes"
+#: ../lib/php/WpOptions.php:1105
+msgid "Premium WordPress Themes"
 msgstr ""
 
-#: ../lib/php/WpOption/WpBooleanOption.php:37
-msgid "No"
+#: ../lib/php/WpOptions.php:1106
+msgid "Welcome to configuration page of"
 msgstr ""
 
-#: ../lib/php/WpOption/WpSelectCategoriesOption.php:49
-msgid "Select one category"
+#: ../lib/php/WpOptions.php:1112
+#: ../lib/php/WpOptions.php:1128
+msgid "Save changes"
 msgstr ""
 
-#: ../lib/php/WpOption/WpSelectPagesOption.php:49
+#: ../lib/php/WpOptions.php:1113
+msgid "Stuck on these options?"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1113
+msgid "Read The Documentation Here"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1114
+msgid "or"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1114
+msgid "Visit Our Support Forum"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1122
+msgid "End Storelicious Options"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1123
+msgid "Back to top"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1130
+msgid "Delete Theme options"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1131
+msgid "To completely remove these theme options from your database (reminder: they are all stored in Wordpress options table"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1132
+msgid "click on the following button. You will be then redirected to the"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1132
+msgid "Themes admin interface"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1132
+msgid "and the Default theme will have been activated"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1133
+msgid "Special notice for people allowing their readers to change theme"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1133
+msgid "i.e. using a Theme Switcher on their blog"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1134
+msgid "Unless you really remove the theme files from your server, this theme will still be available to users, and therefore will self-install again as soon as someone selects it."
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1135
+msgid "Also, all custom variables as defined in the above menu will be blank, this could lead to unexpected behaviour."
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1136
+msgid "Press 'Delete' only if you intend to remove the theme files right after this."
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1139
+msgid "Delete Options"
+msgstr ""
+
+#: ../lib/php/WpOptions.php:1139
+msgid "Are you really sure you want to delete ?"
+msgstr ""
+
+#: ../lib/php/WpOption/WpSelectPagesOption.php:45
 msgid "Select one page"
 msgstr ""
 
-#: ../lib/php/WpOption/WpSelectTagsOption.php:49
+#: ../lib/php/WpOption/WpBooleanOption.php:37
+msgid "Yes"
+msgstr ""
+
+#: ../lib/php/WpOption/WpBooleanOption.php:38
+msgid "No"
+msgstr ""
+
+#: ../lib/php/WpOption/WpSelectUsersOption.php:44
+msgid "Select one user"
+msgstr ""
+
+#: ../lib/php/WpOption/WpSelectTagsOption.php:44
 msgid "Select one tag"
 msgstr ""
 
-#: ../lib/php/WpOption/WpSelectUsersOption.php:48
-msgid "Select one user"
+#: ../lib/php/WpOption/WpSelectCategoriesOption.php:44
+msgid "Select one category"
 msgstr ""
 
