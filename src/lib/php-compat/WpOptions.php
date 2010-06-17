@@ -833,6 +833,22 @@ class WpOptions
     }
     
     /**
+     * Inspect the $_FILES array to extract the file information
+     * @param string $prefix
+     * @param string $name
+     */
+    function getFileInfo($prefix, $name)
+    {
+        return array(
+           'name' => $_FILES[$prefix]['name'][$name],
+           'type' => $_FILES[$prefix]['type'][$name],
+           'tmp_name' => $_FILES[$prefix]['tmp_name'][$name],
+           'error' => $_FILES[$prefix]['error'][$name],
+           'size' => $_FILES[$prefix]['size'][$name]
+        );
+    }
+    
+    /**
      * Guarda los nuevos valores del plugin
      * dependiendo de la interaccion del usuario
      * @access public
@@ -841,10 +857,21 @@ class WpOptions
     {
         if(isset($_POST['post']) && $_POST['post'] == 'updateWpOptions')
         {
+            if (! wp_verify_nonce($_POST['_wpnonce'], 'update-wp-options') ) wp_die(_s("Security check"));
             $prefix = $this->getCamelCase('wp_options') . '_' . $this->baseThemeName;
             foreach($this->options as $optionName => $option)
             {
-                if(is_subclass_of($option, 'WpOption'))
+                if(get_class($option) == 'wpfileoption')
+                {
+                    $file = $this->getFileInfo($prefix,$optionName);
+                    if($file['name'])
+                    {
+                        $info = wp_handle_upload($file, array('action' => 'update-wp-options'));
+                        if(isset($info['error'])) wp_die( $info['error'] );
+                        $this->setOptionValue($optionName,$info['url']);
+                    }
+                }
+                else if(is_subclass_of($option, 'WpOption'))
                 {
                     $value = (is_string($_POST[$prefix][$optionName])) ? stripslashes($_POST[$prefix][$optionName]) : $_POST[$prefix][$optionName];
                     $this->setOptionValue($optionName, $value);
@@ -1130,6 +1157,9 @@ class WpOptions
                         <tbody>%fields%</tbody>                            
                     </table>
                     <p class='submit'><input type='submit' class='button-primary' value='"._s('Save changes')."' />
+                
+                <input type='hidden' name='action' id='action' value='update-wp-options' />
+                ".wp_nonce_field('update-wp-options')."
                 </form>
                 <h2>"._s('Delete Theme options')."</h2>
                 <p>"._s('To completely remove these theme options from your database (reminder: they are all stored in Wordpress options table')." <em>{$this->wpdb->options}</em>),
