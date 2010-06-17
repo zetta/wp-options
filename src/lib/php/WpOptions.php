@@ -597,6 +597,28 @@ class WpOptions
     }
     
     /**
+     * Agrega un dropdown/pulldown/combobox que lista los tags
+     *
+     * @param string $name
+     * @param int|mixed [optional] $selectedValue Si el campo será de opción multiple, 
+     *   se necesita enviar un arreglo en caso contrario se envia un entero
+     * @param boolean [optional] $isMultiple 
+     * @param string [optional] $title
+     * @param string [optional] $description
+     * @access public
+     */
+    public function addSelectFileOption($name, $directory,  $selectedValue = 0, $isMultiple = false, $title = '', $description = '')
+    {
+        require_once 'WpOption/WpSelectFileOption.php';
+        $spigaOption = new WpSelectFileOption($name, $selectedValue);
+        $spigaOption->setTitle($title);
+        $spigaOption->setDescription($description);
+        $spigaOption->setIsMultiple($isMultiple);
+        $spigaOption->setOptions($directory);
+        $this->options[$name] = $spigaOption;
+    }
+    
+    /**
      * Agrega una opción de tipo DatePicker (input)
      *
      * @param string $name

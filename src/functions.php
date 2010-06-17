@@ -64,6 +64,9 @@ $fontSize = array(
 $wpOptions->addSelectOption('select',$fontSize,'13px','Select','Select the font size');
 $wpOptions->addMultipleSelectOption('multipleSelect',$fontSize,array('13px','11px'),'Multiple Select','Select one or more font sizes');
 
+$wpOptions->addSelectFileOption('selectFile', 'sample', 'google.png', false, 'Select a File', 'Select one file' );
+$wpOptions->addSelectFileOption('selectFile2', 'sample', array('google.png'), true, 'Select files', 'Select one or more files' );
+
 $wpOptions->addFileOption('myFile','','Choose a File','You can upload files');
 $wpOptions->addFileOption('mySecondFile','','Choose another File','You can upload more files');
 
