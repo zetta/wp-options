@@ -249,6 +249,7 @@ class WpOption
      */
     function set($value)
     {
+        $this->value = $value;
         return $value;
     }
  

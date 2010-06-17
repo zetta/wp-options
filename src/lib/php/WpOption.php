@@ -255,6 +255,7 @@ abstract class WpOption
      */
     public function set($value)
     {
+        $this->value = $value;
         return $value;
     }
         

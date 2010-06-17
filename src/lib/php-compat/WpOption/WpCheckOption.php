@@ -68,9 +68,10 @@ class WpCheckOption extends WpOption
     function set($value)
     {
         if($value === 'false' || $value === 0 || $value === '0' || $value === 'null' || $value === NULL || $value === false || $value === '')
-            return 'false';
+            $this->value =  'false';
         else
-            return 'true';
+            $this->value =  'true';
+        return $this->value;
     }
     
     /**
