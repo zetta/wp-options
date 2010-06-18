@@ -114,13 +114,13 @@ class WpOptions
      * @var string $forumUrl
      * @access private
      */
-    private $forumUrl = '';
+    private $forumUrl;
     
     /**
      * @var string $manualUrl
      * @access private
      */
-    private $manualUrl = '';
+    private $manualUrl;
     
     /**
      * @var array $subpages
@@ -132,7 +132,7 @@ class WpOptions
      * @var string $menuIcon
      * @access private
      */
-    private $menuIcon = null;
+    private $menuIcon;
     
     /**
      * Instancía el objeto WpOptions
@@ -859,11 +859,11 @@ class WpOptions
     public function getFileInfo($prefix, $name)
     {
         return array(
-           'name' => $_FILES[$prefix]['name'][$name],
-           'type' => $_FILES[$prefix]['type'][$name],
-           'tmp_name' => $_FILES[$prefix]['tmp_name'][$name],
-           'error' => $_FILES[$prefix]['error'][$name],
-           'size' => $_FILES[$prefix]['size'][$name]
+           'name' => isset($_FILES[$prefix]['name'][$name]) ? $_FILES[$prefix]['name'][$name] : null,
+           'type' => isset($_FILES[$prefix]['type'][$name]) ? $_FILES[$prefix]['type'][$name] : null,
+           'tmp_name' => isset($_FILES[$prefix]['tmp_name'][$name]) ? $_FILES[$prefix]['tmp_name'][$name] : null,
+           'error' => isset($_FILES[$prefix]['error'][$name]) ? $_FILES[$prefix]['error'][$name] : null,
+           'size' => isset($_FILES[$prefix]['size'][$name]) ? $_FILES[$prefix]['size'][$name] : null
         );
     }
     

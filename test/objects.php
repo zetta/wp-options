@@ -1,6 +1,11 @@
 <?php
 
 
+class WpDieException extends Exception 
+{
+
+}
+
 
 
 class MockOptions

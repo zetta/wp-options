@@ -4,7 +4,7 @@
 
 function load_theme_textdomain($name,$path){}
 function get_template_directory(){ return getcwd(); }
-function __($t){ return _($t); }
+function __($s,$n){ return _($s); }
 
 
 function get_bloginfo($info)
@@ -44,7 +44,7 @@ function update_option( $opt, $val )
 
 function wp_die($msg)
 {
-    throw new PHPUnit_Framework_Exception($msg);
+    throw new WpDieException($msg);
 }
 
 function is_serialized( $data ) {

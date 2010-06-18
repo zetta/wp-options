@@ -114,13 +114,13 @@ class WpOptions
      * @var string $forumUrl
      * @access private
      */
-    var $forumUrl = '';
+    var $forumUrl;
     
     /**
      * @var string $manualUrl
      * @access private
      */
-    var $manualUrl = '';
+    var $manualUrl;
     
     /**
      * @var array $subpages
@@ -132,7 +132,7 @@ class WpOptions
      * @var string $menuIcon
      * @access private
      */
-    var $menuIcon = null;
+    var $menuIcon;
     
     /**
      * Instancía el objeto WpOptions
