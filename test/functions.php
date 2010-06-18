@@ -42,7 +42,10 @@ function update_option( $opt, $val )
     MockOptions::$options[$opt] = $val;
 }
 
-
+function wp_die($msg)
+{
+    throw new PHPUnit_Framework_Exception($msg);
+}
 
 function is_serialized( $data ) {
 	// if it isn't a string, it isn't serialized

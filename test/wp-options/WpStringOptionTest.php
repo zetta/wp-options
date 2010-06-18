@@ -23,7 +23,7 @@ class WpStringOptionTest extends PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $obj = new WpOptions('3.0', new wpdb());
+        $obj = new WpOptions(WP_VERSION, new wpdb());
         
         $obj->addStringOption('string',self::FIRST_VALUE,'String','You can store strings in this option');
         $this->assertEquals( self::FIRST_VALUE, $obj->getOption('string'));
@@ -31,7 +31,4 @@ class WpStringOptionTest extends PHPUnit_Framework_TestCase
         $obj->setOptionValue('string',self::SECOND_VALUE);
         $this->assertEquals( self::SECOND_VALUE, $obj->getOption('string'));
     }
-    
-
-
 }
