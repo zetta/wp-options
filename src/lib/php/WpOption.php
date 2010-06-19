@@ -32,7 +32,7 @@ abstract class WpOption
      * @access protected
      * @var int 
      */
-    protected $dbSource = 0;
+    protected $dbSource;
     
     /**
      * @var boolean
@@ -195,7 +195,7 @@ abstract class WpOption
         else if($this->dbSource == self::$Sources['POST_META'])
             return get_post_meta($this->post->ID, $this->name . '_value', true);
         else
-            return 'LOL';
+            return var_dump($this->dbSource);
     }
     
     /**
@@ -206,7 +206,7 @@ abstract class WpOption
     {
         if($this->value == null)
         {
-            $this->dbSource = is_null( $this->dbSource ) ?  $this->Sources['OPTION'] : $this->dbSource;
+            $this->dbSource = (is_null( $this->dbSource )) ?  self::$Sources['OPTION'] : $this->dbSource;
             $this->savedValue = $this->getStoredValue();
             $this->value = ($this->savedValue === false) ? $this->defaultValue : (
                 ($this->savedValue) ? ($this->savedValue) : $this->emptyValue

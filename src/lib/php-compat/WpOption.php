@@ -32,7 +32,7 @@ class WpOption
      * @access protected
      * @var int 
      */
-    var $dbSource = 0;
+    var $dbSource;
     
     /**
      * @var boolean
@@ -195,7 +195,7 @@ class WpOption
         else if($this->dbSource == $this->Sources['POST_META'])
             return get_post_meta($this->post->ID, $this->name . '_value', true);
         else
-            return '';
+            return var_dump($this->dbSource);
     }
 
     /**
