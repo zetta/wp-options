@@ -38,6 +38,8 @@ if (($pagenow == 'admin.php') && ($_GET['page'] == 'WpOptions.php'))
 {
     add_action('admin_head', array($wpOptions, 'addMetaData'));
 }
+add_action('save_post', array($wpOptions,'savePostData'));
+
 /**
  * settea el valor de una opción 
  * @param string $optionName

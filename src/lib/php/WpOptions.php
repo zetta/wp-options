@@ -169,7 +169,7 @@ class WpOptions
      */
     public function addOptionsPage()
     {
-        if(function_exists(add_object_page))
+        if(function_exists('add_object_page'))
         {
             add_object_page(_s('Configure ') . $this->themeName, $this->themeName, 8, basename(__FILE__),  $this->getFunctionScope('render'),  $this->menuIcon);
         }
@@ -185,8 +185,8 @@ class WpOptions
         
         if ($this->hasMetaBox())
         {
-            add_meta_box('new-meta-boxes', $this->themeName . ' :: '._s("Post Settings").'', $this->getFunctionScope('renderMetaBox'), 'post', 'normal', 'high');
-            add_action('save_post', $this->getFunctionScope('savePostData'));
+            add_meta_box('wpoptions_section', $this->themeName . ' :: '._s("Post Settings"), $this->getFunctionScope('renderMetaBox'), 'post', 'normal');
+            
         }
     }
     
@@ -742,6 +742,7 @@ class WpOptions
         $fields = '';
         foreach ( $this->optionsInMetaBox as $option )
         {
+            $option->setInputName( $this->getCamelCase('wp_options') . '_' . $this->baseThemeName );
             if ($option->getRequire() != null)
             {
                 $this->options[$option->getRequire()]->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
@@ -768,35 +769,39 @@ class WpOptions
      */
     public function savePostData($idPost)
     {
-        if (isset($_POST['post_type']) && $_POST['post_type'] == 'page')
-        {
-            if (! current_user_can('edit_page', $idPost))
-            {
+        if ( !wp_verify_nonce( $_POST['wpoptions_nonce'], plugin_basename(__FILE__) ))
+            return $post_id;
+
+        if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) 
+            return $post_id;
+        
+        if(isset($_POST['post_type']) && $_POST['post_type'] == 'page')
+            if(! current_user_can('edit_page', $idPost))
                 wp_die(_s("You don't have permission to edit this page"));
-            } else if (! current_user_can('edit_post', $idPost))
-            {
+            else if(! current_user_can('edit_post', $idPost))
                 wp_die(_s("You don't have permission to edit this post"));
-            }
-        }
+
         foreach ( $this->optionsInMetaBox as $option )
         {
-
-            $option->setDbSource(WpOption::$Sources['POST_META']);
-            $option->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
-            $option->setDefaultValue('');
-            $option->setValue('');
-            if(is_array($_POST[$option->getFormName()]))
-                $data = serialize($_POST[$option->getFormName()]);
-            else
-                $data = (get_magic_quotes_gpc()) ? stripslashes($_POST[$option->getFormName()]) : $_POST[$option->getFormName()]; 
-            $data = $option->set($data);
-            
-            if (get_post_meta($idPost, $option->getName() . '_value') == "")
-                add_post_meta($idPost, $option->getName() . '_value', $data, true);
-            elseif ($data != get_post_meta($idPost, $option->getName() . '_value', true))
-                update_post_meta($idPost, $option->getName() . '_value', $data);
-            elseif ($data == "")
-                delete_post_meta($idPost, $option->getName() . '_value', get_post_meta($idPost, $option->getName() . '_value', true));
+            if(isset($_POST[$option->getFormName()]))
+            {
+                $option->setDbSource(WpOption::$Sources['POST_META']);
+                $option->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
+                $option->setDefaultValue('');
+                $option->setValue('');
+                if(is_array($_POST[$option->getFormName()]))
+                    $data = serialize($_POST[$option->getFormName()]);
+                else
+                    $data = (get_magic_quotes_gpc()) ? stripslashes($_POST[$option->getFormName()]) : $_POST[$option->getFormName()]; 
+                $data = $option->set($data);
+                
+                if (get_post_meta($idPost, $option->getName() . '_value') == "")
+                    add_post_meta($idPost, $option->getName() . '_value', $data, true);
+                elseif ($data != get_post_meta($idPost, $option->getName() . '_value', true))
+                    update_post_meta($idPost, $option->getName() . '_value', $data);
+                elseif ($data == "")
+                    delete_post_meta($idPost, $option->getName() . '_value', get_post_meta($idPost, $option->getName() . '_value', true));
+            }
         }
     }
     
@@ -1145,7 +1150,10 @@ class WpOptions
         $this->templateOption = "
             <tr%visible% class='%class%' id='tr_%id%'>
                 <td class='option-title'><label for='%id%'>%title%</label></td>
-                <td class='%id%'>%input% %description%</td>
+                <td class='%id%'>
+                    %input% 
+                    %description%
+                </td>
             </tr>";
 
         $this->templateLayout = "
@@ -1193,6 +1201,7 @@ class WpOptions
             </div>";
         
         $this->templateLayoutMetaBox = "
+            <input type='hidden' name='wpoptions_nonce' id='wpoptions_nonce' value='".wp_create_nonce( plugin_basename(__FILE__) ). "' />
             <table class='widefat' id='storelicious_metabox'>
                 <tbody>
                     %fields%

@@ -206,7 +206,7 @@ abstract class WpOption
     {
         if($this->value == null)
         {
-            $this->dbSource = self::$Sources['OPTION'];
+            $this->dbSource = is_null( $this->dbSource ) ?  $this->Sources['OPTION'] : $this->dbSource;
             $this->savedValue = $this->getStoredValue();
             $this->value = ($this->savedValue === false) ? $this->defaultValue : (
                 ($this->savedValue) ? ($this->savedValue) : $this->emptyValue

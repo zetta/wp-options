@@ -35,6 +35,6 @@ class WpTextOption extends WpOption
         $value = $this->getValue();
         $formName = $this->getFormName();
         $idName = $this->getFormId();
-        return "<textarea name='{$formName}' id='{$idName}' cols='80' rows='6' >{$value}</textarea>";
+        return "<textarea name='{$formName}' id='{$idName}' cols='60' rows='6' >{$value}</textarea>";
     }
 }

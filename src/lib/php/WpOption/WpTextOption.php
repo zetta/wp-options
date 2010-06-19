@@ -33,6 +33,6 @@ class WpTextOption extends WpOption
     public function ___toString()
     {
         $value = $this->getValue();
-        return "<textarea name='{$this->getFormName()}' id='{$this->getFormId()}' cols='80' rows='6' >{$value}</textarea>";
+        return "<textarea name='{$this->getFormName()}' id='{$this->getFormId()}' cols='60' rows='6' >{$value}</textarea>";
     }
 }
