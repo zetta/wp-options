@@ -30,6 +30,9 @@ function &getWpThemeOption($optionName,$index = null)
  * main action
  */
 add_action('admin_menu', array($wpOptions, 'addOptionsPage'));
+//$wpOptions->addOptionsPage();
+
+//
 
 /**
  * Javascript and css just when options page is current
@@ -38,7 +41,6 @@ if (($pagenow == 'admin.php') && ($_GET['page'] == 'WpOptions.php'))
 {
     add_action('admin_head', array($wpOptions, 'addMetaData'));
 }
-add_action('save_post', array($wpOptions,'savePostData'));
 
 /**
  * settea el valor de una opción 
@@ -52,3 +54,25 @@ function &setWpThemeOption($optionName, $optionValue)
     $wpOptions->setOptionValue($optionName,$optionValue);
     return $wpOptions;
 }
+
+
+/** 
+ * function for debugging
+ */
+function wp_debug_backtrace()
+{
+    echo '<pre>';
+    foreach(debug_backtrace() as $id => $trace)
+    {
+        $a = array();
+        foreach($trace['args'] as $arg)
+            $a[] = (string) $arg;
+        $args = implode(',',$a);
+        if(isset($trace['file']))
+            echo "#{$id} {$trace['file']} ({$trace['line']}) {$trace['function']}($args)\n";
+        else
+            echo "#{$id} {$trace['class']} {".get_class($trace['object'])."} {$trace['function']}($args)\n";
+    }
+    echo '</pre>';
+}
+

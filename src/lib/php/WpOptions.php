@@ -162,6 +162,7 @@ class WpOptions
     {
         return $this->hasMetaBoxData;
     }
+
     
     /**
      * Agrega la página de opciones en el administrador y la funcion del metabox si es necesaria
@@ -171,22 +172,22 @@ class WpOptions
     {
         if(function_exists('add_object_page'))
         {
-            add_object_page(_s('Configure ') . $this->themeName, $this->themeName, 8, basename(__FILE__),  $this->getFunctionScope('render'),  $this->menuIcon);
+            add_object_page(_s('Configure ') . $this->themeName, $this->themeName, 'edit_themes', basename(__FILE__),  $this->getFunctionScope('render'),  $this->menuIcon);
         }
         else
         {
-            add_menu_page(_s('Configure ') . $this->themeName, $this->themeName, 8, basename(__FILE__),  $this->getFunctionScope('render'),  $this->menuIcon);
+            add_menu_page(_s('Configure ') . $this->themeName, $this->themeName, 'edit_themes', basename(__FILE__),  $this->getFunctionScope('render'),  $this->menuIcon);
         }
         
         foreach($this->subpages as $sub)
         {
-            add_submenu_page(basename(__FILE__), _s($sub['pageTitle']), _s($sub['title']), 8, $sub['slug'], $sub['function']);
+            add_submenu_page(basename(__FILE__), _s($sub['pageTitle']), _s($sub['title']), 'edit_themes', $sub['slug'], $sub['function']);
         }
         
         if ($this->hasMetaBox())
         {
-            add_meta_box('wpoptions_section', $this->themeName . ' :: '._s("Post Settings"), $this->getFunctionScope('renderMetaBox'), 'post', 'normal');
-            
+            add_meta_box('wpoptions_section', $this->themeName . ' :: '._s("Post Settings"), $this->getFunctionScope('renderMetaBox'), 'post', 'advanced');
+            add_action('save_post', $this->getFunctionScope('savePostData'));
         }
     }
     
@@ -769,11 +770,11 @@ class WpOptions
      */
     public function savePostData($idPost)
     {
-        if ( !wp_verify_nonce( $_POST['wpoptions_nonce'], plugin_basename(__FILE__) ))
-            return $post_id;
+        if (isset($_POST['wpoptions_nonce']) && !wp_verify_nonce( $_POST['wpoptions_nonce'], plugin_basename(__FILE__) ))
+            return $idPost;
 
         if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) 
-            return $post_id;
+            return $idPost;
         
         if(isset($_POST['post_type']) && $_POST['post_type'] == 'page')
             if(! current_user_can('edit_page', $idPost))
@@ -783,9 +784,9 @@ class WpOptions
 
         foreach ( $this->optionsInMetaBox as $option )
         {
+            $option->setDbSource(WpOption::$Sources['POST_META']);
             if(isset($_POST[$option->getFormName()]))
             {
-                $option->setDbSource(WpOption::$Sources['POST_META']);
                 $option->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
                 $option->setDefaultValue('');
                 $option->setValue('');
@@ -1185,7 +1186,7 @@ class WpOptions
                     <p class='submit'><input type='submit' class='button-primary' value='"._s('Save changes')."' />
                 
                 <input type='hidden' name='action' id='action' value='update-wp-options' />
-                ".wp_nonce_field('update-wp-options')."
+                ".wp_nonce_field('update-wp-options','_wpnonce',true,false)."
                 </form>
                 <h2>"._s('Delete Theme options')."</h2>
                 <p>"._s('To completely remove these theme options from your database (reminder: they are all stored in Wordpress options table')." <em>{$this->wpdb->options}</em>),
