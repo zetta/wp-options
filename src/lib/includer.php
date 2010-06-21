@@ -17,7 +17,7 @@ function _s($string, $namespace = 'storelicious')
     return __($string,$namespace);
 }
 
-define('WP_OPTIONS_VERSION',1.1);
+if (!defined('WP_OPTIONS_VERSION'))  define('WP_OPTIONS_VERSION',1.1);
 
 /**
  * pages

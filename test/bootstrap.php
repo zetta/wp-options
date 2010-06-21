@@ -1,6 +1,6 @@
 <?php
 
-define('WP_VERSION','3.0');
+if (!defined('WP_VERSION'))  define('WP_VERSION','3.0');
 
 /**
  * Mocking objects and functions
