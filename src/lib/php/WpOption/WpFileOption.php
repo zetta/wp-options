@@ -33,6 +33,6 @@ class WpFileOption extends WpOption
     public function ___toString()
     {
         $value = $this->getValue();
-        return "<input type='file' size='85' name='{$this->getFormName()}' id='{$this->getFormId()}' value='{$value}' /> ({$value})";
+        return "<input type='file' size='85' name='{$this->getFormName()}' id='{$this->getFormId()}' value='{$value}' /><small class='filevalue'>({$value})</small>";
     }
 }

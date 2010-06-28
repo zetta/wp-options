@@ -90,4 +90,28 @@ table#storelicious tbody td.option-title {
 
 .wpSliderDiv{
     width: 300px !important;
+	margin:10px 0 0 0;
 }
+
+td.wpOptionsForm label {
+	float:left;
+	margin:0 10px 0 0;
+}
+td.wpOptionsForm br{clear:left;}
+td.wpOptionsForm label div.radio img{
+	float:left;
+	}
+	
+td.wpOptionsForm small.filevalue{
+	display:block;
+	clear:left;
+	}
+td.wpOptionsForm div.uploader{
+	margin-bottom:0 !important;
+}
+
+td.wpOptionsForm div.selector,
+td.wpOptionsForm div.selector select {
+  width: 190px !important;
+  }
+

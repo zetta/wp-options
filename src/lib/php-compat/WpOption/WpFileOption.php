@@ -35,6 +35,6 @@ class WpFileOption extends WpOption
         $value = $this->getValue();
         $formName = $this->getFormName();
         $idName = $this->getFormId();
-        return "<input type='file' size='45' id='{$idName}' name='{$formName}' value='{$value}' /> ({$value})";
+        return "<input type='file' size='45' id='{$idName}' name='{$formName}' value='{$value}' /><small class='filevalue'>({$value})</small>";
     }
 }

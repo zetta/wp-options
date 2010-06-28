@@ -1164,7 +1164,7 @@ class WpOptions
                 <h2>"._s('Welcome to configuration page of')." <strong>{$this->themeName}</strong>!</h2>
                 %updatedMessage%
                 
-                <form action='' method='post' enctype='multipart/form-data'>
+                <form action='' method='post' enctype='multipart/form-data' id='wpOptionsForm'>
                 
                  <div class='info'>
                        <input name='save' class='button-primary floatRight' type='submit' value='"._s('Save changes')."' />
