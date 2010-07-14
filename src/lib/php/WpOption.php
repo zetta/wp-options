@@ -154,6 +154,12 @@ abstract class WpOption
     protected $emptyValue = '';
     
     /**
+     * @var string
+     * @access protected
+     */
+    protected $typeOfMetaBox = '';
+    
+    /**
      * Constructor de la clase
      *
      * @param string $name
@@ -502,7 +508,22 @@ abstract class WpOption
         $this->require = $require;
     }
 
-
-  const VERSION = "1.1";
+    const VERSION = "1.1";
+    
+    /**
+     * @param string
+     */
+    public function setTypeOfMetaBox($type)
+    {
+        $this->typeOfMetaBox = $type;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTypeOfMetaBox()
+    {
+        return $this->typeOfMetaBox;
+    }
     
 }

@@ -115,6 +115,8 @@ $wpOptions->setConditionalOptions('testbcheck',array('testb'));
 
 /* Begin metabox */
 $wpOptions->addMetaBox('string',false);
+$wpOptions->addMetaBox('select' ,false,'page'); // este metabox solo se mostrara en el formulario de paginas
+$wpOptions->addMetaBox('font',false,'both'); // este metabox se mostrará en ambos formularios
 $wpOptions->addMetaBoxes(array('text','number','check','select'),false);
 
 $wpOptions->addCheckOption('paraMostrar',false,'Mostrar Campo Google','Cheque esta opción si usted quiere que en el formulario del post aparezca un campo para guardar un dato raro =)');

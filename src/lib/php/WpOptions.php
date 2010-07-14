@@ -186,7 +186,8 @@ class WpOptions
         
         if ($this->hasMetaBox())
         {
-            add_meta_box('wpoptions_section', $this->themeName . ' :: '._s("Post Settings"), $this->getFunctionScope('renderMetaBox'), 'post', 'advanced');
+            add_meta_box('wpoptions_section', $this->themeName . ' :: '._s("Post Settings"), $this->getFunctionScope('renderMetaBox'), 'post', 'advanced','default',array('type'=>'post'));
+            add_meta_box('wpoptions_section', $this->themeName . ' :: '._s("Post Settings"), $this->getFunctionScope('renderMetaBox'), 'page', 'advanced','default',array('type'=>'page'));
             add_action('save_post', $this->getFunctionScope('savePostData'));
         }
     }
@@ -254,16 +255,17 @@ class WpOptions
      * @param boolean $hideInOptionsPage Si es verdadero la opcion solo se mostrará en el metabox y se ocultará en la
      *        página de opciones, en caso contrario se mostrará en ambas
      * @param string $type ('page'|'post'|'both') el metabox se agregará al formulario de paginas, post o ambos
-     *        el comportamiento por default es page
+     *        el comportamiento por default es post
      * @access public
      */
-    public function addMetaBox($metaBoxName, $hideInOptionsPage = true, $type = 'page')
+    public function addMetaBox($metaBoxName, $hideInOptionsPage = true, $type = 'post')
     {
         if (! isset($this->options[$metaBoxName]))
             wp_die(_s("Can't add new Metabox if the option").' <strong>'.$metaBoxName.'</strong> '._s("doesn't exist"));
-        
+        echo $type;
         $this->options[$metaBoxName]->addMetabox();
         $this->options[$metaBoxName]->setHideInOptions($hideInOptionsPage);
+        $this->options[$metaBoxName]->setTypeOfMetaBox($type);
         $this->hasMetaBoxData = true;
         $this->optionsInMetaBox[] = $this->options[$metaBoxName];
     }
@@ -274,10 +276,10 @@ class WpOptions
      * @param boolean $hideInOptionsPage Si es verdadero la opcion solo se mostrará en el metabox y se ocultará en la
      *        página de opciones, en caso contrario se mostrará en ambas
      * @param string $type ('page'|'post'|'both') el metabox se agregará al formulario de paginas, post o ambos
-     *        el comportamiento por default es page
+     *        el comportamiento por default es post
      * @access public
      */
-    public function addMetaBoxes($metaBoxNames, $hideInOptionsPage = true, $type = 'page')
+    public function addMetaBoxes($metaBoxNames, $hideInOptionsPage = true, $type = 'post')
     {
         foreach ( $metaBoxNames as $metaBoxName )
             $this->addMetaBox($metaBoxName,$hideInOptionsPage,$type);
@@ -289,9 +291,11 @@ class WpOptions
      * @param string $metaBoxName El nombre de una opción previamente almacenada
      * @param string $condition El nombre de una opción previamente almacenada
      * @param boolean $hideInOptionsPage
+     * @param string $type ('page'|'post'|'both') el metabox se agregará al formulario de paginas, post o ambos
+     *        el comportamiento por default es post
      * @access public
      */
-    public function addConditionalMetaBox($metaBoxName, $condition, $hideInOptionsPage = true)
+    public function addConditionalMetaBox($metaBoxName, $condition, $hideInOptionsPage = true, $type = 'post')
     {
         if (! isset($this->options[$metaBoxName]))
             wp_die(_s("Can't add new Metabox if the option").' <strong>'.$metaBoxName.'</strong> '._s("doesn't exist"));
@@ -304,6 +308,7 @@ class WpOptions
         
         $this->options[$metaBoxName]->addMetabox();
         $this->options[$metaBoxName]->setHideInOptions($hideInOptionsPage);
+        $this->options[$metaBoxName]->setTypeOfMetaBox($type);
         $this->optionsInMetaBox[] = $this->options[$metaBoxName];
         $this->hasMetaBoxData = true;
         $this->options[$metaBoxName]->setRequire($condition);
@@ -731,13 +736,14 @@ class WpOptions
      * Genera el formulario (metabox) de las opciones agregadas
      * @access public
      */
-    public function renderMetaBox()
+    public function renderMetaBox($post,$args)
     {
-        global $post;
         $this->saveTemplates();
         $fields = '';
         foreach ( $this->optionsInMetaBox as $option )
         {
+            if($option->getTypeOfMetaBox() != $args['args']['type'] && $option->getTypeOfMetaBox() != 'both')
+              continue;
             $option->setInputName( $this->getCamelCase('wp_options') . '_' . $this->baseThemeName );
             if ($option->getRequire() != null)
             {
