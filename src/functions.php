@@ -114,8 +114,8 @@ $wpOptions->setConditionalOptions('testbcheck',array('testb'));
 
 
 /* Begin metabox */
-#$wpOptions->addMetaBox('string',false);
-#$wpOptions->addMetaBoxes(array('text','number','check','select'),false);
+$wpOptions->addMetaBox('string',false);
+$wpOptions->addMetaBoxes(array('text','number','check','select'),false);
 
 $wpOptions->addCheckOption('paraMostrar',false,'Mostrar Campo Google','Cheque esta opción si usted quiere que en el formulario del post aparezca un campo para guardar un dato raro =)');
 $wpOptions->addStringOption('GoogleOption','','Google Option');

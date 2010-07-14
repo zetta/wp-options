@@ -253,9 +253,11 @@ class WpOptions
      * @param string $metaBoxName Tiene que ser un nombre de opcion previamente creado
      * @param boolean $hideInOptionsPage Si es verdadero la opcion solo se mostrará en el metabox y se ocultará en la
      *        página de opciones, en caso contrario se mostrará en ambas
+     * @param string $type ('page'|'post'|'both') el metabox se agregará al formulario de paginas, post o ambos
+     *        el comportamiento por default es page
      * @access public
      */
-    public function addMetaBox($metaBoxName, $hideInOptionsPage = true)
+    public function addMetaBox($metaBoxName, $hideInOptionsPage = true, $type = 'page')
     {
         if (! isset($this->options[$metaBoxName]))
             wp_die(_s("Can't add new Metabox if the option").' <strong>'.$metaBoxName.'</strong> '._s("doesn't exist"));
@@ -271,21 +273,14 @@ class WpOptions
      * @param mixed $metaBoxName Arreglo con los nombres de las opciones previamente creadas
      * @param boolean $hideInOptionsPage Si es verdadero la opcion solo se mostrará en el metabox y se ocultará en la
      *        página de opciones, en caso contrario se mostrará en ambas
+     * @param string $type ('page'|'post'|'both') el metabox se agregará al formulario de paginas, post o ambos
+     *        el comportamiento por default es page
      * @access public
      */
-    public function addMetaBoxes($metaBoxNames, $hideInOptionsPage = true)
+    public function addMetaBoxes($metaBoxNames, $hideInOptionsPage = true, $type = 'page')
     {
         foreach ( $metaBoxNames as $metaBoxName )
-        {
-            
-            if (! isset($this->options[$metaBoxName]))
-                wp_die(_s("Can't add new Metabox if the option").' <strong>'.$metaBoxName.'</strong> '._s("doesn't exist"));
-            
-            $this->options[$metaBoxName]->addMetabox();
-            $this->options[$metaBoxName]->setHideInOptions($hideInOptionsPage);
-            $this->optionsInMetaBox[] = $this->options[$metaBoxName];
-        }
-        $this->hasMetaBoxData = true;
+            $this->addMetaBox($metaBoxName,$hideInOptionsPage,$type);
     }
     
     /**
