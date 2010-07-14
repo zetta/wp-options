@@ -261,7 +261,7 @@ class WpOptions
     {
         if(! isset($this->options[$metaBoxName]))
             wp_die(_s("Can't add new Metabox if the option").' <strong>'.$metaBoxName.'</strong> '._s("doesn't exist"));
-        
+
         $this->options[$metaBoxName]->addMetabox();
         $this->options[$metaBoxName]->setHideInOptions($hideInOptionsPage);
         $this->options[$metaBoxName]->setTypeOfMetaBox($type);
