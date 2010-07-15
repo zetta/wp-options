@@ -199,9 +199,12 @@ class WpOption
         if($this->dbSource == $this->Sources['OPTION'])
             return get_option($this->inputName . '_' . $this->name);
         else if($this->dbSource == $this->Sources['POST_META'])
-            return get_post_meta($this->post->ID, $this->name . '_value', true);
+        {
+            $value = get_post_meta($this->post->ID, $this->name . '_value', true);
+            return ($value) ? $value : false;
+        }
         else
-            return var_dump($this->dbSource);
+            wp_die(_s('Unknown WpOption Error'));
     }
 
     /**

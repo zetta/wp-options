@@ -114,9 +114,11 @@ $wpOptions->setConditionalOptions('testbcheck',array('testb'));
 
 
 /* Begin metabox */
-$wpOptions->addMetaBox('string',false);
-$wpOptions->addMetaBox('checkbox',false);
-$wpOptions->addMetaBox('select' ,false,'page'); // este metabox solo se mostrara en el formulario de paginas
+$wpOptions->addMetaBox('string',false,'page'); // este metabox solo se mostrara en el formulario de paginas
+$wpOptions->addMetaBox('checkbox',false,'both');
+$wpOptions->addMetaBox('boolean1',false,'both');
+$wpOptions->addMetaBox('multipleSelect' ,false,'both');
+$wpOptions->addMetaBox('select' ,false,'both');
 $wpOptions->addMetaBox('font',false,'both'); // este metabox se mostrará en ambos formularios
 $wpOptions->addMetaBoxes(array('text','number','check','select'),false);
 

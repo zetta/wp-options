@@ -754,7 +754,7 @@ class WpOptions
             }
             $option->setDbSource(WpOption::$Sources['POST_META']);
             $option->setTemplate($this->templateOption);
-            $option->setDefaultValue('');
+            //$option->setDefaultValue('');
             $option->setValue('');
             $option->setPost($post);
             $fields .= $option;

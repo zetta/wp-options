@@ -199,9 +199,11 @@ abstract class WpOption
         if($this->dbSource == self::$Sources['OPTION'])
             return get_option($this->inputName . '_' . $this->name);
         else if($this->dbSource == self::$Sources['POST_META'])
+        {
             return get_post_meta($this->post->ID, $this->name . '_value', true);
+        }
         else
-            return var_dump($this->dbSource);
+            wp_die(_s('Unknown WpOption Error'));
     }
     
     /**
@@ -214,9 +216,9 @@ abstract class WpOption
         {
             $this->dbSource = (is_null( $this->dbSource )) ?  self::$Sources['OPTION'] : $this->dbSource;
             $this->savedValue = $this->getStoredValue();
-            $this->value = ($this->savedValue === false) ? $this->defaultValue : (
+            $this->value = (($this->savedValue === false) ? $this->defaultValue : (
                 ($this->savedValue) ? ($this->savedValue) : $this->emptyValue
-            );
+            ));
         }
         return $this->value;
     }
