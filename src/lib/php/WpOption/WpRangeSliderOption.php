@@ -15,7 +15,7 @@ require_once 'WpSliderOption.php';
 
 class WpRangeSliderOption extends WpSliderOption
 {
-    protected $emptyValue = '0';
+    protected $emptyValue = array('min' => 0, 'max' => 0);
 
 
     

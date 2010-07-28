@@ -14,14 +14,22 @@
  */
 class WpOptionsTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * Una instancia del objeto WpOptions
+     * @var WpOptions
+     */
     private $obj;
+    
+    /**
+     * Setup del test, genera un nuevo objeto WpOptions
+     */
     public function setUp()
     {
         $this->obj = new WpOptions(WP_VERSION, new wpdb());
     }    
 
     /**
-     * Probando el método
+     * Probando una excepción, no se puede agregar un metabox cuando tal metabox no existe
      * @expectedException WpDieException
      */
     public function testMetaException()
@@ -30,7 +38,7 @@ class WpOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Probando el método
+     * Prueba el método de agregar metaboxes
      */
     public function testMeta()
     {
@@ -40,10 +48,14 @@ class WpOptionsTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test the method
+     * Prueba los metodos de wpOptions que se utilizan para subir archivos
      */
     public function testGetFileInfo()
     {
+        /**
+         * @var array
+         * un array de prueba de como llegan los valores de los archivos a la variable $_FILES
+         */
         $_FILES = array(
             'fake' => array(
                'name' => array('first' => 'firstName'),
@@ -71,6 +83,9 @@ class WpOptionsTest extends PHPUnit_Framework_TestCase
         ), $file);
     }
     
+    /**
+     * prueba el metodo de agregar el nombre del theme
+     */
     public function testGetThemeName()
     {
         $name = 'My Theme Name';
@@ -78,7 +93,10 @@ class WpOptionsTest extends PHPUnit_Framework_TestCase
         $this->obj->setThemeName($name);
         $this->assertEquals($name,$this->obj->getThemeName());       
     }
-    
+
+    /**
+     * prueba el metodo de guardar/obtener el url del manual
+     */
     public function testGetManualUrl()
     {
         $url = 'http://google.com';
@@ -86,7 +104,10 @@ class WpOptionsTest extends PHPUnit_Framework_TestCase
         $this->obj->setManualUrl($url);
         $this->assertEquals($url,$this->obj->getManualUrl());
     }
- 
+
+    /**
+     * prueba el metodo de guardar/obtener el url del foro
+     */ 
     public function testGetForumUrl()
     {
         $url = 'http://google.com';

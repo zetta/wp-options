@@ -15,13 +15,13 @@
 class WpSliderOptionTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Probando el método
+     * Probando que el option guarde/recupere la informacion de forma correcta
      */
     public function testSave()
     {
         $obj = new WpOptions(WP_VERSION, new wpdb());
         
-        $obj->addSliderOption('slider','1','String','You can store strings in this option');
+        $obj->addSliderOption('slider','1','Slider','This is a slider and store numbers');
         $this->assertEquals(1, $obj->getOption('slider'));
         
         $obj->setOptionValue('slider',3);

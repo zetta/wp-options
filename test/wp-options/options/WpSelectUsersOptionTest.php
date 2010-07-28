@@ -15,13 +15,13 @@
 class WpSelectUsersOptionTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Probando el método
+     * Probando que el option guarde/recupere la informacion de forma correcta
      */
     public function testSave()
     {
         $obj = new WpOptions(WP_VERSION, new wpdb());
         
-        $obj->addSelectUsersOption('users','1','String','You can store strings in this option');
+        $obj->addSelectUsersOption('users','1','Users','This is a user select combobox');
         $this->assertEquals(1, $obj->getOption('users'));
         
         $obj->setOptionValue('users',3);

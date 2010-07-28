@@ -220,7 +220,15 @@ abstract class WpOption
                 ($this->savedValue) ? ($this->savedValue) : $this->emptyValue
             ));
         }
-        return $this->value;
+        return $this->cast($this->value);
+    }
+    
+    /**
+     * type casting
+     */
+    protected function cast($value)
+    {
+        return $value;
     }
     
     /**

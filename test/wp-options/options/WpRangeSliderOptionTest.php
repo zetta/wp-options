@@ -12,12 +12,8 @@
 /**
  *  unit test case.
  */
-class WpTextOptionTest extends PHPUnit_Framework_TestCase
+class WpRangeSliderOptionTest extends PHPUnit_Framework_TestCase
 {
-
-    const FIRST_VALUE = 'this is the default text...';
-    const SECOND_VALUE = 'other text';
-
     /**
      * Probando que el option guarde/recupere la informacion de forma correcta
      */
@@ -25,10 +21,13 @@ class WpTextOptionTest extends PHPUnit_Framework_TestCase
     {
         $obj = new WpOptions(WP_VERSION, new wpdb());
         
-        $obj->addTextOption('text',self::FIRST_VALUE,'Text','You can store long text in this option');
-        $this->assertEquals( self::FIRST_VALUE, $obj->getOption('text'));
+        $obj->addRangeSliderOption('rangeslider',array(1,24),'Slider','This is a slider and store numbers');
+        $this->assertEquals(array('min' => 1, 'max' =>24), $obj->getOption('rangeslider'));
         
-        $obj->setOptionValue('text',self::SECOND_VALUE);
-        $this->assertEquals( self::SECOND_VALUE, $obj->getOption('text'));
+        $obj->setOptionValue('rangeslider',array(12,15));
+        $this->assertEquals(array('min' => 12, 'max' =>15), $obj->getOption('rangeslider'));
+        
+        
+        
     }
 }

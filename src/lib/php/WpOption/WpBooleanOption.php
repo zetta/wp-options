@@ -45,7 +45,7 @@ class WpBooleanOption extends WpOption
      * @return boolean
      * @access public
      */
-    private function cast($value)
+    protected function cast($value)
     {
         if(is_bool($value))
             return $value;

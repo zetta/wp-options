@@ -221,7 +221,15 @@ class WpOption
                 ($this->savedValue) ? ($this->savedValue) : $this->emptyValue
             );
         }
-        return $this->value;
+        return $this->cast($this->value);
+    }
+
+    /**
+     * type casting
+     */
+    function cast($value)
+    {
+        return $value;
     }
 
     /**

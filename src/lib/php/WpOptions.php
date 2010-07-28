@@ -424,7 +424,7 @@ class WpOptions
      * @param boolean [optional] $onePerLine (si deseamos que se muestre cada opcion en una linea diferente
      * @access public
      */
-    public function addRadioOption($name, $options, $defaultValue, $title = '', $description = '', $onePerLine = true)
+    public function addRadioOption($name, array $options, $defaultValue, $title = '', $description = '', $onePerLine = true)
     {
         require_once 'WpOption/WpRadioOption.php';
         $spigaOption = new WpRadioOption($name, $defaultValue, $onePerLine);
@@ -438,14 +438,14 @@ class WpOptions
      * Agrega una opción multiple (input - checkbox [x opciones])
      *
      * @param string $name
-     * @param mixed $selectedValues
-     * @param mixed $options Array asociativo con los valores a mostrar
+     * @param array $selectedValues
+     * @param array $options Array asociativo con los valores a mostrar
      * @param string [optional] $title
      * @param string [optional] $description
      * @param boolean [optional] $onePerLine (si deseamos que se muestre cada opcion en una linea diferente
      * @access public
      */
-    public function addCheckBoxOption($name, $options, $selectedValues, $title = '', $description = '', $onePerLine = true)
+    public function addCheckBoxOption($name, array $options, array $selectedValues, $title = '', $description = '', $onePerLine = true)
     {
         require_once 'WpOption/WpCheckBoxOption.php';
         $spigaOption = new WpCheckBoxOption($name, $selectedValues, $onePerLine);
@@ -459,7 +459,7 @@ class WpOptions
      * Agrega una opción de tipo checkbox que regresa un boleano
      *
      * @param string $name
-     * @param mixed $defaultValue
+     * @param boolean $defaultValue
      * @param string [optional] $title
      * @param string [optional] $description
      * @access public
@@ -483,7 +483,7 @@ class WpOptions
      * @param string [optional] $description
      * @access public
      */
-    public function addSelectOption($name, $options, $selectedValue, $title = '', $description = '')
+    public function addSelectOption($name, array $options, $selectedValue, $title = '', $description = '')
     {
         require_once 'WpOption/WpSelectOption.php';
         $spigaOption = new WpSelectOption($name, $selectedValue);
@@ -503,7 +503,7 @@ class WpOptions
      * @param string [optional] $description
      * @access public
      */
-    public function addMultipleSelectOption($name, $options, $selectedValues, $title = '', $description = '')
+    public function addMultipleSelectOption($name, array $options, array $selectedValues, $title = '', $description = '')
     {
         require_once 'WpOption/WpMultipleSelectOption.php';
         $spigaOption = new WpMultipleSelectOption($name, $selectedValues);

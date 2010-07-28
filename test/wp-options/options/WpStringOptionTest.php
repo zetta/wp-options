@@ -19,7 +19,7 @@ class WpStringOptionTest extends PHPUnit_Framework_TestCase
     const SECOND_VALUE = 'other string';
 
     /**
-     * Probando el método
+     * Probando que el option guarde/recupere la informacion de forma correcta
      */
     public function testSave()
     {

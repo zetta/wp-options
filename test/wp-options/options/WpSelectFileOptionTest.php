@@ -12,12 +12,8 @@
 /**
  *  unit test case.
  */
-class WpTextOptionTest extends PHPUnit_Framework_TestCase
+class WpSelectFileOptionTest extends PHPUnit_Framework_TestCase
 {
-
-    const FIRST_VALUE = 'this is the default text...';
-    const SECOND_VALUE = 'other text';
-
     /**
      * Probando que el option guarde/recupere la informacion de forma correcta
      */
@@ -25,10 +21,10 @@ class WpTextOptionTest extends PHPUnit_Framework_TestCase
     {
         $obj = new WpOptions(WP_VERSION, new wpdb());
         
-        $obj->addTextOption('text',self::FIRST_VALUE,'Text','You can store long text in this option');
-        $this->assertEquals( self::FIRST_VALUE, $obj->getOption('text'));
+        $obj->addSelectFileOption('file','.','WpSelectFileOptionTest.php','This is a file select combobox');
+        $this->assertEquals('WpSelectFileOptionTest.php', $obj->getOption('file'));
         
-        $obj->setOptionValue('text',self::SECOND_VALUE);
-        $this->assertEquals( self::SECOND_VALUE, $obj->getOption('text'));
+        $obj->setOptionValue('file','WpSelectUsersOptionTest.php');
+        $this->assertEquals('WpSelectUsersOptionTest.php', $obj->getOption('file'));
     }
 }
