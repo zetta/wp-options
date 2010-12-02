@@ -983,7 +983,7 @@ class WpOptions
         $prefix = $this->getCamelCase('wp_options');
         $this->options[$optionName]->setInputName($this->getCamelCase('wp_options') . '_' . $this->baseThemeName);
         update_option($prefix . '_' . $this->baseThemeName .'_' . $optionName, $this->options[$optionName]->set( $value ));
-        $this->
+        $this->options[$optionName]->set($value);
     }
     
     /**    
