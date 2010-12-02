@@ -18,8 +18,7 @@ require_once 'WpOption.php';
 
 class WpOptions
 {
-    
-    /**
+   	/**
      * Where the plugin are located
      * @var string $pluginLocation
      * @access private
@@ -783,7 +782,7 @@ class WpOptions
         
         foreach($this->optionsInMetaBox as $option)
         {
-            $option->setDbSource(WpOption::$Sources['POST_META']);
+            $option->setDbSource($option->$Sources['POST_META']);  // TODO verificar que esta linea haga lo que debe hacer
             if(isset($_POST[$option->getFormName()]))
             {
                 $option->setDbSource($option->Sources['POST_META']);
