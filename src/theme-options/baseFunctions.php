@@ -1,5 +1,5 @@
 <?php
-
+// TODO delete this file
 global $pagenow;
 
 /**

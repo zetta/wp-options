@@ -1,4 +1,5 @@
 <?php 
+//TODO delete this file
 load_theme_textdomain('storelicious',get_template_directory().'/lang');
 
 /**

@@ -1,10 +1,30 @@
 <?php
+// comenzamos con la programacion de la version 2.0
+include_once 'theme-options/theme-options.php';
+
+
+setup_options(
+	'Spiga Theme Options',
+	'http://www.manualurl.com',
+	'http://www.forumurl.com',
+	array(
+		wpo_title("Basic Types"),
+		  wpo_string('string','this is the default string...','String','You can store strings in this option'),
+		  wpo_text('text','default text','Text','Here you can store large text'),
+		  wpo_boolean('boolean1',false,'Boolean','True or False'),
+		  wpo_boolean('boolean2',true,'Boolean'),
+		  wpo_number('number',10,'Number'),
+		  wpo_check('check',true,'Check','Toggle Option')
+	)
+);
+
 /**
  * Dont remove this, this include must be at top of the functions.php file
  */
-include_once 'lib/includer.php';
+//include_once 'lib/includer.php';
 
-//basic theme info, you MUST modify this information
+//basic theme info, you MUST modify this information/*
+/*
 $wpOptions = new WpOptions($wp_version,$wpdb,get_bloginfo('template_url').'/lib/pix/storelicious.png');
 $wpOptions->setThemeName('wp-options');
 $wpOptions->addCSS('options');
@@ -13,6 +33,7 @@ $wpOptions->setForumUrl('http://www.google.com');
 
 
 /*Begin Basic types*/
+/*
 $wpOptions->addTitle('Basic Types');
 $wpOptions->addStringOption('string','this is the default string...','String','You can store strings in this option');
 $wpOptions->addTextOption('text','default text','Text','Here you can store large text');
@@ -22,13 +43,12 @@ $wpOptions->addNumberOption('number',10,'Number');
 $wpOptions->addCheckOption('check',true,'Check','Toggle Option');
 
 /* You can add subpages */
+/*
 $wpOptions->addSubpage('subpage title','my subpage','subpage-slug','subpage_demo_function');
 
 
-
-
-
 /*Begin complex types*/
+/*
 $wpOptions->addTitle('Complex Types');
 
 $options = array(
@@ -73,6 +93,7 @@ $wpOptions->addFileOption('mySecondFile','','Choose another File','You can uploa
 
 
 /* Begin Wordpress types */
+/*
 $wpOptions->addTitle('WordPress Types');
 $wpOptions->addSelectCategoriesOption('categorySelector',0,false,'WordPress Categories','Select a category');
 $wpOptions->addSelectCategoriesOption('multipleCategorySelector',array(),true,'WordPress Categories');
@@ -88,6 +109,7 @@ $wpOptions->addSelectTagsOption('multipleTagSelector',array(),true,'WordPress Ta
 
 
 /* Begin CoolTypes */
+/*
 $wpOptions->addTitle('CoolTypes');
 $wpOptions->addDatePickerOption('myDate',date('m/d/Y'),'Select a date','You can control dates');
 $wpOptions->addColorPickerOption('myColor','ffdd00','Select color','you can store colors');
@@ -96,6 +118,7 @@ $wpOptions->addRangeSliderOption('myRangeSlider',array(6,15),30,0,2,'Select quan
 
 
 /* Begin Conditional option types */
+/*
 $wpOptions->addTitle('Conditional');
 $wpOptions->addStringOption('flickrName','MyName','Flickr Name');
 $wpOptions->addNumberOption('FlickrID',0,'Flickr Number');
@@ -114,6 +137,7 @@ $wpOptions->setConditionalOptions('testbcheck',array('testb'));
 
 
 /* Begin metabox */
+/*
 $wpOptions->addMetaBox('string',false,'page'); // este metabox solo se mostrara en el formulario de paginas
 $wpOptions->addMetaBox('checkbox',false,'both');
 $wpOptions->addMetaBox('boolean1',false,'both');
@@ -134,12 +158,14 @@ $wpOptions->setOptionValue('time',time());
  * Subpage demo function 
  * used in $wpOptions->addSubpage();
  */
+ /*
 function subpage_demo_function()
 {
     
     /**
      * you DONT need to add this page, this is for testing purposes only
      */
+     /*
     ?>
     <p><strong>Hello world</strong></p>
         <p><strong>String</strong> : <?php echo var_dump(getWpThemeOption('string')) ?></p>
@@ -160,5 +186,6 @@ function subpage_demo_function()
 /**
  * Dont remove this, this include must be at bottom of the functions.php file
  */
+ /*
 include_once 'lib/baseFunctions.php';
 
