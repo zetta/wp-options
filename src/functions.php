@@ -1,22 +1,9 @@
 <?php
 // comenzamos con la programacion de la version 2.0
 include_once 'theme-options/theme-options.php';
+include_once 'theme-options/theme-options-setup.php';
 
 
-setup_options(
-	'Spiga Theme Options',
-	'http://www.manualurl.com',
-	'http://www.forumurl.com',
-	array(
-		wpo_title("Basic Types"),
-		  wpo_string('string','this is the default string...','String','You can store strings in this option'),
-		  wpo_text('text','default text','Text','Here you can store large text'),
-		  wpo_boolean('boolean1',false,'Boolean','True or False'),
-		  wpo_boolean('boolean2',true,'Boolean'),
-		  wpo_number('number',10,'Number'),
-		  wpo_check('check',true,'Check','Toggle Option')
-	)
-);
 
 /**
  * Dont remove this, this include must be at top of the functions.php file

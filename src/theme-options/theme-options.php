@@ -1,48 +1,37 @@
 <?php
 
 include "wpo-options.php";
+include "theme-options-view.php";
 
-global $pagenow;
-$_wpo = array();
+
+global $_wpo;
+$wpo = array();
 
 /**
  * main actions
  */
-add_action('admin_menu', 'add_theme_options_page');
+
 
 load_theme_textdomain('storelicious',get_template_directory().'/lang');
-if (($pagenow == 'admin.php') && ($_GET['page'] == 'WpOptions.php'))
-{
-    add_action('admin_head', 'add_theme_options_meta');
-}
-
 function _s($string, $namespace = 'storelicious')
 {
     return __($string,$namespace);
 }
 
 
-function setup_options($theme_name, $manual_url, $forum_url, $options)
-{
-	
-	
-	
-	
-}
-
-
-
 function add_theme_options_page()
 {
+	global $_wpo;
     if(function_exists('add_object_page'))
     {
-        add_object_page(_s('Configure ') . get_template(), get_template(), 'edit_themes', basename(__FILE__),  'render_options_page',  get_bloginfo('template_url').'/theme-options/pix/storelicious.png');
+        add_object_page(_s('Configure ') . $_wpo['name'], $_wpo['name'], 'edit_themes', basename(__FILE__),  'render_options_page',  $_wpo['icon']);
     }
     else
     {
-        add_menu_page(_s('Configure ') . get_template(), get_template(), 'edit_themes', basename(__FILE__),  'render_options_page',  get_bloginfo('template_url').'/theme-options/pix/storelicious.png');
+        add_menu_page(_s('Configure ') . $_wpo['name'], $_wpo['name'], 'edit_themes', basename(__FILE__),  'render_options_page',  $_wpo['icon']);
     }
     /*
+    // todo manager de las metabox
     foreach($this->subpages as $sub)
     {
         add_submenu_page(basename(__FILE__), _s($sub['pageTitle']), _s($sub['title']), 'edit_themes', $sub['slug'], $sub['function']);
@@ -55,18 +44,40 @@ function add_theme_options_page()
         add_action('save_post', $this->getFunctionScope('savePostData'));
     }*/
 }
+add_action('admin_menu', 'add_theme_options_page');
 
 
-function render_options_page()
+function setup_options($manual_url, $forum_url, $options, $icon = null)
 {
-	echo "hola mundo =)";
+	global $_wpo;
+	$info = get_theme_data( get_template_directory().'/style.css' );
+	$_wpo['name'] = $info['Name'];
+	$_wpo['author'] = $info['Author'];
+	$_wpo['version'] = $info['Version'];
+	$_wpo['title'] = $info['Title'];
+	$_wpo['manual'] = $manual_url;
+	$_wpo['forum'] = $forum_url;
+	$_wpo['icon'] = $icon ? $icon : get_bloginfo('template_url').'/theme-options/pix/storelicious.png';
+	$_wpo['options'] = $options;
+	
+	/*
+	Name] => 
+    [URI] => 
+    [Description] => 
+    [Author] => Anonymous
+    [AuthorURI] => 
+    [Version] => 
+    [Template] => 
+    [Status] => publish
+    [Tags] => Array
+        (
+        )
+
+    [Title] => 
+    [AuthorName] => Anonymous
+	
+	*/
 }
-
-function add_theme_options_meta()
-{
-}
-
-
 
 
 function get_theme_option()
