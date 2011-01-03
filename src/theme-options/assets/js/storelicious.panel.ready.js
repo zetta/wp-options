@@ -3,7 +3,7 @@
 
 jQuery(document).ready(function($){
 
-SyntaxHighlighter.all()
+//SyntaxHighlighter.all()
 //UI
 $(".wpDatePickerOption").datepicker( {
 	inline : true,

@@ -54,6 +54,51 @@ if (('admin.php' == $pagenow) && ('theme-options.php' == $_GET['page']))
 			<link rel='stylesheet' href='{$base}/css/colorpicker.css' type='text/css' media='screen' />
 		<!-- /theme options assets -->";
 	}
+	add_action('init', 'add_theme_options_js');
+	function add_theme_options_js()
+	{
+		$base = get_bloginfo('template_url').'/theme-options/assets';
+		wp_register_script('storeliciousTipsy', $base.'/js/jquery.tipsy.pack.js');
+		wp_register_script('storeliciousEzMark', $base.'/js/jquery.ezmark.min.js');
+		wp_register_script('storeliciousSwfObject', $base.'/js/swfobject.js');
+		wp_register_script('storeliciousUploadify', $base.'/js/jquery.uploadify.v2.1.0.min.js');
+		wp_register_script('storeliciousIdTabs', $base.'/js/jquery.idTabs.min.js');
+		wp_register_script('storeliciousIdTabs', $base.'/js/jquery.validate.pack.js');
+		wp_register_script('storeliciousAddress', $base.'/js/jquery.address-1.2.2.min.js');
+		wp_register_script('storeliciousUi', $base.'/js/jquery-ui-1.8.5.custom.min.js');
+		wp_register_script('storeliciousTinyTips', $base.'/js/jquery.tinyTips.js');
+		wp_register_script('storeliciousFancybox', $base.'/js/jquery.fancybox-1.3.1.pack.js');
+		wp_register_script('storeliciousColorPicker', $base.'/js/colorpicker.js');
+		wp_enqueue_script('jquery');
+		wp_enqueue_script('storeliciousEzMark');
+		wp_enqueue_script('storeliciousTipsy');
+		wp_enqueue_script('storeliciousSwfObject');
+		wp_enqueue_script('storeliciousUploadify');
+		wp_enqueue_script('storeliciousAddress');
+		wp_enqueue_script('storeliciousUi');
+		wp_enqueue_script('storeliciousTinyTips');
+		wp_enqueue_script('storeliciousFancybox');
+		wp_enqueue_script('storeliciousColorPicker');
+		
+		
+		// syntax highlighter (no se para que)
+		/*
+		wp_register_script('storeliciousShCore', $base.'/js/shCore.js');
+		wp_register_script('storeliciousShLegacy', $base.'/js/shLegacy.js');
+		wp_register_script('storeliciousShCss', $base.'/js/shBrushCss.js');
+		wp_register_script('storeliciousShJs', $base.'/js/shBrushJScript.js');
+		wp_register_script('storeliciousShPhp', $base.'/js/shBrushPhp.js');
+		wp_register_script('storeliciousShXml', $base.'/js/shBrushXml.js');
+		wp_enqueue_script('storeliciousShCore');
+		wp_enqueue_script('storeliciousShLegacy');
+		wp_enqueue_script('storeliciousShCss');
+		wp_enqueue_script('storeliciousShJs');
+		wp_enqueue_script('storeliciousShPhp');
+		wp_enqueue_script('storeliciousShXml');*/
+		
+		wp_register_script('storeliciousPanelReady', $base.'/js/storelicious.panel.ready.js');
+		wp_enqueue_script('storeliciousPanelReady');
+	}
 }
 
 
