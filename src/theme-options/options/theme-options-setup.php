@@ -8,7 +8,17 @@ $options[] = wpo_boolean('boolean1',false,'Boolean','True or False');
 $options[] = wpo_boolean('boolean2',true,'Boolean');
 $options[] = wpo_number('number',10,'Number');
 $options[] = wpo_check('check',true,'Check','Toggle Option');
+$options[] = wpo_tab("Complex Types");
 
+
+$colors = array(
+    'blue'   => 'Blue',
+    'red'    => 'Red',
+    'green'  => 'Green',
+    'orange' => 'Orange',
+    'yellow' => 'Yellow'
+);
+$options[] = wpo_checkbox('checkbox',$colors,array('orange','green'),'CheckBox','Select colors');
 
 
 
@@ -19,3 +29,4 @@ setup_options(
 	'http://www.theme-url.com',
 	$options
 );
+unset($options); //liberamos un poquitin de memoria =)
