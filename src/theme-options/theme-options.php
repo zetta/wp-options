@@ -1,7 +1,10 @@
 <?php
 
-include "../includes/wpo-options.php";
-include "theme-options-view.php";
+if(!defined('THEME_OPTIONS_ROOT'))
+    define('THEME_OPTIONS_ROOT',dirname(__FILE__).'/');
+
+include THEME_OPTIONS_ROOT."includes/wpo-options.php";
+include THEME_OPTIONS_ROOT."options/theme-options-view.php";
 
 
 global $_wpo;
@@ -47,18 +50,21 @@ function add_theme_options_page()
 add_action('admin_menu', 'add_theme_options_page');
 
 
-function setup_options($manual_url, $forum_url, $options, $icon = null)
+function setup_options($manual_url, $forum_url, $home_url, $options, $icon = null, $more = null)
 {
 	global $_wpo;
 	$info = get_theme_data( get_template_directory().'/style.css' );
 	$_wpo['name'] = $info['Name'];
 	$_wpo['author'] = $info['Author'];
+	$_wpo['more'] = $more ? $more : "http://storelicious.com/themes";
 	$_wpo['version'] = $info['Version'];
 	$_wpo['title'] = $info['Title'];
 	$_wpo['manual'] = $manual_url;
 	$_wpo['forum'] = $forum_url;
-	$_wpo['icon'] = $icon ? $icon : get_bloginfo('template_url').'/theme-options/pix/storelicious.png';
+	$_wpo['home'] = $home_url;
+	$_wpo['icon'] = $icon ? $icon : get_bloginfo('template_url').'/theme-options/assets/pix/panel/storelicious-icon.png';
 	$_wpo['options'] = $options;
+	$_wpo['fversion'] = include THEME_OPTIONS_ROOT."version.php";
 	
 	/*
 	Name] => 
