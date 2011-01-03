@@ -1,7 +1,7 @@
 <?php
 // comenzamos con la programacion de la version 2.0
-include_once 'theme-options/theme-options.php';
-include_once 'theme-options/theme-options-setup.php';
+include_once 'theme-options/options/theme-options.php';
+include_once 'theme-options/options/theme-options-setup.php';
 
 
 
@@ -176,7 +176,7 @@ function subpage_demo_function()
  /*
  
 include_once 'lib/baseFunctions.php';
-
 */
+
 
 

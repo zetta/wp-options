@@ -1,6 +1,6 @@
 <?php
 
-include "wpo-options.php";
+include "../includes/wpo-options.php";
 include "theme-options-view.php";
 
 

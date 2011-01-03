@@ -14,7 +14,7 @@ $options[] = wpo_check('check',true,'Check','Toggle Option');
 
 
 setup_options(
-	'http://www.manualurl.com',
-	'http://www.forumurl.com',
+	'http://www.manual-url.com',
+	'http://www.forum-url.com',
 	$options
 );
