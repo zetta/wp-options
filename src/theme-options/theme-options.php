@@ -3,16 +3,17 @@
 if(!defined('THEME_OPTIONS_ROOT'))
     define('THEME_OPTIONS_ROOT',dirname(__FILE__).'/');
 
-include THEME_OPTIONS_ROOT."includes/wpo-options.php";
 include THEME_OPTIONS_ROOT."options/theme-options-view.php";
 
+// Redirect to Theme Options after Activation
+
+if (is_admin() && isset($_GET['activated'] ) && "themes.php" == $pagenow) {
+    header( 'Location: '.admin_url().'admin.php?page=storelicious' ) ;
+}
 
 global $_wpo;
 $_wpo = array();
 
-/**
- * main actions
- */
 load_theme_textdomain('storelicious',get_template_directory().'/lang');
 function _s($string, $namespace = 'storelicious')
 {
@@ -25,11 +26,11 @@ function add_theme_options_page()
 	global $_wpo;
     if(function_exists('add_object_page'))
     {
-        add_object_page(_s('Configure ') . $_wpo['name'], $_wpo['name'], 'edit_themes', basename(__FILE__),  'render_options_page',  $_wpo['icon']);
+        add_object_page(_s('Configure ') . $_wpo['name'], $_wpo['name'], 'edit_themes', 'storelicious',  'render_options_page',  $_wpo['icon']);
     }
     else
     {
-        add_menu_page(_s('Configure ') . $_wpo['name'], $_wpo['name'], 'edit_themes', basename(__FILE__),  'render_options_page',  $_wpo['icon']);
+        add_menu_page(_s('Configure ') . $_wpo['name'], $_wpo['name'], 'edit_themes', 'storelicious',  'render_options_page',  $_wpo['icon']);
     }
     /*
     // TODO manager de las metabox

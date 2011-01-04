@@ -36,7 +36,7 @@ function render_options_page()
 }
 
 
-if (('admin.php' == $pagenow) && ('theme-options.php' == $_GET['page']))
+if (('admin.php' == $pagenow) && ('storelicious' == $_GET['page']))
 {
     add_action('admin_head', 'add_theme_options_meta');
 	function add_theme_options_meta()
@@ -80,9 +80,7 @@ if (('admin.php' == $pagenow) && ('theme-options.php' == $_GET['page']))
 		wp_enqueue_script('storeliciousFancybox');
 		wp_enqueue_script('storeliciousColorPicker');
 		
-		
-		// syntax highlighter (no se para que)
-		/*
+		/*syntax highlighter (no se para que)
 		wp_register_script('storeliciousShCore', $base.'/js/shCore.js');
 		wp_register_script('storeliciousShLegacy', $base.'/js/shLegacy.js');
 		wp_register_script('storeliciousShCss', $base.'/js/shBrushCss.js');
@@ -156,7 +154,7 @@ function get_theme_options_tab_menu()
 	{
 		if(is_array($option) && 'tab' == $option['type'])
 		{
-			$title = $option['title'];
+			$title = $option['name'];
 			$menu .= "<li class='".($first?'current_option':'')."'><a class='tipLeft' href='#stTab{$key}' title='{$title}'>{$title}</a></li>\n";
 			$first = false;
 		}
@@ -177,7 +175,7 @@ function get_theme_options_body()
 			if('tab' == $option['type'])
 			{
 				$body .= (2==$status?'</div>':'');
-				$body .= "\n<div class='stTabContent' id='stTab{$key}'><h2>{$option['title']}</h2>";
+				$body .= "\n<div class='stTabContent' id='stTab{$key}'><h2>{$option['name']}</h2>";
 				$status = 2;
 			}	
 		}
