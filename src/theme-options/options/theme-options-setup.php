@@ -5,6 +5,22 @@ $options[] = array( "name" => _s("Basic form elements"),
                     "type" => "tab");
 
 
+$body_pos = array("top left","top center","top right","center left","center center","center right","bottom left","bottom center","bottom right");
+$options[] = array( "name" => "Theme Stylesheet",
+					"desc" => "Select your themes alternative color scheme.",
+					"id" => $shortname."_alt_stylesheet",
+					"std" => "top center",
+					"type" => "select",
+					"options" => $body_pos);
+
+
+
+/*
+$options[] = array( "name" => _s("Single Text"),
+					"type" => "text");
+
+
+
 
 /*                    
 $options[] = wpo_string('string','this is the default string...','String','You can store strings in this option');

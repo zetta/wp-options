@@ -179,6 +179,7 @@ function get_theme_options_body()
 				$status = 2;
 			}	
 		}
+		$body .= "\n".get_theme_options_option($option)."\n";
 	}
 	$body .= (2==$status?'</div>':'');
 	return $body;
@@ -195,4 +196,550 @@ function get_theme_options_body()
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Generates The Options - woothemes_machine */
+/*-----------------------------------------------------------------------------------*/
+
+
+function get_theme_options_option($option) {
+        
+    $value = $option;    
+        
+    //$counter = 0;
+	//$menu = '';
+	$output = '<div>';
+	//foreach ($options as $value) {
+	   /*
+		$counter++;
+		$val = '';
+		//Start Heading
+		 if ( $value['type'] != "heading" )
+		 {
+		 	$class = ''; if(isset( $value['class'] )) { $class = $value['class']; }
+			//$output .= '<div class="section section-'. $value['type'] .'">'."\n".'<div class="option-inner">'."\n";
+			$output .= '<div class="section section-'.$value['type'].' '. $class .'">'."\n";
+			$output .= '<h3 class="heading">'. $value['name'] .'</h3>'."\n";
+			$output .= '<div class="option">'."\n" . '<div class="controls">'."\n";
+
+		 } 
+		 //End Heading
+		$select_value = '';    */
+		
+		
+		
+		                               
+		switch ( $value['type'] ) {
+		
+		case 'text':
+			$val = $value['std'];
+			$std = get_option($value['id']);
+			if ( $std != "") { $val = $std; }
+			$output .= '<input class="woo-input" name="'. $value['id'] .'" id="'. $value['id'] .'" type="'. $value['type'] .'" value="'. $val .'" />';
+		break;
+		
+		case 'select':
+
+			$output .= '<div class="select_wrapper"><select class="woo-input" name="'. $value['id'] .'" id="'. $value['id'] .'">';
+		
+			$select_value = stripslashes(get_option($value['id']));
+			 
+			foreach ($value['options'] as $option) {
+				
+				$selected = '';
+				
+				 if($select_value != '') {
+					 if ( $select_value == $option) { $selected = ' selected="selected"';} 
+			     } else {
+					 if ( isset($value['std']) )
+						 if ($value['std'] == $option) { $selected = ' selected="selected"'; }
+				 }
+				  
+				 $output .= '<option'. $selected .'>';
+				 $output .= $option;
+				 $output .= '</option>';
+			 
+			 } 
+			 $output .= '</select></div>';
+
+			
+		break;
+		case 'select2':
+
+			$output .= '<div class="select_wrapper"><select class="woo-input" name="'. $value['id'] .'" id="'. $value['id'] .'">';
+		
+			$select_value = stripslashes(get_option($value['id']));
+			 
+			foreach ($value['options'] as $option => $name) {
+				
+				$selected = '';
+				
+				 if($select_value != '') {
+					 if ( $select_value == $option) { $selected = ' selected="selected"';} 
+			     } else {
+					 if ( isset($value['std']) )
+						 if ($value['std'] == $option) { $selected = ' selected="selected"'; }
+				 }
+				  
+				 $output .= '<option'. $selected .' value="'.$option.'">';
+				 $output .= $name;
+				 $output .= '</option>';
+			 
+			 } 
+			 $output .= '</select></div>';
+
+			
+		break;
+		case 'calendar':
+		
+			$val = $value['std'];
+			$std = get_option($value['id']);
+			if ( $std != "") { $val = $std; }
+            $output .= '<input class="woo-input-calendar" type="text" name="'.$value['id'].'" id="'.$value['id'].'" value="'.$val.'">';
+		
+		break;
+		case 'time':
+			$val = $value['std'];
+			$std = get_option($value['id']);
+			if ( $std != "") { $val = $std; }
+			$output .= '<input class="woo-input-time" name="'. $value['id'] .'" id="'. $value['id'] .'" type="text" value="'. $val .'" />';
+		break;
+		case 'textarea':
+			
+			$cols = '8';
+			$ta_value = '';
+			
+			if(isset($value['std'])) {
+				
+				$ta_value = $value['std']; 
+				
+				if(isset($value['options'])){
+					$ta_options = $value['options'];
+					if(isset($ta_options['cols'])){
+					$cols = $ta_options['cols'];
+					} else { $cols = '8'; }
+				}
+				
+			}
+				$std = get_option($value['id']);
+				if( $std != "") { $ta_value = stripslashes( $std ); }
+				$output .= '<textarea class="woo-input" name="'. $value['id'] .'" id="'. $value['id'] .'" cols="'. $cols .'" rows="8">'.$ta_value.'</textarea>';
+			
+			
+		break;
+		case "radio":
+			
+			 $select_value = get_option( $value['id']);
+				   
+			 foreach ($value['options'] as $key => $option) 
+			 { 
+
+				 $checked = '';
+				   if($select_value != '') {
+						if ( $select_value == $key) { $checked = ' checked'; } 
+				   } else {
+					if ($value['std'] == $key) { $checked = ' checked'; }
+				   }
+				$output .= '<input class="woo-input woo-radio" type="radio" name="'. $value['id'] .'" value="'. $key .'" '. $checked .' />' . $option .'<br />';
+			
+			}
+			 
+		break;
+		case "checkbox": 
+		
+		   $std = $value['std'];  
+		   
+		   $saved_std = get_option($value['id']);
+		   
+		   $checked = '';
+			
+			if(!empty($saved_std)) {
+				if($saved_std == 'true') {
+				$checked = 'checked="checked"';
+				}
+				else{
+				   $checked = '';
+				}
+			}
+			elseif( $std == 'true') {
+			   $checked = 'checked="checked"';
+			}
+			else {
+				$checked = '';
+			}
+			$output .= '<input type="checkbox" class="checkbox woo-input" name="'.  $value['id'] .'" id="'. $value['id'] .'" value="true" '. $checked .' />';
+
+		break;
+		case "multicheck":
+		
+			$std =  $value['std'];         
+			
+			foreach ($value['options'] as $key => $option) {
+											 
+			$woo_key = $value['id'] . '_' . $key;
+			$saved_std = get_option($woo_key);
+					
+			if(!empty($saved_std)) 
+			{ 
+				  if($saved_std == 'true'){
+					 $checked = 'checked="checked"';  
+				  } 
+				  else{
+					  $checked = '';     
+				  }    
+			} 
+			elseif( $std == $key) {
+			   $checked = 'checked="checked"';
+			}
+			else {
+				$checked = '';                                                                                    }
+			$output .= '<input type="checkbox" class="checkbox woo-input" name="'. $woo_key .'" id="'. $woo_key .'" value="true" '. $checked .' /><label for="'. $woo_key .'">'. $option .'</label><br />';
+										
+			}
+		break;
+		case "upload":
+			
+			if ( function_exists( 'woothemes_medialibrary_uploader' ) ) {
+				
+				$output .= woothemes_medialibrary_uploader( $value['id'], $value['std'], null ); // New AJAX Uploader using Media Library
+			
+			} else {
+			
+				$output .= woothemes_uploader_function($value['id'],$value['std'],null); // Original AJAX Uploader
+				
+			} // End IF Statement
+						
+		break;
+		case "upload_min":
+			
+			if ( function_exists( 'woothemes_medialibrary_uploader' ) ) {
+				
+				$output .= woothemes_medialibrary_uploader( $value['id'], $value['std'], 'min' ); // New AJAX Uploader using Media Library
+			
+			} else {
+			
+				$output .= woothemes_uploader_function($value['id'],$value['std'],'min'); // Original AJAX Uploader
+				
+			} // End IF Statement
+			
+			// $output .= woothemes_uploader_function($value['id'],$value['std'],'min');
+			
+		break;
+		case "color":
+			$val = $value['std'];
+			$stored  = get_option( $value['id'] );
+			if ( $stored != "") { $val = $stored; }
+			$output .= '<div id="' . $value['id'] . '_picker" class="colorSelector"><div></div></div>';
+			$output .= '<input class="woo-color" name="'. $value['id'] .'" id="'. $value['id'] .'" type="text" value="'. $val .'" />';
+		break;   
+		
+		case "typography":
+		
+			$default = $value['std'];
+			$typography_stored = get_option($value['id']);
+			
+			/* Font Size */
+			$val = $default['size'];
+			if ( $typography_stored['size'] != "") { $val = $typography_stored['size']; }
+			if ( $typography_stored['unit'] == 'px'){ $show_px = ''; $show_em = ' style="display:none" '; $name_px = ' name="'. $value['id'].'_size" '; $name_em = ''; }
+			else if ( $typography_stored['unit'] == 'em'){ $show_em = ''; $show_px = 'style="display:none"'; $name_em = ' name="'. $value['id'].'_size" '; $name_px = ''; }
+			else { $show_px = ''; $show_em = ' style="display:none" '; $name_px = ' name="'. $value['id'].'_size" '; $name_em = ''; }
+			$output .= '<select class="woo-typography woo-typography-size woo-typography-size-px"  id="'. $value['id'].'_size" '. $name_px . $show_px .'>';
+				for ($i = 9; $i < 71; $i++){ 
+					if($val == strval($i)){ $active = 'selected="selected"'; } else { $active = ''; }
+					$output .= '<option value="'. $i .'" ' . $active . '>'. $i .'</option>'; }
+			$output .= '</select>';
+			$output .= '<select class="woo-typography woo-typography-size woo-typography-size-em" id="'. $value['id'].'_size" '. $name_em . $show_em.'>';
+				$em = 0.5;
+				for ($i = 0; $i < 39; $i++){
+					if ($i <= 24)			// up to 2.0em in 0.1 increments
+						$em = $em + 0.1;
+					elseif ($i >= 14 && $i <= 24)		// Above 2.0em to 3.0em in 0.2 increments
+						$em = $em + 0.2;
+					elseif ($i >= 24)		// Above 3.0em in 0.5 increments
+						$em = $em + 0.5;
+					if($val == strval($em)){ $active = 'selected="selected"'; } else { $active = ''; }
+					//echo ' '. $value['id'] .' val:'.floatval($val). ' -> ' . floatval($em) . ' $<br />' ;
+					$output .= '<option value="'. $em .'" ' . $active . '>'. $em .'</option>'; }
+			$output .= '</select>';
+			
+			/* Font Unit */
+			$val = $default['unit'];
+			if ( $typography_stored['unit'] != "") { $val = $typography_stored['unit']; }
+				$em = ''; $px = '';
+			if($val == 'em'){ $em = 'selected="selected"'; }
+			if($val == 'px'){ $px = 'selected="selected"'; }
+			$output .= '<select class="woo-typography woo-typography-unit" name="'. $value['id'].'_unit" id="'. $value['id'].'_unit">';
+			$output .= '<option value="px" '. $px .'">px</option>';
+			$output .= '<option value="em" '. $em .'>em</option>';
+			$output .= '</select>';
+			
+			/* Font Face */
+			$val = $default['face'];
+			if ( $typography_stored['face'] != "") 
+				$val = $typography_stored['face']; 
+
+			$font01 = ''; 
+			$font02 = ''; 
+			$font03 = ''; 
+			$font04 = ''; 
+			$font05 = ''; 
+			$font06 = ''; 
+			$font07 = ''; 
+			$font08 = '';
+			$font09 = ''; 
+			$font10 = '';
+			$font11 = '';
+			$font12 = '';
+			$font13 = '';
+			$font14 = '';
+			$font15 = '';
+								
+			if (strpos($val, 'Arial, sans-serif') !== false){ $font01 = 'selected="selected"'; }
+			if (strpos($val, 'Verdana, Geneva') !== false){ $font02 = 'selected="selected"'; }
+			if (strpos($val, 'Trebuchet') !== false){ $font03 = 'selected="selected"'; }
+			if (strpos($val, 'Georgia') !== false){ $font04 = 'selected="selected"'; }
+			if (strpos($val, 'Times New Roman') !== false){ $font05 = 'selected="selected"'; }
+			if (strpos($val, 'Tahoma, Geneva') !== false){ $font06 = 'selected="selected"'; }
+			if (strpos($val, 'Palatino') !== false){ $font07 = 'selected="selected"'; }
+			if (strpos($val, 'Helvetica') !== false){ $font08 = 'selected="selected"'; }
+			if (strpos($val, 'Calibri') !== false){ $font09 = 'selected="selected"'; }
+			if (strpos($val, 'Myriad') !== false){ $font10 = 'selected="selected"'; }
+			if (strpos($val, 'Lucida') !== false){ $font11 = 'selected="selected"'; }
+			if (strpos($val, 'Arial Black') !== false){ $font12 = 'selected="selected"'; }
+			if (strpos($val, 'Gill') !== false){ $font13 = 'selected="selected"'; }
+			if (strpos($val, 'Geneva, Tahoma') !== false){ $font14 = 'selected="selected"'; }
+			if (strpos($val, 'Impact') !== false){ $font15 = 'selected="selected"'; }
+			
+			$output .= '<select class="woo-typography woo-typography-face" name="'. $value['id'].'_face" id="'. $value['id'].'_face">';
+			$output .= '<option value="Arial, sans-serif" '. $font01 .'>Arial</option>';
+			$output .= '<option value="Verdana, Geneva, sans-serif" '. $font02 .'>Verdana</option>';
+			$output .= '<option value="&quot;Trebuchet MS&quot;, Tahoma, sans-serif"'. $font03 .'>Trebuchet</option>';
+			$output .= '<option value="Georgia, serif" '. $font04 .'>Georgia</option>';
+			$output .= '<option value="&quot;Times New Roman&quot;, serif"'. $font05 .'>Times New Roman</option>';
+			$output .= '<option value="Tahoma, Geneva, Verdana, sans-serif"'. $font06 .'>Tahoma</option>';
+			$output .= '<option value="Palatino, &quot;Palatino Linotype&quot;, serif"'. $font07 .'>Palatino</option>';
+			$output .= '<option value="&quot;Helvetica Neue&quot;, Helvetica, sans-serif" '. $font08 .'>Helvetica*</option>';
+			$output .= '<option value="Calibri, Candara, Segoe, Optima, sans-serif"'. $font09 .'>Calibri*</option>';
+			$output .= '<option value="&quot;Myriad Pro&quot;, Myriad, sans-serif"'. $font10 .'>Myriad Pro*</option>';
+			$output .= '<option value="&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, &quot;Lucida Sans&quot;, sans-serif"'. $font11 .'>Lucida</option>';
+			$output .= '<option value="&quot;Arial Black&quot;, sans-serif" '. $font12 .'>Arial Black</option>';
+			$output .= '<option value="&quot;Gill Sans&quot;, &quot;Gill Sans MT&quot;, Calibri, sans-serif" '. $font13 .'>Gill Sans*</option>';
+			$output .= '<option value="Geneva, Tahoma, Verdana, sans-serif" '. $font14 .'>Geneva*</option>';
+			$output .= '<option value="Impact, Charcoal, sans-serif" '. $font15 .'>Impact</option>';
+			
+			// Google webfonts			
+		 	global $google_fonts;
+			$output .= '<option value="">-- Google Fonts --</option>';
+			foreach ( $google_fonts as $key => $gfont ) :
+		 		$font[$key] = '';
+				if ($val == $gfont['name']){ $font[$key] = 'selected="selected"'; }
+				$name = $gfont['name'];
+				$output .= '<option value="'.$name.'" '. $font[$key] .'>'.$name.'</option>';
+			endforeach;			
+
+			// Custom Font stack
+			$new_stacks = get_option('framework_woo_font_stack');
+			if(!empty($new_stacks)){
+				$output .= '<option value="">-- Custom Font Stacks --</option>';
+				foreach($new_stacks as $name => $stack){
+					if (strpos($val, $stack) !== false){ $fontstack = 'selected="selected"'; } else { $fontstack = ''; }
+					$output .= '<option value="'. stripslashes(htmlentities($stack)) .'" '.$fontstack.'>'. str_replace('_',' ',$name).'</option>';
+				}
+			}
+
+			$output .= '</select>';
+			
+			/* Font Weight */
+			$val = $default['style'];
+			if ( $typography_stored['style'] != "") { $val = $typography_stored['style']; }
+				$normal = ''; $italic = ''; $bold = ''; $bolditalic = '';
+			if($val == 'normal'){ $normal = 'selected="selected"'; }
+			if($val == 'italic'){ $italic = 'selected="selected"'; }
+			if($val == 'bold'){ $bold = 'selected="selected"'; }
+			if($val == 'bold italic'){ $bolditalic = 'selected="selected"'; }
+			
+			$output .= '<select class="woo-typography woo-typography-style" name="'. $value['id'].'_style" id="'. $value['id'].'_style">';
+			$output .= '<option value="normal" '. $normal .'>Normal</option>';
+			$output .= '<option value="italic" '. $italic .'>Italic</option>';
+			$output .= '<option value="bold" '. $bold .'>Bold</option>';
+			$output .= '<option value="bold italic" '. $bolditalic .'>Bold/Italic</option>';
+			$output .= '</select>';
+			
+			/* Font Color */
+			$val = $default['color'];
+			if ( $typography_stored['color'] != "") { $val = $typography_stored['color']; }			
+			$output .= '<div id="' . $value['id'] . '_color_picker" class="colorSelector"><div></div></div>';
+			$output .= '<input class="woo-color woo-typography woo-typography-color" name="'. $value['id'] .'_color" id="'. $value['id'] .'_color" type="text" value="'. $val .'" />';
+
+		break;  
+		
+		case "border":
+		
+			$default = $value['std'];
+			$border_stored = get_option( $value['id'] );
+			
+			/* Border Width */
+			$val = $default['width'];
+			if ( $border_stored['width'] != "") { $val = $border_stored['width']; }
+			$output .= '<select class="woo-border woo-border-width" name="'. $value['id'].'_width" id="'. $value['id'].'_width">';
+				for ($i = 0; $i < 21; $i++){ 
+					if($val == $i){ $active = 'selected="selected"'; } else { $active = ''; }
+					$output .= '<option value="'. $i .'" ' . $active . '>'. $i .'px</option>'; }
+			$output .= '</select>';
+			
+			/* Border Style */
+			$val = $default['style'];
+			if ( $border_stored['style'] != "") { $val = $border_stored['style']; }
+				$solid = ''; $dashed = ''; $dotted = '';
+			if($val == 'solid'){ $solid = 'selected="selected"'; }
+			if($val == 'dashed'){ $dashed = 'selected="selected"'; }
+			if($val == 'dotted'){ $dotted = 'selected="selected"'; }
+			
+			$output .= '<select class="woo-border woo-border-style" name="'. $value['id'].'_style" id="'. $value['id'].'_style">';
+			$output .= '<option value="solid" '. $solid .'>Solid</option>';
+			$output .= '<option value="dashed" '. $dashed .'>Dashed</option>';
+			$output .= '<option value="dotted" '. $dotted .'>Dotted</option>';
+			$output .= '</select>';
+			
+			/* Border Color */
+			$val = $default['color'];
+			if ( $border_stored['color'] != "") { $val = $border_stored['color']; }			
+			$output .= '<div id="' . $value['id'] . '_color_picker" class="colorSelector"><div></div></div>';
+			$output .= '<input class="woo-color woo-border woo-border-color" name="'. $value['id'] .'_color" id="'. $value['id'] .'_color" type="text" value="'. $val .'" />';
+
+		break;   
+		
+		case "images":
+			$i = 0;
+			$select_value = get_settings( $value['id']);
+				   
+			foreach ($value['options'] as $key => $option) 
+			 { 
+			 $i++;
+
+				 $checked = '';
+				 $selected = '';
+				   if($select_value != '') {
+						if ( $select_value == $key) { $checked = ' checked'; $selected = 'woo-radio-img-selected'; } 
+				    } else {
+						if ($value['std'] == $key) { $checked = ' checked'; $selected = 'woo-radio-img-selected'; }
+						elseif ($i == 1  && !isset($select_value)) { $checked = ' checked'; $selected = 'woo-radio-img-selected'; }
+						elseif ($i == 1  && $value['std'] == '') { $checked = ' checked'; $selected = 'woo-radio-img-selected'; }
+						else { $checked = ''; }
+					}	
+				
+				$output .= '<span>';
+				$output .= '<input type="radio" id="woo-radio-img-' . $value['id'] . $i . '" class="checkbox woo-radio-img-radio" value="'.$key.'" name="'. $value['id'].'" '.$checked.' />';
+				$output .= '<div class="woo-radio-img-label">'. $key .'</div>';
+				$output .= '<img src="'.$option.'" alt="" class="woo-radio-img-img '. $selected .'" onClick="document.getElementById(\'woo-radio-img-'. $value['id'] . $i.'\').checked = true;" />';
+				$output .= '</span>';
+				
+			}
+		
+		break; 
+		
+		case "info":
+			$default = $value['std'];
+			$output .= $default;
+		break; 
+		
+		case "string_builder":
+			$desc = $value['std'];
+			$output .= '<div id="'.$value['id'].'">';
+			$output .= 'Name<input class="woo-input woo-ignore" name="name" id="'. $value['id'] .'_name" type="text" />';
+			$output .= 'Font Stack<input class="woo-input woo-ignore" name="value" id="'. $value['id'] .'_value" type="text" />';
+			$output .= '<div class="add_button"><a class="button string_builder_add" href="#" class="string_builder" id="'.$value['id'].'">Add</a></div>';
+			
+			$output .= '<div id="'.$value['id'].'_return" class="string_builder_return">';
+			$output .= '<h3>'.$desc.'</h3>';
+			$saved_data = get_option($value['id']);
+			if(!empty($saved_data)){
+				foreach($saved_data as $name => $data){
+					$data = stripslashes($data);	
+					$output .= '<div class="string_option" id="string_builer_option_'.str_replace(' ','_',$name).'"><a class="delete" rel="'.$name.'" href="#"><img src="'.get_bloginfo('template_url').'/functions/images/ico-close.png" /></a><span>'.str_replace('_',' ',$name) .':</span> '. $data .'</div>';
+				}
+			}
+			$output .= '<div style="display:none" class="string_builder_empty">Nothing added yet.</div>';			
+			$output .= '</div>';
+			$output .= '</div>';
+
+		break;                               
+		/*
+		case "heading":
+			
+			if($counter >= 2){
+			   $output .= '</div>'."\n";
+			}
+			$jquery_click_hook = ereg_replace("[^A-Za-z0-9]", "", strtolower($value['name']) );
+			$jquery_click_hook = "woo-option-" . $jquery_click_hook;
+//			$jquery_click_hook = "woo-option-" . str_replace("&","",str_replace("/","",str_replace(".","",str_replace(")","",str_replace("(","",str_replace(" ","",strtolower($value['name'])))))));
+			$menu .= '<li class="'.$value['icon'].'"><a title="'.  $value['name'] .'" href="#'.  $jquery_click_hook  .'">'.  $value['name'] .'</a></li>';
+			$output .= '<div class="group" id="'. $jquery_click_hook  .'"><h2>'.$value['name'].'</h2>'."\n";
+		break;
+		*/
+		} 
+		
+		// if TYPE is an array, formatted into smaller inputs... ie smaller values
+		if ( is_array($value['type'])) {
+			foreach($value['type'] as $array){
+			
+					$id = $array['id']; 
+					$std = $array['std'];
+					$saved_std = get_option($id);
+					if($saved_std != $std){$std = $saved_std;} 
+					$meta = $array['meta'];
+					
+					if($array['type'] == 'text') { // Only text at this point
+						 
+						 $output .= '<input class="input-text-small woo-input" name="'. $id .'" id="'. $id .'" type="text" value="'. $std .'" />';  
+						 $output .= '<span class="meta-two">'.$meta.'</span>';
+					}
+				}
+		}
+		
+		if ( $value['type'] != "heading" ) { 
+			if ( $value['type'] != "checkbox" ) 
+				{ 
+				$output .= '<br/>';
+				}
+			if(!isset($value['desc'])){ $explain_value = ''; } else{ $explain_value = $value['desc']; } 
+			$output .= '</div><div class="explain">'. $explain_value .'</div>'."\n";
+			$output .= '<div class="clear"> </div>'."\n";
+		}
+	  
+	   return $output;
+	//}
+    //$output .= '</div>';
+    //return array($output,$menu);
+
+}
 
