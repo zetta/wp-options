@@ -178,8 +178,9 @@ function get_theme_options_body()
 				$body .= "\n<div class='stTabContent' id='stTab{$key}'><h2>{$option['name']}</h2>";
 				$status = 2;
 			}	
+			else
+				$body .= "\n".get_theme_options_option($option)."\n";
 		}
-		$body .= "\n".get_theme_options_option($option)."\n";
 	}
 	$body .= (2==$status?'</div>':'');
 	return $body;
@@ -229,95 +230,55 @@ function get_theme_options_body()
 /* Generates The Options - woothemes_machine */
 /*-----------------------------------------------------------------------------------*/
 
+function get_select_options($values)
+{
+	$output = '';
+	foreach($values as $key => $option)
+	{
+		if(is_array($option))
+			$output .= "<optgroup label='{$option['name']}'>".get_select_options($option['values'])."</optgroup>";
+		else
+			$output .= "\t<option value='{$key}'>{$option}</option>\n";
+	}
+	return $output;
+}
 
-function get_theme_options_option($option) {
-        
-    $value = $option;    
-        
-    //$counter = 0;
-	//$menu = '';
-	$output = '<div>';
-	//foreach ($options as $value) {
-	   /*
-		$counter++;
-		$val = '';
-		//Start Heading
-		 if ( $value['type'] != "heading" )
-		 {
-		 	$class = ''; if(isset( $value['class'] )) { $class = $value['class']; }
-			//$output .= '<div class="section section-'. $value['type'] .'">'."\n".'<div class="option-inner">'."\n";
-			$output .= '<div class="section section-'.$value['type'].' '. $class .'">'."\n";
-			$output .= '<h3 class="heading">'. $value['name'] .'</h3>'."\n";
-			$output .= '<div class="option">'."\n" . '<div class="controls">'."\n";
 
-		 } 
-		 //End Heading
-		$select_value = '';    */
-		
-		
-		
-		                               
-		switch ( $value['type'] ) {
-		
+function get_theme_options_option($value)
+{
+	$id = isset($value['id']) ? $value['id'] : '';
+	$output = '';
+	switch ( $value['type'] )
+	{
 		case 'text':
-			$val = $value['std'];
-			$std = get_option($value['id']);
-			if ( $std != "") { $val = $std; }
-			$output .= '<input class="woo-input" name="'. $value['id'] .'" id="'. $value['id'] .'" type="'. $value['type'] .'" value="'. $val .'" />';
+		case 'password':
+			$output .= "<div class='rowForm rowText'><div class='controls clearfix'><label for='{$id}'>{$value['name']}:</label>";
+			$val = get_option($id) ? get_option($id) : $value['std'];
+			$output .= "<input type='{$value['type']}' name='{$id}' id='{$id}' value='{$val}' />";
 		break;
-		
+		case 'textarea':
+			$output .= "<div class='rowForm rowTextArea'><div class='controls clearfix'><label for='{$id}'>{$value['name']}:</label>";
+			$val = htmlentities((get_option($id) ? get_option($id) : $value['std']));
+			$cols = isset($value['options']['cols']) ? $value['options']['cols'] : 40 ;
+			$output .= "<textarea rows='12' cols='{$cols}' name='{$id}' id='{$id}'>{$val}</textarea>";
+		break;
 		case 'select':
-
-			$output .= '<div class="select_wrapper"><select class="woo-input" name="'. $value['id'] .'" id="'. $value['id'] .'">';
-		
-			$select_value = stripslashes(get_option($value['id']));
-			 
-			foreach ($value['options'] as $option) {
-				
-				$selected = '';
-				
-				 if($select_value != '') {
-					 if ( $select_value == $option) { $selected = ' selected="selected"';} 
-			     } else {
-					 if ( isset($value['std']) )
-						 if ($value['std'] == $option) { $selected = ' selected="selected"'; }
-				 }
-				  
-				 $output .= '<option'. $selected .'>';
-				 $output .= $option;
-				 $output .= '</option>';
-			 
-			 } 
-			 $output .= '</select></div>';
-
-			
+			$label = (isset($value['label']) ? $value['label'] : _s("Select one option"));
+			$output .= "<div class='rowForm rowSelect'><div class='controls clearfix'><label for='{$id}'>{$value['name']}:</label>\n";
+			$output .= "<select name='selectshort' id='selectshort'><option value='0'>&mdash; ".$label." &mdash;</option>\n";
+			$output .= get_select_options($value['options']);
+			$output .= "</select>";
 		break;
-		case 'select2':
-
-			$output .= '<div class="select_wrapper"><select class="woo-input" name="'. $value['id'] .'" id="'. $value['id'] .'">';
-		
-			$select_value = stripslashes(get_option($value['id']));
-			 
-			foreach ($value['options'] as $option => $name) {
-				
-				$selected = '';
-				
-				 if($select_value != '') {
-					 if ( $select_value == $option) { $selected = ' selected="selected"';} 
-			     } else {
-					 if ( isset($value['std']) )
-						 if ($value['std'] == $option) { $selected = ' selected="selected"'; }
-				 }
-				  
-				 $output .= '<option'. $selected .' value="'.$option.'">';
-				 $output .= $name;
-				 $output .= '</option>';
-			 
-			 } 
-			 $output .= '</select></div>';
-
-			
+		case 'inline-select':
+			$label = (isset($value['label']) ? $value['label'] : _s("Select one option"));
+			$output .= "<div class='rowForm rowSelect'><div class='controls clearfix'><label for='{$id}'>{$value['name']}:</label>\n";
+			$output .= "<select name='selectshort' id='selectshort'><option value='0'>&mdash; ".$label." &mdash;</option>\n";
+			$output .= get_select_options($value['options']);
+			$output .= "</select>";
 		break;
+		
+		
+		/*
 		case 'calendar':
 		
 			$val = $value['std'];
@@ -331,29 +292,6 @@ function get_theme_options_option($option) {
 			$std = get_option($value['id']);
 			if ( $std != "") { $val = $std; }
 			$output .= '<input class="woo-input-time" name="'. $value['id'] .'" id="'. $value['id'] .'" type="text" value="'. $val .'" />';
-		break;
-		case 'textarea':
-			
-			$cols = '8';
-			$ta_value = '';
-			
-			if(isset($value['std'])) {
-				
-				$ta_value = $value['std']; 
-				
-				if(isset($value['options'])){
-					$ta_options = $value['options'];
-					if(isset($ta_options['cols'])){
-					$cols = $ta_options['cols'];
-					} else { $cols = '8'; }
-				}
-				
-			}
-				$std = get_option($value['id']);
-				if( $std != "") { $ta_value = stripslashes( $std ); }
-				$output .= '<textarea class="woo-input" name="'. $value['id'] .'" id="'. $value['id'] .'" cols="'. $cols .'" rows="8">'.$ta_value.'</textarea>';
-			
-			
 		break;
 		case "radio":
 			
@@ -466,7 +404,7 @@ function get_theme_options_option($option) {
 			$default = $value['std'];
 			$typography_stored = get_option($value['id']);
 			
-			/* Font Size */
+			// Font Size 
 			$val = $default['size'];
 			if ( $typography_stored['size'] != "") { $val = $typography_stored['size']; }
 			if ( $typography_stored['unit'] == 'px'){ $show_px = ''; $show_em = ' style="display:none" '; $name_px = ' name="'. $value['id'].'_size" '; $name_em = ''; }
@@ -491,7 +429,7 @@ function get_theme_options_option($option) {
 					$output .= '<option value="'. $em .'" ' . $active . '>'. $em .'</option>'; }
 			$output .= '</select>';
 			
-			/* Font Unit */
+			// Font Unit 
 			$val = $default['unit'];
 			if ( $typography_stored['unit'] != "") { $val = $typography_stored['unit']; }
 				$em = ''; $px = '';
@@ -502,7 +440,7 @@ function get_theme_options_option($option) {
 			$output .= '<option value="em" '. $em .'>em</option>';
 			$output .= '</select>';
 			
-			/* Font Face */
+			// Font Face 
 			$val = $default['face'];
 			if ( $typography_stored['face'] != "") 
 				$val = $typography_stored['face']; 
@@ -578,7 +516,7 @@ function get_theme_options_option($option) {
 
 			$output .= '</select>';
 			
-			/* Font Weight */
+			// Font Weight 
 			$val = $default['style'];
 			if ( $typography_stored['style'] != "") { $val = $typography_stored['style']; }
 				$normal = ''; $italic = ''; $bold = ''; $bolditalic = '';
@@ -592,9 +530,9 @@ function get_theme_options_option($option) {
 			$output .= '<option value="italic" '. $italic .'>Italic</option>';
 			$output .= '<option value="bold" '. $bold .'>Bold</option>';
 			$output .= '<option value="bold italic" '. $bolditalic .'>Bold/Italic</option>';
-			$output .= '</select>';
+			$output .= '</select>'; virtual, y opte pro peguntarle a mi developer para aclarar dudillas
 			
-			/* Font Color */
+			// Font Color 
 			$val = $default['color'];
 			if ( $typography_stored['color'] != "") { $val = $typography_stored['color']; }			
 			$output .= '<div id="' . $value['id'] . '_color_picker" class="colorSelector"><div></div></div>';
@@ -607,7 +545,7 @@ function get_theme_options_option($option) {
 			$default = $value['std'];
 			$border_stored = get_option( $value['id'] );
 			
-			/* Border Width */
+			// Border Width 
 			$val = $default['width'];
 			if ( $border_stored['width'] != "") { $val = $border_stored['width']; }
 			$output .= '<select class="woo-border woo-border-width" name="'. $value['id'].'_width" id="'. $value['id'].'_width">';
@@ -615,8 +553,8 @@ function get_theme_options_option($option) {
 					if($val == $i){ $active = 'selected="selected"'; } else { $active = ''; }
 					$output .= '<option value="'. $i .'" ' . $active . '>'. $i .'px</option>'; }
 			$output .= '</select>';
-			
-			/* Border Style */
+		
+			// Border Style
 			$val = $default['style'];
 			if ( $border_stored['style'] != "") { $val = $border_stored['style']; }
 				$solid = ''; $dashed = ''; $dotted = '';
@@ -630,7 +568,7 @@ function get_theme_options_option($option) {
 			$output .= '<option value="dotted" '. $dotted .'>Dotted</option>';
 			$output .= '</select>';
 			
-			/* Border Color */
+			// Border Color
 			$val = $default['color'];
 			if ( $border_stored['color'] != "") { $val = $border_stored['color']; }			
 			$output .= '<div id="' . $value['id'] . '_color_picker" class="colorSelector"><div></div></div>';
@@ -692,54 +630,30 @@ function get_theme_options_option($option) {
 			$output .= '</div>';
 			$output .= '</div>';
 
-		break;                               
-		/*
-		case "heading":
-			
-			if($counter >= 2){
-			   $output .= '</div>'."\n";
-			}
-			$jquery_click_hook = ereg_replace("[^A-Za-z0-9]", "", strtolower($value['name']) );
-			$jquery_click_hook = "woo-option-" . $jquery_click_hook;
-//			$jquery_click_hook = "woo-option-" . str_replace("&","",str_replace("/","",str_replace(".","",str_replace(")","",str_replace("(","",str_replace(" ","",strtolower($value['name'])))))));
-			$menu .= '<li class="'.$value['icon'].'"><a title="'.  $value['name'] .'" href="#'.  $jquery_click_hook  .'">'.  $value['name'] .'</a></li>';
-			$output .= '<div class="group" id="'. $jquery_click_hook  .'"><h2>'.$value['name'].'</h2>'."\n";
 		break;
-		*/
-		} 
+	*/
+	}
 		
-		// if TYPE is an array, formatted into smaller inputs... ie smaller values
-		if ( is_array($value['type'])) {
-			foreach($value['type'] as $array){
-			
-					$id = $array['id']; 
-					$std = $array['std'];
-					$saved_std = get_option($id);
-					if($saved_std != $std){$std = $saved_std;} 
-					$meta = $array['meta'];
-					
-					if($array['type'] == 'text') { // Only text at this point
-						 
-						 $output .= '<input class="input-text-small woo-input" name="'. $id .'" id="'. $id .'" type="text" value="'. $std .'" />';  
-						 $output .= '<span class="meta-two">'.$meta.'</span>';
-					}
-				}
+	// if array then we add small inputs
+	if ( is_array($value['type']))
+	{
+		$output .= "<div class='rowForm rowInlineText'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>";
+	
+		foreach($value['type'] as $child)
+		{
+			$id = isset($child['id']) ? $child['id'] : '';
+			$val = (get_option($id))? get_option($id) : $child['std'];			
+			if('text' == $child['type'])
+				 $output .= "<label for='$id'>{$child['name']}<br /><input type='text' name='{$id}' id='{$id}' value='{$val}'/></label>\n";
 		}
+	
+	}
 		
-		if ( $value['type'] != "heading" ) { 
-			if ( $value['type'] != "checkbox" ) 
-				{ 
-				$output .= '<br/>';
-				}
-			if(!isset($value['desc'])){ $explain_value = ''; } else{ $explain_value = $value['desc']; } 
-			$output .= '</div><div class="explain">'. $explain_value .'</div>'."\n";
-			$output .= '<div class="clear"> </div>'."\n";
-		}
+	//if ( "checkbox" != $value['type']) 
+	//	$output .= '<br/>';
+	$output .= '</div><p class="desc">'. (isset($value['desc'])?$value['desc']:'') .'</div>'."\n";
+	
 	  
-	   return $output;
-	//}
-    //$output .= '</div>';
-    //return array($output,$menu);
-
+   return $output;
 }
 

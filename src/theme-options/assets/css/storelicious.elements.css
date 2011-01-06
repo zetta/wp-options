@@ -473,7 +473,7 @@ dd          { margin-left: 1.5em;}
 -------------------------------------------------------------- */
 form{overflow:hidden; margin:0; border:none;}
 form p{overflow:hidden; padding:0 0 10px 0; margin:0 0 10px 0; position:relative;}
-form label{display:block; font-weight:bold; float:left; width:100px; margin:4px 10px 0 0;}
+form label{display:block; font-weight:bold; float:left; /*width:100px;*/ margin:4px 10px 0 0;}
 form label{cursor:pointer;}
 form input,
 form select,
