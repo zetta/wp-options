@@ -1,7 +1,7 @@
 <?php
 // comenzamos con la programacion de la version 2.0
-include_once 'theme-options/theme-options.php';
-include_once 'theme-options/options/theme-options-setup.php'; // or include your custom file with setup
+include_once 'lib/storelicious-core.php';
+include_once 'lib/options/theme-options-setup.php'; // or include your custom file with setup
 
 
 

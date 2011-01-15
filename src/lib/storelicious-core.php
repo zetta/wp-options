@@ -61,7 +61,7 @@ function setup_options($manual_url, $forum_url, $home_url, $options, $icon = nul
 	$_wpo['manual'] = $manual_url;
 	$_wpo['forum'] = $forum_url;
 	$_wpo['home'] = $home_url;
-	$_wpo['icon'] = $icon ? $icon : get_bloginfo('template_url').'/theme-options/assets/pix/panel/storelicious-icon.png';
+	$_wpo['icon'] = $icon ? $icon : get_bloginfo('template_url').'/lib/assets/pix/panel/storelicious-icon.png';
 	$_wpo['fversion'] = get_theme_options_version();
 	$_wpo['options'] = $options;
 }

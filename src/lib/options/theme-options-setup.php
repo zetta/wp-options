@@ -4,7 +4,8 @@ $options = array();
 $options[] = array( "name" => _s("Basic form elements"),
                     "type" => "tab");
 
-$cras = "Cras iaculis dictum neque, posuere dictum dolor gravida vel. Donec placerat convallis pharetra. Etiam semper nibh et ipsum vulputate dictum eget a diam.";
+$cras = "Cras iaculis dictum neque, posuere dictum dolor gravida vel. Donec placerat convallis pharetra. 
+Etiam semper nibh et ipsum vulputate dictum eget a diam.";
 
 $options[] = array( "name" => "Input Text",
 					"desc" => $cras,
@@ -65,7 +66,7 @@ $options[] = array( "name" => "Select (with long options)",
 						'op2' => "My Option 02",
 						array(
 							'name' => "My SubOptions",
-							'values' => array(
+							'options' => array(
 								'op2_1' => 'my suboption 2.1',
 								'op2_2' => 'my suboption 2.2',
 								'op2_3' => 'my suboption 2.3'
@@ -78,37 +79,48 @@ $options[] = array( "name" => "Select (with long options)",
 						), 
 					"type" => "select");
 
-$options[] = array( "name" => "Inline Selects",
+$options[] = array( "name" => "<em>Inline</em> Selects",
 					"desc" => $cras,
-					"id" => "inlineselects",
 					"std" => "",
-					"options" => array(
+					"type" => array(
 						array(
-							'name' => "My Inline Options 1",
-							'values' => array(
-								'op2_1' => 'my suboption 2.1',
-								'op2_2' => 'my suboption 2.2',
-								'op2_3' => 'my suboption 2.3'
+							'name' => "Dia",
+							'type' => 'select',
+							"id" => "inlineselects1",
+							'options' => array(
+								'op2_1' => '01',
+								'op2_2' => '02',
+								'op2_3' => '03',
+								'op2_4' => '04',
+								'op2_5' => '05'
 							)
 						),
 						array(
-							'name' => "My Inline Options 2",
-							'values' => array(
-								'op2_1' => 'my suboption 2.1',
-								'op2_2' => 'my suboption 2.2',
-								'op2_3' => 'my suboption 2.3'
+							'name' => "Mes",
+							'type' => 'select',
+							"id" => "inlineselects2",
+							'options' => array(
+								'op2_1' => 'Enero',
+								'op2_2' => 'Febrero',
+								'op2_3' => 'Marzo',
+								'op2_4' => 'Abril',
+								'op2_5' => 'Mayo'
 							)
 						),
 						array(
-							'name' => "My Inline Options 3",
-							'values' => array(
-								'op2_1' => 'my suboption 2.1',
-								'op2_2' => 'my suboption 2.2',
-								'op2_3' => 'my suboption 2.3'
+							'name' => "Año",
+							'type' => 'select',
+							"id" => "inlineselect3",
+							'options' => array(
+								'op2_1' => '2005',
+								'op2_2' => '2006',
+								'op2_3' => '2007',
+								'op2_4' => '2008',
+								'op2_5' => '2009',
+								'op2_6' => '2010'
 							)
 						),	
-					), 
-					"type" => "inline-select");
+					));
 
 
 

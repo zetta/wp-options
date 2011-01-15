@@ -4,7 +4,7 @@ global $pagenow;
 function render_options_page()
 {
 	global $_wpo;
-	$base = get_bloginfo('template_url').'/theme-options/assets';
+	$base = get_bloginfo('template_url').'/lib/assets';
 	echo "<!-- storelicious -->
 <div id='storelicious-page-outer' class='st'>
 	<div id='st-body' class='container_12'>
@@ -41,7 +41,7 @@ if (('admin.php' == $pagenow) && ('storelicious' == $_GET['page']))
     add_action('admin_head', 'add_theme_options_meta');
 	function add_theme_options_meta()
 	{
-		$base = get_bloginfo('template_url').'/theme-options/assets';
+		$base = get_bloginfo('template_url').'/lib/assets';
 		echo "
 		<!-- theme options assets -->
 			<link rel='stylesheet' href='{$base}/css/storelicious.panel.gs.reset.css' type='text/css' media='screen' />
@@ -132,7 +132,7 @@ function get_theme_options_footer()
 function get_theme_options_links()
 {
 	global $_wpo;
-	$base = get_bloginfo('template_url').'/theme-options/assets';
+	$base = get_bloginfo('template_url').'/lib/assets';
 	return " <!--#st-info-links-->
         <div id='st-info-links' class='clearfix'>
           <ul class='shadowWhite'>
@@ -236,7 +236,7 @@ function get_select_options($values)
 	foreach($values as $key => $option)
 	{
 		if(is_array($option))
-			$output .= "<optgroup label='{$option['name']}'>".get_select_options($option['values'])."</optgroup>";
+			$output .= "<optgroup label='{$option['name']}'>".get_select_options($option['options'])."</optgroup>";
 		else
 			$output .= "\t<option value='{$key}'>{$option}</option>\n";
 	}
@@ -269,13 +269,7 @@ function get_theme_options_option($value)
 			$output .= get_select_options($value['options']);
 			$output .= "</select>";
 		break;
-		case 'inline-select':
-			$label = (isset($value['label']) ? $value['label'] : _s("Select one option"));
-			$output .= "<div class='rowForm rowSelect'><div class='controls clearfix'><label for='{$id}'>{$value['name']}:</label>\n";
-			$output .= "<select name='selectshort' id='selectshort'><option value='0'>&mdash; ".$label." &mdash;</option>\n";
-			$output .= get_select_options($value['options']);
-			$output .= "</select>";
-		break;
+		
 		
 		
 		/*
@@ -634,10 +628,11 @@ function get_theme_options_option($value)
 	*/
 	}
 		
-	// if array then we add small inputs
+	// if array then we add small inputs/selects
 	if ( is_array($value['type']))
 	{
-		$output .= "<div class='rowForm rowInlineText'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>";
+		$class = ( 'text'==$value['type'][0]['type'] ) ? 'rowInlineText' : 'rowInlineSelect';
+		$output .= "<div class='rowForm ".$class."'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>";
 	
 		foreach($value['type'] as $child)
 		{
@@ -645,6 +640,15 @@ function get_theme_options_option($value)
 			$val = (get_option($id))? get_option($id) : $child['std'];			
 			if('text' == $child['type'])
 				 $output .= "<label for='$id'>{$child['name']}<br /><input type='text' name='{$id}' id='{$id}' value='{$val}'/></label>\n";
+			elseif('select' == $child['type'])
+			{
+				$id = isset($child['id']) ? $child['id'] : '';
+				$label = (isset($child['label']) ? $child['label'] : _s("Select one option"));
+				$output .= "<label for='{$id}'>{$child['name']}:</label>\n";
+				$output .= "<select name='{$id}' id='{$id}'>\n";
+				$output .= get_select_options($child['options']);
+				$output .= "</select>";
+			}	
 		}
 	
 	}
