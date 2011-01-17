@@ -57,7 +57,7 @@ if (('admin.php' == $pagenow) && ('storelicious' == $_GET['page']))
 	add_action('init', 'add_theme_options_js');
 	function add_theme_options_js()
 	{
-		$base = get_bloginfo('template_url').'/theme-options/assets';
+		$base = get_bloginfo('template_url').'/lib/assets';
 		wp_register_script('storeliciousTipsy', $base.'/js/jquery.tipsy.pack.js');
 		wp_register_script('storeliciousEzMark', $base.'/js/jquery.ezmark.min.js');
 		wp_register_script('storeliciousSwfObject', $base.'/js/swfobject.js');
@@ -248,6 +248,7 @@ function get_theme_options_option($value)
 {
 	$id = isset($value['id']) ? $value['id'] : '';
 	$output = '';
+	$attr = '';
 	switch ( $value['type'] )
 	{
 		case 'text':
@@ -262,12 +263,33 @@ function get_theme_options_option($value)
 			$cols = isset($value['options']['cols']) ? $value['options']['cols'] : 40 ;
 			$output .= "<textarea rows='12' cols='{$cols}' name='{$id}' id='{$id}'>{$val}</textarea>";
 		break;
+		case 'select-list':
+		case 'select-list-browsing':
+		case 'select-list-browsing-multiple':
+			if('select-list' == $value['type'])
+				$attr = ' size="5" multiple="multiple" class="select-list" ';
+			else if('select-list-browsing' == $value['type'])
+				$attr = ' size="5" class="select-list-browsing" ';
+			else
+				$attr = ' size="5" multiple="multiple" class="select-list-browsing-multiple" ';
 		case 'select':
+			$val = get_option($id) ? get_option($id) : $value['std'];
 			$label = (isset($value['label']) ? $value['label'] : _s("Select one option"));
 			$output .= "<div class='rowForm rowSelect'><div class='controls clearfix'><label for='{$id}'>{$value['name']}:</label>\n";
-			$output .= "<select name='selectshort' id='selectshort'><option value='0'>&mdash; ".$label." &mdash;</option>\n";
+			$output .= "<select name='{$id}' id='{$id}' {$attr}>\n";
+			if('select'==$value['type'])
+				$output .= "<option value='0'>&mdash; ".$label." &mdash;</option>";
 			$output .= get_select_options($value['options']);
 			$output .= "</select>";
+			if( preg_match('/select-list-browsing/',$value['type']) )
+			{
+				$output .= "<code class='codeblock'><strong>Path:</strong> <span id='{$id}_path'>{$value['path']}</span></code>";
+				if('select-list-browsing'==$value['type'])
+				{
+					$output .= "<span class='st-currentFile-preview'>
+               		<span class='stOverlay'>&nbsp;</span><img src='{$value['path']}/{$val}' id='{$id}_viewer'  alt='' /></span>";
+               	}
+			}
 		break;
 		
 		

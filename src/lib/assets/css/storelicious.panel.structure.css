@@ -141,7 +141,7 @@
 	padding:0
 }
 
-.innerToggle{
+#st-body .innerToggle{
 	border:1px solid #dcecfb;
 	background:#f9fcff;
 	padding:0 15px;
@@ -179,6 +179,11 @@
 	background-color:#f9fbfd;
 	color:#4b5e70;
 	}
+
+#st-body form select{
+	height:35px;
+}
+
 #st-body form textarea{font-family:Arial, Helvetica, sans-serif; line-height:150%; font-size:12px;} 	
 #st-body form .rowText input,
 #st-body form .rowSelect select,
@@ -187,9 +192,24 @@
 	width:98%;
 	}
 
+#st-body form .rowInlineSelect label{
+	float:none;
+	display:inline-block;
+	}
 #st-body form .rowInlineSelect select{
 	padding:2px;
 	font-size:11px;
+	float:none;
+	margin:0 10px 0 0;
+		line-height:20px;
+	padding:3px 2px 2px 5px!important;
+	height:25px !important;
+}
+
+#st-body form select.select-list,
+#st-body form select.select-list-browsing,
+#st-body form select.select-list-browsing-multiple{
+	height: auto !important;
 }
 
 #st-body form input:focus,
@@ -233,7 +253,7 @@
 #st-body form .rowInlineSelect span.label,
 #st-body form .rowFile span.label,
 #st-body form .rowUploadify span.label,
-#st-body form .rowSlider span.label{display:block;}
+#st-body form .rowSlider span.label{display:block !important;}
 
 #st-body form .rowInlineText label{
 	float:left;

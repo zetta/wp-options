@@ -123,7 +123,62 @@ $options[] = array( "name" => "<em>Inline</em> Selects",
 					));
 
 
+$options[] = array( "name" => "Select (List)",
+					"desc" => $cras,
+					"id" => "selectlist",
+					"std" => "",
+					"options" => array(
+						'op2' => "My Option 02",
+						'op3' => "My Option 03",
+						'op4' => "My Option 04",
+						), 
+					"type" => "select-list");
+					
+$options[] = array( "name" => "Select (List // Browsing)",
+					"desc" => $cras,
+					"id" => "selectlistbrowsing",
+					"path" => get_bloginfo('template_url').'/lib/assets/pix/temp/',
+					"std" => "radiology.png",
+					"options" => array(
+						'radiology.png' => "Radiology",
+						'currentlogo.png' => "CurrentLogo",
+						'logo.png' => "LogoStorelicious",
+						), 
+					"type" => "select-list-browsing");
+					
+$options[] = array( "name" => "Select (List // Browsing Multiple)",
+					"desc" => $cras,
+					"id" => "selectlistbrowsing",
+					"path" => get_bloginfo('template_url').'/lib/assets/pix/temp/',
+					"std" => "radiology.png",
+					"options" => array(
+						'radiology.png' => "Radiology",
+						'currentlogo.png' => "CurrentLogo",
+						'logo.png' => "LogoStorelicious",
+						), 
+					"type" => "select-list-browsing-multiple");
 
+
+
+//  --- NEW TAB --- 
+$options[] = array( "name" => _s("Checks & Radio Buttons"),
+                    "type" => "tab");
+
+//  --- NEW TAB --- 
+$options[] = array( "name" => _s("Color & Date Pickers"),
+                    "type" => "tab");
+
+//  --- NEW TAB --- 
+$options[] = array( "name" => _s("Uploading Files"),
+                    "type" => "tab");
+
+//  --- NEW TAB --- 
+$options[] = array( "name" => _s("Sliders"),
+                    "type" => "tab");
+
+//  --- NEW TAB --- 
+$options[] = array( "name" => _s("Buttons"),
+                    "type" => "tab");                    
 
 
 

@@ -47,6 +47,19 @@ $(".stOverlay").fadeTo("fast", 0);;
       function() {
         $(this).find(".stOverlay").stop().fadeTo(250,0);
     });
+
+
+$(".select-list-browsing").change(function(e){
+	//console.log('hola');
+	//console.log(this)
+	var id = $(this).attr('id');
+	console.log( id )
+	console.log( $(this).val() )
+	console.log( $('#'+id+'_viewer') )
+	$('#'+id+'_viewer').attr('src', $('#'+id+'_path').text()+$(this).val() );
+	//console.log( $('#'+id+'_viewer').attr('src') )
+})
+
 	
 
 
