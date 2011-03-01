@@ -71,9 +71,6 @@ function update_storelicious_options()
 {
 	global $_wpo;
 	$updated = false;
-	echo '<pre>';
-	print_r($_POST);
-	echo '</pre>';
 	if (isset($_POST['storelicious_post']) && $_POST['storelicious_post'] == 'storelicious_post')
 	{
 		if (! wp_verify_nonce($_POST['_wpnonce'], 'update-wp-options') ) wp_die(_s("Security check"));

@@ -313,8 +313,8 @@ function get_theme_options_option($value)
 			            <label for='{$id}'><img title='{$value['desc']}' src='{$base}/pix/panel/spacer.gif' width='16' height='16' alt='' />{$value['label']} :
 				        <input type='text' class='wpSliderAmount' id='{$id}' readonly='readonly' value='{$val}' /></label>
 				        <input type='hidden' disabled='disabled' id='{$id}_max' value='{$value['max']}' />
-							<input type='hidden' disabled='disabled' id='{$id}_min' value='{$value['min']}' />
-							<div id='wpSliderOption_{$id}' class='wpSliderOption'></div>
+						<input type='hidden' disabled='disabled' id='{$id}_min' value='{$value['min']}' />
+						<div id='wpSliderOption_{$id}' class='wpSliderOption'></div>
 							";
 		break;
 		case 'file':
