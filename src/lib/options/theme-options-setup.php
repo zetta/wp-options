@@ -23,17 +23,17 @@ $options[] = array( "name" => "<em>Inline</em> Inputs",
 					"desc" => $cras,
 					"type" => array( 
 						array(  'name' => 'Input text',
-						  		'id' => 'inlint_input_text_1',
+						  		'id' => 'inline_input_text_1',
 								'type' => 'text',
 								'std' => 440,
 								'meta' => 'Width'),
 						array(  'name' => 'Input text',
-								'id' => 'inlint_input_text_2',
+								'id' => 'inline_input_text_2',
 								'type' => 'text',
 								'std' => 200,
 								'meta' => 'Height'),
 						array(  'name' => 'Input text',
-								'id' => 'inlint_input_text_3',
+								'id' => 'inline_input_text_3',
 								'type' => 'text',
 								'std' => 200,
 								'meta' => 'Height')
@@ -164,9 +164,112 @@ $options[] = array( "name" => "Select (List // Browsing Multiple)",
 $options[] = array( "name" => _s("Checks & Radio Buttons"),
                     "type" => "tab");
 
+
+$options[] = array('name' => "One Checkbox",
+					'desc' => $cras,
+					'type' => 'checkbox',
+					'id' => 'chbox',
+					'label' => 'Option here',
+					'std' => 'true'
+					);
+
+
+$options[] = array('name' => "Multiple <em>Inline</em> Checkboxes",
+					'desc' => $cras,
+					'inline' => true,
+					'type' => 'checkbox-multiple',
+					'id' => 'chbox-multiple',
+					'std' => array('uno','dos','cinco'),
+					'options' => array(
+						'uno' => 'Option 01',
+						'dos' => 'Option 02',
+						'tres' => 'Option 03',
+						'cuatro' => 'Option 04',
+						'cinco' => 'Option 05'
+						)
+					);
+					
+$options[] = array('name' => "Multiple  Checkboxes",
+					'desc' => $cras,
+					'type' => 'checkbox-multiple',
+					'id' => 'chbox-multiple2',
+					'std' => array('uno','dos','cinco'),
+					'options' => array(
+						'uno' => 'Option 01',
+						'dos' => 'Option 02',
+						'tres' => 'Option 03',
+						'cuatro' => 'Option 04',
+						'cinco' => 'Option 05'
+						)
+					);
+
+
+
+$options[] = array('name' => "<em>Inline</em> Radio Buttons",
+					'desc' => $cras,
+					'inline' => true,
+					'type' => 'radio',
+					'id' => 'radio',
+					'std' => 'tres',
+					'options' => array(
+						'uno' => 'Radio 01',
+						'dos' => 'Radio 02',
+						'tres' => 'Radio 03',
+						'cuatro' => 'Radio 04',
+						'cinco' => 'Radio 05'
+						)
+					);
+
+$options[] = array('name' => " Radio Buttons",
+					'desc' => $cras,
+					'type' => 'radio',
+					'id' => 'radio2',
+					'std' => 'dos',
+					'options' => array(
+						'uno' => 'Radio 01',
+						'dos' => 'Radio 02',
+						'tres' => 'Radio 03',
+						'cuatro' => 'Radio 04',
+						'cinco' => 'Radio 05'
+						)
+					);
+
+
 //  --- NEW TAB --- 
 $options[] = array( "name" => _s("Color & Date Pickers"),
                     "type" => "tab");
+
+
+$options[] = array( "name" => "Date Picker",
+					 "label" => "Choose Date",
+					"desc" => $cras,
+					"id" => "datepicker",
+					"std" => "06/13/1986",  // mm-dd-yy
+					"type" => "datepicker");
+					
+$options[] = array( "name" => "Color Picker",
+                     "label" => "Select Color",
+					"desc" => $cras,
+					"id" => "colorpicker",
+					"std" => "#ffdd00",  
+					"type" => "colorpicker");
+
+
+$options[] = array( "name" => "<em>Combining</em> Pickers",
+					"desc" => $cras,
+					"type" => array( 
+						array(  'name' => 'Choose Date',
+						  		'id' => 'datepicker2',
+								'type' => 'datepicker',
+								'std' => "06/15/1984"),
+						array(  'name' => 'Select color',
+								'id' => 'colorpicker2',
+								'type' => 'colorpicker',
+								'std' => "#fd5e23")
+						
+				    ));
+
+
 
 //  --- NEW TAB --- 
 $options[] = array( "name" => _s("Uploading Files"),
@@ -175,6 +278,14 @@ $options[] = array( "name" => _s("Uploading Files"),
 //  --- NEW TAB --- 
 $options[] = array( "name" => _s("Sliders"),
                     "type" => "tab");
+
+$options[] = array( "name" => "Slider",
+					 "label" => "Number of",
+					"desc" => $cras,
+					"id" => "slider",
+					"std" => "5",  // mm-dd-yy
+					"type" => "slider");
+
 
 //  --- NEW TAB --- 
 $options[] = array( "name" => _s("Buttons"),

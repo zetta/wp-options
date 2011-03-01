@@ -1,5 +1,6 @@
 <?php
 // TODO delete this file
+// @deprecated file
 global $pagenow;
 
 /**

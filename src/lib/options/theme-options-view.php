@@ -4,11 +4,12 @@ global $pagenow;
 function render_options_page()
 {
 	global $_wpo;
+	$updated = update_storelicious_options();
 	$base = get_bloginfo('template_url').'/lib/assets';
 	echo "<!-- storelicious -->
 <div id='storelicious-page-outer' class='st'>
 	<div id='st-body' class='container_12'>
-		<form id='st-form' name='st-form' action=''>
+		<form id='st-form' name='st-form' action='' method='post' enctype='multipart/form-data'>
 			".get_theme_options_header()."
 			".get_theme_options_links()."
 			 <!--#st-content-->
@@ -30,6 +31,8 @@ function render_options_page()
 			</div>
 			<!--#st-content-->
 			".get_theme_options_footer()."
+			".wp_nonce_field('update-wp-options','_wpnonce',true,false)."
+		<input type='hidden' id='storelicious-post' name='storelicious-post' value='storelicious-post'  />
 		</form>
 	</div>
 </div>";
@@ -109,7 +112,7 @@ function get_theme_options_header()
         <div id='st-header' class='clearfix'>
           <h2 id='st-theme-info' class='shadowBlack'>{$_wpo['name']}
           <small>Version: {$_wpo['version']} | Framework: {$_wpo['fversion'][0]}"
-          . ( 'stable' != $_wpo['fversion'][1] ? '-'.$_wpo['fversion'][1] : '' ) . "</small></h2>
+          . ( 'stable' != $_wpo['fversion'][1] ? '-'.$_wpo['fversion'][1].'-release' : '' ) . "</small></h2>
           <h1 id='st-logo'>Storelicious &mdash; theme-options</h1>
         </div>
         <!--/#st-header--> ";
@@ -227,18 +230,24 @@ function get_theme_options_body()
 
 
 /*-----------------------------------------------------------------------------------*/
-/* Generates The Options - woothemes_machine */
+/* Generates The Options - storelicious_machine */
 /*-----------------------------------------------------------------------------------*/
 
-function get_select_options($values)
+function get_select_options($options, $values)
 {
 	$output = '';
-	foreach($values as $key => $option)
+	foreach($options as $key => $option)
 	{
 		if(is_array($option))
 			$output .= "<optgroup label='{$option['name']}'>".get_select_options($option['options'])."</optgroup>";
 		else
-			$output .= "\t<option value='{$key}'>{$option}</option>\n";
+		{	
+			$s = " selected='selected' ";
+			$selected = is_array($values) ? 
+						( in_array($key,$values) ? $s : '' ):
+						( $values = $key ) ? $s : '';
+			$output .= "\t<option value='{$key}' {$selected}>{$option}</option>\n";
+		}
 	}
 	return $output;
 }
@@ -284,100 +293,65 @@ function get_theme_options_option($value)
 			if( preg_match('/select-list-browsing/',$value['type']) )
 			{
 				$output .= "<code class='codeblock'><strong>Path:</strong> <span id='{$id}_path'>{$value['path']}</span></code>";
-				if('select-list-browsing'==$value['type'])
+				if('select-list-browsing'==$value['type'], $val)
 				{
 					$output .= "<span class='st-currentFile-preview'>
                		<span class='stOverlay'>&nbsp;</span><img src='{$value['path']}/{$val}' id='{$id}_viewer'  alt='' /></span>";
                	}
 			}
 		break;
-		
-		
-		
-		/*
-		case 'calendar':
-		
-			$val = $value['std'];
-			$std = get_option($value['id']);
-			if ( $std != "") { $val = $std; }
-            $output .= '<input class="woo-input-calendar" type="text" name="'.$value['id'].'" id="'.$value['id'].'" value="'.$val.'">';
+		case 'checkbox':
+			$val = get_option($id) ? get_option($id) : $value['std'];
+			$output .= "<div class='rowForm rowCheck'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>";
+			$selected = ($val=='true') ? " checked='checked' " : '';
+			$output .= "<label for='{$id}'> <input type='checkbox' name='{$id}' id='{$id}' {$selected}/>{$value['label']}</label>";
 		
 		break;
+		case 'checkbox-multiple':
+			$eol = $value['inline'] ? '' : ' <br />';
+			$class = $value['inline'] ? 'rowInlineCheck' : '';
+			$val = get_option($id) ? get_option($id) : (is_array($value['std']) ? $value['std']: array());
+			$output .= "<div class='rowForm rowCheck {$class}'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>";
+			foreach($value['options'] as $key => $option)
+			{
+				$selected = (in_array($key,$val)) ? " checked='checked' " : '';
+				$output .= "<label for='{$id}_{$key}'> <input type='checkbox' name='{$id}[${key}]' id='{$id}_{$key}' {$selected}/>{$option}</label>".$eol;
+			}
+		break;
+		case 'radio':
+			$eol = $value['inline'] ? '' : ' <br />';
+			$class = $value['inline'] ? 'rowInlineRadio' : '';
+			$val = get_option($id) ? get_option($id) :  $value['std'];
+			$output .= "<div class='rowForm rowRadio {$class}'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>";
+			foreach($value['options'] as $key => $option)
+			{
+				$selected = ($val==$key) ? " checked='checked' " : '';
+				$output .= "<label for='{$id}_{$key}'><input type='radio' name='{$id}' id='{$id}_{$key}' {$selected} value='{$key}'/>{$option}</label>".$eol;
+			}
+		break;
+		case 'datepicker':
+			$output .= "<div class='rowForm rowDatePicker'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'><label for='{$id}'>{$value['label']}: ";
+			$val = get_option($id) ? get_option($id) : $value['std'];
+			$output .= "<input type='{$value['type']}' name='{$id}' id='{$id}' value='{$val}' size='15' class='wpDatePickerOption' /></label>";
+		break;
+		case 'colorpicker':
+			$output .= "<div class='rowForm rowColorPicker'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'><label for='{$id}'>{$value['label']}: ";
+			$val = get_option($id) ? get_option($id) : $value['std'];
+			$output .= "<input type='{$value['type']}' name='{$id}' id='{$id}' value='{$val}' size='15' class='wpColorPickerOption' /></label>";
+		break;
+		case 'slider':
+			// TODO
+			$output .= "<div class=rowForm rowSlider'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>
+			            <label for='amount'><img title='{$value['desc']}' src='includes/pix/iface/spacer.gif' width='16' height='16' alt='' />{$value['label']} :
+				        <input type='text' disabled='disabled' class='wpSliderAmount' id='amount' readonly='readonly' /></label>
+							<div class='wpSliderOption'></div>";
+		break;
+		/*  
 		case 'time':
 			$val = $value['std'];
 			$std = get_option($value['id']);
 			if ( $std != "") { $val = $std; }
 			$output .= '<input class="woo-input-time" name="'. $value['id'] .'" id="'. $value['id'] .'" type="text" value="'. $val .'" />';
-		break;
-		case "radio":
-			
-			 $select_value = get_option( $value['id']);
-				   
-			 foreach ($value['options'] as $key => $option) 
-			 { 
-
-				 $checked = '';
-				   if($select_value != '') {
-						if ( $select_value == $key) { $checked = ' checked'; } 
-				   } else {
-					if ($value['std'] == $key) { $checked = ' checked'; }
-				   }
-				$output .= '<input class="woo-input woo-radio" type="radio" name="'. $value['id'] .'" value="'. $key .'" '. $checked .' />' . $option .'<br />';
-			
-			}
-			 
-		break;
-		case "checkbox": 
-		
-		   $std = $value['std'];  
-		   
-		   $saved_std = get_option($value['id']);
-		   
-		   $checked = '';
-			
-			if(!empty($saved_std)) {
-				if($saved_std == 'true') {
-				$checked = 'checked="checked"';
-				}
-				else{
-				   $checked = '';
-				}
-			}
-			elseif( $std == 'true') {
-			   $checked = 'checked="checked"';
-			}
-			else {
-				$checked = '';
-			}
-			$output .= '<input type="checkbox" class="checkbox woo-input" name="'.  $value['id'] .'" id="'. $value['id'] .'" value="true" '. $checked .' />';
-
-		break;
-		case "multicheck":
-		
-			$std =  $value['std'];         
-			
-			foreach ($value['options'] as $key => $option) {
-											 
-			$woo_key = $value['id'] . '_' . $key;
-			$saved_std = get_option($woo_key);
-					
-			if(!empty($saved_std)) 
-			{ 
-				  if($saved_std == 'true'){
-					 $checked = 'checked="checked"';  
-				  } 
-				  else{
-					  $checked = '';     
-				  }    
-			} 
-			elseif( $std == $key) {
-			   $checked = 'checked="checked"';
-			}
-			else {
-				$checked = '';                                                                                    }
-			$output .= '<input type="checkbox" class="checkbox woo-input" name="'. $woo_key .'" id="'. $woo_key .'" value="true" '. $checked .' /><label for="'. $woo_key .'">'. $option .'</label><br />';
-										
-			}
 		break;
 		case "upload":
 			
@@ -407,13 +381,6 @@ function get_theme_options_option($value)
 			// $output .= woothemes_uploader_function($value['id'],$value['std'],'min');
 			
 		break;
-		case "color":
-			$val = $value['std'];
-			$stored  = get_option( $value['id'] );
-			if ( $stored != "") { $val = $stored; }
-			$output .= '<div id="' . $value['id'] . '_picker" class="colorSelector"><div></div></div>';
-			$output .= '<input class="woo-color" name="'. $value['id'] .'" id="'. $value['id'] .'" type="text" value="'. $val .'" />';
-		break;   
 		
 		case "typography":
 		
@@ -621,11 +588,6 @@ function get_theme_options_option($value)
 		
 		break; 
 		
-		case "info":
-			$default = $value['std'];
-			$output .= $default;
-		break; 
-		
 		case "string_builder":
 			$desc = $value['std'];
 			$output .= '<div id="'.$value['id'].'">';
@@ -661,7 +623,11 @@ function get_theme_options_option($value)
 			$id = isset($child['id']) ? $child['id'] : '';
 			$val = (get_option($id))? get_option($id) : $child['std'];			
 			if('text' == $child['type'])
-				 $output .= "<label for='$id'>{$child['name']}<br /><input type='text' name='{$id}' id='{$id}' value='{$val}'/></label>\n";
+				 $output .= "<label for='$id'>{$child['name']}:<br /><input type='text' name='{$id}' id='{$id}' value='{$val}'/></label>\n";
+			elseif('datepicker' == $child['type'])
+				 $output .= "<label for='$id'>{$child['name']}:<br /><input type='text' name='{$id}' id='{$id}' value='{$val}' class='wpDatePickerOption'/></label>\n";
+			elseif('colorpicker' == $child['type'])
+				 $output .= "<label for='$id'>{$child['name']}:<br /><input type='text' name='{$id}' id='{$id}' value='{$val}' class='wpColorPickerOption'/></label>\n";
 			elseif('select' == $child['type'])
 			{
 				$id = isset($child['id']) ? $child['id'] : '';
@@ -674,10 +640,8 @@ function get_theme_options_option($value)
 		}
 	
 	}
-		
-	//if ( "checkbox" != $value['type']) 
-	//	$output .= '<br/>';
-	$output .= '</div><p class="desc">'. (isset($value['desc'])?$value['desc']:'') .'</div>'."\n";
+	
+	$output .= '</div><p class="desc">'. (isset($value['desc'])?$value['desc']:'') .'</p></div>'."\n";
 	
 	  
    return $output;

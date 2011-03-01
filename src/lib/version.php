@@ -1,2 +1,2 @@
 <?php 
-  return array("2.0",'unstable');
+  return array("2.0",'alpha');

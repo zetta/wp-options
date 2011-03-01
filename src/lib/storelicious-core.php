@@ -66,6 +66,34 @@ function setup_options($manual_url, $forum_url, $home_url, $options, $icon = nul
 	$_wpo['options'] = $options;
 }
 
+function update_storelicious_options()
+{
+	global $_wpo;
+	$updated = false;
+	if (isset($_POST['storelicious-post']) && $_POST['storelicious-post'] == 'storelicious-post')
+	{
+		if (! wp_verify_nonce($_POST['_wpnonce'], 'update-wp-options') ) wp_die(_s("Security check"));
+		foreach($_wpo['options'] as $key => $option)
+		{
+			if(is_array($option['type']))
+			{
+				foreach ($option['type'] as $child)
+					update_storelicious_option($child);
+			}
+			else
+				update_storelicious_option($option);
+		}
+		$updated = true;
+	}
+	return $updated;
+}
+
+function update_storelicious_option($option)
+{
+	$id = $option['id'];
+	$value = (is_string($_POST[$id])) ? stripslashes($_POST[$id]) : $_POST[$id];
+	update_option($id,$value); 
+}
 
 function get_theme_options_version()
 {
