@@ -70,11 +70,12 @@ function update_storelicious_options()
 {
 	global $_wpo;
 	$updated = false;
-	if (isset($_POST['storelicious-post']) && $_POST['storelicious-post'] == 'storelicious-post')
+	if (isset($_POST['storelicious_post']) && $_POST['storelicious_post'] == 'storelicious_post')
 	{
 		if (! wp_verify_nonce($_POST['_wpnonce'], 'update-wp-options') ) wp_die(_s("Security check"));
 		foreach($_wpo['options'] as $key => $option)
 		{
+			if($option['type']=='tab') continue;
 			if(is_array($option['type']))
 			{
 				foreach ($option['type'] as $child)
@@ -92,7 +93,15 @@ function update_storelicious_option($option)
 {
 	$id = $option['id'];
 	$value = (is_string($_POST[$id])) ? stripslashes($_POST[$id]) : $_POST[$id];
-	update_option($id,$value); 
+	if(!isset($_POST[$id]) && 'checkbox' == $option['type'])
+	{
+		$value = "false";
+	}
+	if('checkbox-multiple'==$option['type'])
+	{
+		$value = array_keys($value);
+	}
+	update_option($id,$value);
 }
 
 function get_theme_options_version()

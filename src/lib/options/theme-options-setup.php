@@ -158,8 +158,6 @@ $options[] = array( "name" => "Select (List // Browsing Multiple)",
 						), 
 					"type" => "select-list-browsing-multiple");
 
-
-
 //  --- NEW TAB --- 
 $options[] = array( "name" => _s("Checks & Radio Buttons"),
                     "type" => "tab");

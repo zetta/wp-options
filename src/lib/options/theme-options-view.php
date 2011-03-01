@@ -31,11 +31,11 @@ function render_options_page()
 			</div>
 			<!--#st-content-->
 			".get_theme_options_footer()."
-			".wp_nonce_field('update-wp-options','_wpnonce',true,false)."
-		<input type='hidden' id='storelicious-post' name='storelicious-post' value='storelicious-post'  />
+			".wp_nonce_field('update-wp-options','_wpnonce',true,false).'
+		    <input type="hidden" id="storelicious_post" name="storelicious_post" value="storelicious_post"  />
 		</form>
 	</div>
-</div>";
+</div>';
 }
 
 
@@ -308,9 +308,8 @@ function get_theme_options_option($value)
 		case 'checkbox':
 			$val = get_option($id) ? get_option($id) : $value['std'];
 			$output .= "<div class='rowForm rowCheck'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>";
-			$selected = ($val=='true') ? " checked='checked' " : '';
-			$output .= "<label for='{$id}'> <input type='checkbox' name='{$id}' id='{$id}' {$selected}/>{$value['label']}</label>";
-		
+			$checked = ($val=='true') ? " checked='checked' " : '';
+			$output .= "<label for='{$id}'> <input type='checkbox' name='{$id}' id='{$id}' value='true' {$checked}/>{$value['label']}</label>";
 		break;
 		case 'checkbox-multiple':
 			$eol = $value['inline'] ? '' : ' <br />';
