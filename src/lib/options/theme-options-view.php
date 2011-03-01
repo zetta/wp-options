@@ -310,9 +310,12 @@ function get_theme_options_option($value)
 			// TODO
 			$val = get_option($id) ? get_option($id) : $value['std'];
 			$output .= "<div class='rowForm rowSlider'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>
-			            <label for='amount'><img title='{$value['desc']}' src='{$base}/pix/panel/spacer.gif' width='16' height='16' alt='' />{$value['label']} :
-				        <input type='text' class='wpSliderAmount_{$id}' id='amount' readonly='readonly' value='{$val}' /></label>
-							<div id='wpSliderOption_{$id}' class='wpSliderOption'></div>";
+			            <label for='{$id}'><img title='{$value['desc']}' src='{$base}/pix/panel/spacer.gif' width='16' height='16' alt='' />{$value['label']} :
+				        <input type='text' class='wpSliderAmount' id='{$id}' readonly='readonly' value='{$val}' /></label>
+				        <input type='hidden' disabled='disabled' id='{$id}_max' value='{$value['max']}' />
+							<input type='hidden' disabled='disabled' id='{$id}_min' value='{$value['min']}' />
+							<div id='wpSliderOption_{$id}' class='wpSliderOption'></div>
+							";
 		break;
 		case 'file':
 			$output .= "<div class='rowForm rowFile'><div class='controls lbls clearfix'><span class='label'>{$value['name']}:</span>

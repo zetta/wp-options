@@ -30,10 +30,16 @@ $(".wpColorPickerOption").ColorPicker({
 
 $('.wpSliderOption').each(function(){
 	var id = $(this).attr('id').replace(/wpSliderOption_/,'');
-	$(this).slider({
-		range: 'max', min: {$value['min']}, max: {$value['max']}, value: {$val},
+	var opts = {
+		range: 'min', 
+		min: parseInt($('#'+id+'_min').val()), 
+		max: parseInt($('#'+id+'_max').val()), 
+		value: parseInt($('#'+id).val()),
 		slide: function(e, ui) { $('.wpSliderAmount_{$id}').val(ui.value); }
 	}
+	console.log(opts);
+	$(this).slider(opts);
+	//$('#'+id).val($(this).slider("value"));
 });
 
 
