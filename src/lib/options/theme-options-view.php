@@ -330,9 +330,10 @@ function get_theme_options_option($value)
 			$output .= " <input type='file' name='{$id}' id='{$id}' value='{$val}' />";
 			if($val)
 			{
+					// aqui ayudame, ¿donde irian esos ? ¿cómo pongo este valor? get_template_directory_uri()?? GRACIAS!!
 				$output .= "<code class='codeblock'><strong>Path:</strong> <span id='{$id}_path'>{$value['path']}</span></code>";			
 				$output .= "<span class='st-currentFile-preview'>
-           		   <span class='stOverlay'>&nbsp;</span><img src='{$val}' id='{$id}_viewer'  alt='' /></span>";
+           		   <span class='stOverlay'>&nbsp;</span><img src='".get_template_directory_uri()."/lib/scripts/timthumb.php?src={$val}&amp;w={$value['width']}&amp;h={$value['height']}&amp;zc=1&amp;q=60&amp;a=t' id='{$id}_viewer'  alt='' /></span>";
             }
 		break;
 	}

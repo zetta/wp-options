@@ -285,6 +285,8 @@ $options[] = array( "name" => "Viewer Input File",
 					"desc" => $cras,
 					"id" => "upload2",
 					'label' => 'File',
+					'height' => '200px',
+					'width' => '200px',
 					"std" => "",
 					"type" => "file-viewer");
 					
