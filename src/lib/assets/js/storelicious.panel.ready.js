@@ -28,16 +28,15 @@ $(".wpColorPickerOption").ColorPicker({
 });
 
 
-$(".wpSliderOption").slider({
-			range: "max",
-			min: 1,
-			max: 10,
-			value: 2,
-			slide: function(event, ui) {
-				$(".wpSliderAmount").val(ui.value);
-			}
-		});
-		$(".wpSliderAmount").val($(".wpSliderOption").slider("value"));
+$('.wpSliderOption').each(function(){
+	var id = $(this).attr('id').replace(/wpSliderOption_/,'');
+	$(this).slider({
+		range: 'max', min: {$value['min']}, max: {$value['max']}, value: {$val},
+		slide: function(e, ui) { $('.wpSliderAmount_{$id}').val(ui.value); }
+	}
+});
+
+
 
 //OVERLAY
 $(".stOverlay").fadeTo("fast", 0);; 	

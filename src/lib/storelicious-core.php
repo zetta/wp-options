@@ -4,6 +4,7 @@ if(!defined('THEME_OPTIONS_ROOT'))
     define('THEME_OPTIONS_ROOT',dirname(__FILE__).'/');
 
 include THEME_OPTIONS_ROOT."options/theme-options-view.php";
+include THEME_OPTIONS_ROOT."options/theme-options-helpers.php";
 
 // Redirect to Theme Options after Activation
 
@@ -70,6 +71,9 @@ function update_storelicious_options()
 {
 	global $_wpo;
 	$updated = false;
+	echo '<pre>';
+	print_r($_POST);
+	echo '</pre>';
 	if (isset($_POST['storelicious_post']) && $_POST['storelicious_post'] == 'storelicious_post')
 	{
 		if (! wp_verify_nonce($_POST['_wpnonce'], 'update-wp-options') ) wp_die(_s("Security check"));

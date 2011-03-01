@@ -329,7 +329,7 @@
 	position:absolute;
 	top:0;
 	left:0;
-	background:#333 url(../pix/panel/alphas/alpha50.png);
+	background:#333 url(../pix/alphas/alpha50.png);
 	z-index:1;
 	-moz-opacity:0;
 	-khtml-opacity: 0;

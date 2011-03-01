@@ -4,8 +4,8 @@ $options = array();
 $options[] = array( "name" => _s("Basic form elements"),
                     "type" => "tab");
 
-$cras = "Cras iaculis dictum neque, posuere dictum dolor gravida vel. Donec placerat convallis pharetra. 
-Etiam semper nibh et ipsum vulputate dictum eget a diam.";
+$cras = "Cras iaculis dictum neque, posuere dictum dolor gravida vel. Donec placerat convallis pharetra. "
+		."Etiam semper nibh et ipsum vulputate dictum eget a diam.";
 
 $options[] = array( "name" => "Input Text",
 					"desc" => $cras,
@@ -234,8 +234,8 @@ $options[] = array('name' => " Radio Buttons",
 
 
 //  --- NEW TAB --- 
-$options[] = array( "name" => _s("Color & Date Pickers"),
-                    "type" => "tab");
+// usando helpers en lugar del array directo !! 
+$options[] = wpo_tab( _s("Color & Date Pickers") );
 
 
 $options[] = array( "name" => "Date Picker",
@@ -277,7 +277,7 @@ $options[] = array( "name" => "Normal Input File",
 					"desc" => $cras,
 					"id" => "upload",
 					'label' => 'File',
-					"std" => "",
+					"std" => "", // 
 					"type" => "file");
 					
 					
@@ -288,8 +288,7 @@ $options[] = array( "name" => "Viewer Input File",
 					"std" => "",
 					"type" => "file-viewer");
 					
-					
-					
+
 //  --- NEW TAB --- 
 $options[] = array( "name" => _s("Sliders"),
                     "type" => "tab");
@@ -298,7 +297,9 @@ $options[] = array( "name" => "Slider",
 					 "label" => "Number of",
 					"desc" => $cras,
 					"id" => "slider",
-					"std" => "5",  // mm-dd-yy
+					'min' => 1,
+					'max' => 15,
+					"std" => "5",  
 					"type" => "slider");
 
 

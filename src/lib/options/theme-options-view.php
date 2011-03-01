@@ -191,45 +191,6 @@ function get_theme_options_body()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*-----------------------------------------------------------------------------------*/
 /* Generates The Options - storelicious_machine */
 /*-----------------------------------------------------------------------------------*/
@@ -256,6 +217,7 @@ function get_select_options($options, $values)
 
 function get_theme_options_option($value)
 {
+	$base = get_bloginfo('template_url').'/lib/assets';
 	$id = isset($value['id']) ? $value['id'] : '';
 	$output = '';
 	$attr = '';
@@ -346,10 +308,11 @@ function get_theme_options_option($value)
 		break;
 		case 'slider':
 			// TODO
-			$output .= "<div class=rowForm rowSlider'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>
-			            <label for='amount'><img title='{$value['desc']}' src='includes/pix/iface/spacer.gif' width='16' height='16' alt='' />{$value['label']} :
-				        <input type='text' disabled='disabled' class='wpSliderAmount' id='amount' readonly='readonly' /></label>
-							<div class='wpSliderOption'></div>";
+			$val = get_option($id) ? get_option($id) : $value['std'];
+			$output .= "<div class='rowForm rowSlider'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>
+			            <label for='amount'><img title='{$value['desc']}' src='{$base}/pix/panel/spacer.gif' width='16' height='16' alt='' />{$value['label']} :
+				        <input type='text' class='wpSliderAmount_{$id}' id='amount' readonly='readonly' value='{$val}' /></label>
+							<div id='wpSliderOption_{$id}' class='wpSliderOption'></div>";
 		break;
 		case 'file':
 			$output .= "<div class='rowForm rowFile'><div class='controls lbls clearfix'><span class='label'>{$value['name']}:</span>
@@ -366,8 +329,8 @@ function get_theme_options_option($value)
 			{
 				$output .= "<code class='codeblock'><strong>Path:</strong> <span id='{$id}_path'>{$value['path']}</span></code>";			
 				$output .= "<span class='st-currentFile-preview'>
-           		<span class='stOverlay'>&nbsp;</span><img src='{$val}' id='{$id}_viewer'  alt='' /></span>";
-               	}
+           		   <span class='stOverlay'>&nbsp;</span><img src='{$val}' id='{$id}_viewer'  alt='' /></span>";
+            }
 		break;
 	}
 		
