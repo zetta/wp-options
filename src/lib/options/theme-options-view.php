@@ -282,7 +282,7 @@ function get_theme_options_option($value)
 				$attr = ' size="5" class="select-list-browsing" ';
 			}else{
 				$attr = ' size="5" multiple="multiple" class="select-list-browsing-multiple" ';
-				$m = '';
+				$m = '[]';
 			}
 		case 'select':
 			$attr = ($attr) ? $attr : ''; // para evitar warnings, no me gustan

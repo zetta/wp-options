@@ -148,7 +148,7 @@ $options[] = array( "name" => "Select (List // Browsing)",
 					
 $options[] = array( "name" => "Select (List // Browsing Multiple)",
 					"desc" => $cras,
-					"id" => "selectlistbrowsing",
+					"id" => "selectlistbrowsingmultiple",
 					"path" => get_bloginfo('template_url').'/lib/assets/pix/temp/',
 					"std" => "radiology.png",
 					"options" => array(
