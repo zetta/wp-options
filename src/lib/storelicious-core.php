@@ -89,6 +89,9 @@ function update_storelicious_options()
 	return $updated;
 }
 
+/**
+ * actualiza una storelicious-option (wp-option)
+ */
 function update_storelicious_option($option)
 {
 	$id = $option['id'];
@@ -100,6 +103,16 @@ function update_storelicious_option($option)
 	if('checkbox-multiple'==$option['type'])
 	{
 		$value = array_keys($value);
+	}
+	if('file' == $option['type'] || 'file-viewer' == $option['type'])
+	{
+		$file = $_FILES[$id];
+		if($file['name'])
+        {
+            $info = wp_handle_upload($file, array('action' => 'update-wp-options'));
+            if(isset($info['error'])) wp_die( $info['error'] );
+            $value = $info['url'];
+        }
 	}
 	update_option($id,$value);
 }

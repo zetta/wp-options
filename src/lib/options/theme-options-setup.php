@@ -249,7 +249,7 @@ $options[] = array( "name" => "Color Picker",
                      "label" => "Select Color",
 					"desc" => $cras,
 					"id" => "colorpicker",
-					"std" => "#ffdd00",  
+					"std" => "ffdd00",  
 					"type" => "colorpicker");
 
 
@@ -263,8 +263,7 @@ $options[] = array( "name" => "<em>Combining</em> Pickers",
 						array(  'name' => 'Select color',
 								'id' => 'colorpicker2',
 								'type' => 'colorpicker',
-								'std' => "#fd5e23")
-						
+								'std' => "fd5e23")
 				    ));
 
 
@@ -273,6 +272,24 @@ $options[] = array( "name" => "<em>Combining</em> Pickers",
 $options[] = array( "name" => _s("Uploading Files"),
                     "type" => "tab");
 
+
+$options[] = array( "name" => "Normal Input File",
+					"desc" => $cras,
+					"id" => "upload",
+					'label' => 'File',
+					"std" => "",
+					"type" => "file");
+					
+					
+$options[] = array( "name" => "Viewer Input File",
+					"desc" => $cras,
+					"id" => "upload2",
+					'label' => 'File',
+					"std" => "",
+					"type" => "file-viewer");
+					
+					
+					
 //  --- NEW TAB --- 
 $options[] = array( "name" => _s("Sliders"),
                     "type" => "tab");

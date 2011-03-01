@@ -33,6 +33,7 @@ function render_options_page()
 			".get_theme_options_footer()."
 			".wp_nonce_field('update-wp-options','_wpnonce',true,false).'
 		    <input type="hidden" id="storelicious_post" name="storelicious_post" value="storelicious_post"  />
+		    <input type="hidden" name="action" id="action" value="update-wp-options" />
 		</form>
 	</div>
 </div>';
@@ -350,13 +351,26 @@ function get_theme_options_option($value)
 				        <input type='text' disabled='disabled' class='wpSliderAmount' id='amount' readonly='readonly' /></label>
 							<div class='wpSliderOption'></div>";
 		break;
-		/*  
-		case 'time':
-			$val = $value['std'];
-			$std = get_option($value['id']);
-			if ( $std != "") { $val = $std; }
-			$output .= '<input class="woo-input-time" name="'. $value['id'] .'" id="'. $value['id'] .'" type="text" value="'. $val .'" />';
+		case 'file':
+			$output .= "<div class='rowForm rowFile'><div class='controls lbls clearfix'><span class='label'>{$value['name']}:</span>
+			<label for='{$id}'>{$value['label']}</label>";
+			$val = get_option($id) ? get_option($id) : $value['std'];
+			$output .= " <input type='file' name='{$id}' id='{$id}' value='{$val}' />";
 		break;
+		case 'file-viewer':
+			$output .= "<div class='rowForm rowFile'><div class='controls lbls clearfix'><span class='label'>{$value['name']}:</span>
+			<label for='{$id}'>{$value['label']}</label>";
+			$val = get_option($id) ? get_option($id) : $value['std'];
+			$output .= " <input type='file' name='{$id}' id='{$id}' value='{$val}' />";
+			if($val)
+			{
+				$output .= "<code class='codeblock'><strong>Path:</strong> <span id='{$id}_path'>{$value['path']}</span></code>";			
+				$output .= "<span class='st-currentFile-preview'>
+           		<span class='stOverlay'>&nbsp;</span><img src='{$val}' id='{$id}_viewer'  alt='' /></span>";
+               	}
+		break;
+		
+		/*  
 		case "upload":
 			
 			if ( function_exists( 'woothemes_medialibrary_uploader' ) ) {
@@ -526,43 +540,6 @@ function get_theme_options_option($value)
 			$output .= '<input class="woo-color woo-typography woo-typography-color" name="'. $value['id'] .'_color" id="'. $value['id'] .'_color" type="text" value="'. $val .'" />';
 
 		break;  
-		
-		case "border":
-		
-			$default = $value['std'];
-			$border_stored = get_option( $value['id'] );
-			
-			// Border Width 
-			$val = $default['width'];
-			if ( $border_stored['width'] != "") { $val = $border_stored['width']; }
-			$output .= '<select class="woo-border woo-border-width" name="'. $value['id'].'_width" id="'. $value['id'].'_width">';
-				for ($i = 0; $i < 21; $i++){ 
-					if($val == $i){ $active = 'selected="selected"'; } else { $active = ''; }
-					$output .= '<option value="'. $i .'" ' . $active . '>'. $i .'px</option>'; }
-			$output .= '</select>';
-		
-			// Border Style
-			$val = $default['style'];
-			if ( $border_stored['style'] != "") { $val = $border_stored['style']; }
-				$solid = ''; $dashed = ''; $dotted = '';
-			if($val == 'solid'){ $solid = 'selected="selected"'; }
-			if($val == 'dashed'){ $dashed = 'selected="selected"'; }
-			if($val == 'dotted'){ $dotted = 'selected="selected"'; }
-			
-			$output .= '<select class="woo-border woo-border-style" name="'. $value['id'].'_style" id="'. $value['id'].'_style">';
-			$output .= '<option value="solid" '. $solid .'>Solid</option>';
-			$output .= '<option value="dashed" '. $dashed .'>Dashed</option>';
-			$output .= '<option value="dotted" '. $dotted .'>Dotted</option>';
-			$output .= '</select>';
-			
-			// Border Color
-			$val = $default['color'];
-			if ( $border_stored['color'] != "") { $val = $border_stored['color']; }			
-			$output .= '<div id="' . $value['id'] . '_color_picker" class="colorSelector"><div></div></div>';
-			$output .= '<input class="woo-color woo-border woo-border-color" name="'. $value['id'] .'_color" id="'. $value['id'] .'_color" type="text" value="'. $val .'" />';
-
-		break;   
-		
 		case "images":
 			$i = 0;
 			$select_value = get_settings( $value['id']);
