@@ -239,14 +239,14 @@ function get_select_options($options, $values)
 	foreach($options as $key => $option)
 	{
 		if(is_array($option))
-			$output .= "<optgroup label='{$option['name']}'>".get_select_options($option['options'])."</optgroup>";
+			$output .= "<optgroup label='{$option['name']}'>".get_select_options($option['options'], $values)."</optgroup>";
 		else
 		{	
 			$s = " selected='selected' ";
 			$selected = is_array($values) ? 
 						( in_array($key,$values) ? $s : '' ):
-						( $values = $key ) ? $s : '';
-			$output .= "\t<option value='{$key}' {$selected}>{$option}</option>\n";
+						( $values == $key ) ? $s : '';
+		    $output .= "\t<option value='{$key}' {$selected}>{$option}</option>\n";
 		}
 	}
 	return $output;
@@ -275,25 +275,30 @@ function get_theme_options_option($value)
 		case 'select-list':
 		case 'select-list-browsing':
 		case 'select-list-browsing-multiple':
-			if('select-list' == $value['type'])
+			if('select-list' == $value['type']){
 				$attr = ' size="5" multiple="multiple" class="select-list" ';
-			else if('select-list-browsing' == $value['type'])
+				$m = '[]';
+			}else if('select-list-browsing' == $value['type']){
 				$attr = ' size="5" class="select-list-browsing" ';
-			else
+			}else{
 				$attr = ' size="5" multiple="multiple" class="select-list-browsing-multiple" ';
+				$m = '';
+			}
 		case 'select':
+			$attr = ($attr) ? $attr : ''; // para evitar warnings, no me gustan
+			$m = ($m) ? $m : ''; 
 			$val = get_option($id) ? get_option($id) : $value['std'];
 			$label = (isset($value['label']) ? $value['label'] : _s("Select one option"));
 			$output .= "<div class='rowForm rowSelect'><div class='controls clearfix'><label for='{$id}'>{$value['name']}:</label>\n";
-			$output .= "<select name='{$id}' id='{$id}' {$attr}>\n";
+			$output .= "<select name='{$id}{$m}' id='{$id}' {$attr}>\n";
 			if('select'==$value['type'])
 				$output .= "<option value='0'>&mdash; ".$label." &mdash;</option>";
-			$output .= get_select_options($value['options']);
+			$output .= get_select_options($value['options'], $val);
 			$output .= "</select>";
 			if( preg_match('/select-list-browsing/',$value['type']) )
 			{
 				$output .= "<code class='codeblock'><strong>Path:</strong> <span id='{$id}_path'>{$value['path']}</span></code>";
-				if('select-list-browsing'==$value['type'], $val)
+				if('select-list-browsing'==$value['type'])
 				{
 					$output .= "<span class='st-currentFile-preview'>
                		<span class='stOverlay'>&nbsp;</span><img src='{$value['path']}/{$val}' id='{$id}_viewer'  alt='' /></span>";
@@ -634,7 +639,7 @@ function get_theme_options_option($value)
 				$label = (isset($child['label']) ? $child['label'] : _s("Select one option"));
 				$output .= "<label for='{$id}'>{$child['name']}:</label>\n";
 				$output .= "<select name='{$id}' id='{$id}'>\n";
-				$output .= get_select_options($child['options']);
+				$output .= get_select_options($child['options'], $val);
 				$output .= "</select>";
 			}	
 		}

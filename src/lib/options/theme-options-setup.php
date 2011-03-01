@@ -49,7 +49,7 @@ $options[] = array( "name" => "Textarea",
 $options[] = array( "name" => "Select (with short options)",
 					"desc" => $cras,
 					"id" => "selectshort",
-					"std" => "",
+					"std" => "op2",
 					"options" => array(
 						'op2' => "My Option 02",
 						'op3' => "My Option 03",
