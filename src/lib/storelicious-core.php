@@ -5,6 +5,7 @@ if(!defined('THEME_OPTIONS_ROOT'))
 
 include THEME_OPTIONS_ROOT."options/theme-options-view.php";
 include THEME_OPTIONS_ROOT."options/theme-options-helpers.php";
+include THEME_OPTIONS_ROOT."/storelicious-functions.php";
 
 // Redirect to Theme Options after Activation
 

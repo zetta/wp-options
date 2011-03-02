@@ -248,6 +248,10 @@ function get_theme_options_option($value)
 				$m = '[]';
 			}
 		case 'select':
+			if(!isset($value['options']) && isset($value['fs']))
+			{
+				$value['options'] = get_directory_files(realpath($value['fs']), isset($value['mask'])?$value['mask']:null);
+			}
 			$attr = ($attr) ? $attr : ''; // para evitar warnings, no me gustan
 			$m = ($m) ? $m : ''; 
 			$val = get_option($id) ? get_option($id) : $value['std'];
