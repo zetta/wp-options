@@ -112,8 +112,7 @@ function get_theme_options_header()
 	return "<!--#st-header-->
         <div id='st-header' class='clearfix'>
           <h2 id='st-theme-info' class='shadowBlack'>{$_wpo['name']}
-          <small>Version: {$_wpo['version']} | Framework: {$_wpo['fversion'][0]}"
-          . ( 'stable' != $_wpo['fversion'][1] ? '-'.$_wpo['fversion'][1].'-release' : '' ) . "</small></h2>
+          <small>Version: {$_wpo['version']} | Framework: {$_wpo['fversion']}</small></h2>
           <h1 id='st-logo'>Storelicious &mdash; theme-options</h1>
         </div>
         <!--/#st-header--> ";
@@ -248,6 +247,10 @@ function get_theme_options_option($value)
 				$m = '[]';
 			}
 		case 'select':
+			if(!isset($value['options']) && isset($value['fs']))
+			{
+				$value['options'] = get_directory_files(realpath($value['fs']), isset($value['mask'])?$value['mask']:null);
+			}
 			$attr = ($attr) ? $attr : ''; // para evitar warnings, no me gustan
 			$m = ($m) ? $m : ''; 
 			$val = get_option($id) ? get_option($id) : $value['std'];

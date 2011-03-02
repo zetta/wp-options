@@ -5,6 +5,7 @@ if(!defined('THEME_OPTIONS_ROOT'))
 
 include THEME_OPTIONS_ROOT."options/theme-options-view.php";
 include THEME_OPTIONS_ROOT."options/theme-options-helpers.php";
+include THEME_OPTIONS_ROOT."/storelicious-functions.php";
 
 // Redirect to Theme Options after Activation
 
@@ -35,11 +36,6 @@ function add_theme_options_page()
     }
     /*
     // TODO manager de las metabox
-    foreach($this->subpages as $sub)
-    {
-        add_submenu_page(basename(__FILE__), _s($sub['pageTitle']), _s($sub['title']), 'edit_themes', $sub['slug'], $sub['function']);
-    }
-    
     if ($this->hasMetaBox())
     {
         add_meta_box('wpoptions_section', $this->themeName . ' :: '._s("Post Settings"), $this->getFunctionScope('renderMetaBox'), 'post', 'normal','high',array('type'=>'post'));
@@ -47,7 +43,22 @@ function add_theme_options_page()
         add_action('save_post', $this->getFunctionScope('savePostData'));
     }*/
 }
+
+function add_theme_options_subpages()
+{
+	$path = THEME_OPTIONS_ROOT.'pages/';
+	$pages = get_directory_files($path, '.php$');
+	foreach($pages as $page)
+	{
+		$headers = array('slug'=>'slug','title'=>'title','menu_title'=>'menu_title');
+		$data = get_file_data($path.$page, $headers );
+		add_submenu_page('storelicious', _s( $data['title'] ), _s( $data['menu_title'] ), 'edit_themes', 'storelicious/'.$data['slug'], create_function('',"require_once '{$path}{$page}';"));
+	}
+}
+
+
 add_action('admin_menu', 'add_theme_options_page');
+add_action('admin_menu', 'add_theme_options_subpages');
 
 
 function setup_options($manual_url, $forum_url, $home_url, $options, $icon = null, $more = null)
@@ -113,6 +124,9 @@ function update_storelicious_option($option)
             $info = wp_handle_upload($file, array('action' => 'update-wp-options'));
             if(isset($info['error'])) wp_die( $info['error'] );
             $value = $info['url'];
+        }else
+        {
+            return;  // evitar que se nos borren las imagenes cuando no se selecciona un archivo
         }
 	}
 	update_option($id,$value);
@@ -120,18 +134,24 @@ function update_storelicious_option($option)
 
 function get_theme_options_version()
 {
-	return include THEME_OPTIONS_ROOT."version.php";
+	$v = include THEME_OPTIONS_ROOT."storelicious-version.php";
+	return 'stable'==$v[1] ? $v[0] : implode('-',$v);
 }
 
-
-function get_theme_option()
+/**
+ * wrapper de get_option
+ * es mas facil acceder a una llave de una opcion si se le indica el indice
+ */
+function get_theme_option($option_name, $index=null)
 {
-}
+	$val = get_option($optiona_name);
+	return is_null($index) ? $val : (
+        !is_array($val) ? $val : (
+            isset($val[$index]) ? $val[$index] : $val
+        )
+    );
 
-function set_theme_option()
-{
 }
-
 
 
 

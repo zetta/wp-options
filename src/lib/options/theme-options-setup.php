@@ -146,6 +146,14 @@ $options[] = array( "name" => "Select (List // Browsing)",
 						), 
 					"type" => "select-list-browsing");
 					
+$options[] = array( "name" => "Select (List // Browsing) Automatic",
+					"desc" => $cras,
+					"id" => "selectlistbrowsing-auto",
+					"path" => get_bloginfo('template_url').'/sample/',
+					"fs" => THEME_OPTIONS_ROOT.'../sample/',
+					"std" => "feed.png",
+					"type" => "select-list-browsing");				
+					
 $options[] = array( "name" => "Select (List // Browsing Multiple)",
 					"desc" => $cras,
 					"id" => "selectlistbrowsingmultiple",
