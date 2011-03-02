@@ -113,6 +113,9 @@ function update_storelicious_option($option)
             $info = wp_handle_upload($file, array('action' => 'update-wp-options'));
             if(isset($info['error'])) wp_die( $info['error'] );
             $value = $info['url'];
+        }else
+        {
+            return;  // evitar que se nos borren las imagenes si no subimos nada
         }
 	}
 	update_option($id,$value);
