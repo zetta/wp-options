@@ -134,7 +134,8 @@ function update_storelicious_option($option)
 
 function get_theme_options_version()
 {
-	return include THEME_OPTIONS_ROOT."storelicious-version.php";
+	$v = include THEME_OPTIONS_ROOT."storelicious-version.php";
+	return 'stable'==$v[1] ? $v[0] : implode('-',$v);
 }
 
 /**

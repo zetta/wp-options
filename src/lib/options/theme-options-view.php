@@ -112,8 +112,7 @@ function get_theme_options_header()
 	return "<!--#st-header-->
         <div id='st-header' class='clearfix'>
           <h2 id='st-theme-info' class='shadowBlack'>{$_wpo['name']}
-          <small>Version: {$_wpo['version']} | Framework: {$_wpo['fversion'][0]}"
-          . ( 'stable' != $_wpo['fversion'][1] ? '-'.$_wpo['fversion'][1].'-release' : '' ) . "</small></h2>
+          <small>Version: {$_wpo['version']} | Framework: {$_wpo['fversion']}</small></h2>
           <h1 id='st-logo'>Storelicious &mdash; theme-options</h1>
         </div>
         <!--/#st-header--> ";
