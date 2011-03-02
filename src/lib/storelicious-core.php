@@ -134,18 +134,23 @@ function update_storelicious_option($option)
 
 function get_theme_options_version()
 {
-	return include THEME_OPTIONS_ROOT."version.php";
+	return include THEME_OPTIONS_ROOT."storelicious-version.php";
 }
 
-
-function get_theme_option()
+/**
+ * wrapper de get_option
+ * es mas facil acceder a una llave de una opcion si se le indica el indice
+ */
+function get_theme_option($option_name, $index=null)
 {
-}
+	$val = get_option($optiona_name);
+	return is_null($index) ? $val : (
+        !is_array($val) ? $val : (
+            isset($val[$index]) ? $val[$index] : $val
+        )
+    );
 
-function set_theme_option()
-{
 }
-
 
 
 
