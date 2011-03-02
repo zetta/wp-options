@@ -50,11 +50,16 @@ function add_theme_options_subpages()
 {
 	$path = THEME_OPTIONS_ROOT.'pages/';
 	$pages = get_directory_files($path, '.php$');
+	$page_datas = array();
 	foreach($pages as $page)
 	{
-		$headers = array('slug'=>'slug','title'=>'title','menu_title'=>'menu_title');
-		$data = get_file_data($path.$page, $headers );
-		add_submenu_page('storelicious', _s( $data['title'] ), _s( $data['menu_title'] ), 'edit_themes', 'storelicious/'.$data['slug'], create_function('',"require_once '{$path}{$page}';"));
+		$headers = array('slug'=>'slug','title'=>'title','menu_title'=>'menu_title','order' => 'order');
+		$page_datas[] = get_file_data($path.$page, $headers ) + array('page' => $page);
+	}
+	uasort($page_datas, create_function('$a,$b', 'return ($a["order"] < $b["order"]) ? -1 : 1;'));
+	foreach($page_datas as $data)
+	{
+		add_submenu_page('storelicious', _s( $data['title'] ), _s( $data['menu_title'] ), 'edit_themes', 'storelicious/'.$data['slug'], create_function('',"require_once '{$path}{$data['page']}';"));
 	}
 }
 

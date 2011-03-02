@@ -3,6 +3,7 @@
 title: Backup Template Options
 menu_title: Backup theme
 slug: backup
+order:2
  */
 ?>
 

@@ -3,6 +3,7 @@
 title: Get more Storelicious Themes
 menu_title: Get more themes
 slug: more
+order:3
  */
 ?>
 
