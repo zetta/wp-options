@@ -1,5 +1,6 @@
 #st-body{
 	margin:20px auto;
+	
 }
 #st-body a{text-decoration:none;}
 #st-body a:link,
@@ -89,6 +90,7 @@
 	margin:0;
 	padding:0;
 	list-style:none;
+	font-size:12px;
 }
 #st-side ul{
 	margin:0 0 20px 0;
@@ -269,7 +271,7 @@
 #st-body form .rowRadio label,
 #st-body form .rowInlineText label{
 	font-weight:normal;
-	line-height:22px;
+	line-height:18px;
 }
 #st-body form .rowCheck label,
 #st-body form .rowCheck input,
@@ -288,6 +290,17 @@
 	float:left;
 	display:block;
 }
+
+#st-body form .rowCheck input,
+#st-body form .rowRadio input{
+	float:left;
+	display:inline-block;
+	margin:2px 5px 2px 0
+}
+
+#st-body form .rowCheck br,
+#st-body form .rowRadio br{
+	clear:both;}
 
 /*UPLOADIFY*/
 #st-body form .rowUploadifySingle .controls object{
