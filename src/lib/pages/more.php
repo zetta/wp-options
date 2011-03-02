@@ -1,7 +1,7 @@
 <?php
 /*
-title: Get more Storelicious Themes
-menu_title: Get more themes
+title:Moreeeeeeeeeeeeeeee
+menu_title: view more
 slug: more
 order:3
  */
