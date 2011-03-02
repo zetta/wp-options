@@ -6,6 +6,8 @@ if(!defined('THEME_OPTIONS_ROOT'))
 include THEME_OPTIONS_ROOT."options/theme-options-view.php";
 include THEME_OPTIONS_ROOT."options/theme-options-helpers.php";
 include THEME_OPTIONS_ROOT."/storelicious-functions.php";
+include THEME_OPTIONS_ROOT."/storelicious-includes.php";
+include THEME_OPTIONS_ROOT."/shortcodes/init.php";
 
 // Redirect to Theme Options after Activation
 

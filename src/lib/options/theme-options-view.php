@@ -50,7 +50,7 @@ if (('admin.php' == $pagenow) && ('storelicious' == $_GET['page']))
 		<!-- theme options assets -->
 			<link rel='stylesheet' href='{$base}/css/storelicious.panel.gs.reset.css' type='text/css' media='screen' />
 			<link rel='stylesheet' href='{$base}/css/storelicious.panel.gs.css' type='text/css' media='screen' />
-			<link rel='stylesheet' href='{$base}/css/storelicious.elements.css' type='text/css' media='screen' />
+			<link rel='stylesheet' href='{$base}/css/elements.css' type='text/css' media='screen' />
 			<link rel='stylesheet' href='{$base}/css/storelicious.panel.structure.css' type='text/css' media='screen' />
 			<link rel='stylesheet' href='{$base}/css/jquery.fancybox-1.3.1.css' type='text/css' media='screen' />
 			<link rel='stylesheet' href='{$base}/css/uploadify.css' type='text/css' media='screen' />
@@ -324,13 +324,13 @@ function get_theme_options_option($value)
 			$output .= "<div class='rowForm rowFile'><div class='controls lbls clearfix'><span class='label'>{$value['name']}:</span>
 			<label for='{$id}'>{$value['label']}</label>";
 			$val = get_option($id) ? get_option($id) : $value['std'];
-			$output .= " <input type='file' name='{$id}' id='{$id}' value='{$val}' />";
+			$output .= "<input type='file' name='{$id}' id='{$id}' value='{$val}' /> <input class='stButton btnLightGrey' type='button' value='".__('Upload','storeliciouspanel')."' />";
 		break;
 		case 'file-viewer':
 			$output .= "<div class='rowForm rowFile'><div class='controls lbls clearfix'><span class='label'>{$value['name']}:</span>
 			<label for='{$id}'>{$value['label']}</label>";
 			$val = get_option($id) ? get_option($id) : $value['std'];
-			$output .= " <input type='file' name='{$id}' id='{$id}' value='{$val}' />";
+			$output .= " <input type='file' name='{$id}' id='{$id}' value='{$val}' /> <input class='stButton btnLightGrey' type='button' value='".__('Upload','storeliciouspanel')."' />";
 			if($val)
 			{
 					// aqui ayudame, ¿donde irian esos ? ¿cómo pongo este valor? get_template_directory_uri()?? GRACIAS!!

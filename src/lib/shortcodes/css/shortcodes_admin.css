@@ -1,0 +1,61 @@
+* #st-body a{font-weight:bold; text-decoration:none;}
+
+#st-body .btnSquare,
+#st-body .stButton {font-size:12px;}
+
+
+.storelicious_shortcodes fieldset{
+	padding:0 0 0 15px;
+	background-color:#EFEFEF;
+	border-bottom-width:2px;
+}
+
+.storelicious_shortcodes fieldset p{
+	overflow:hidden;
+	padding:10px 0;
+	position:relative;
+	margin:5px 0;
+	height:auto;
+}
+.storelicious_shortcodes fieldset p label{
+	display:block;
+	font-weight:bold;
+	width:70px;
+	float:left;
+	margin:5px 10px 0 0;
+	cursor:pointer;
+}
+
+.storelicious_shortcodes p small.desc{
+	font-size: 10px;
+	font-family:Tahoma, Geneva, sans-serif;
+	color: #666;
+	padding: 2px 0 0 80px;
+	display:block;
+}
+
+.storelicious_shortcodes fieldset p select,
+.storelicious_shortcodes fieldset p input.inputTxt,
+.storelicious_shortcodes fieldset p textarea{
+	border:1px solid #CCC;
+	width:70%;
+	padding:4px;
+}
+
+.storelicious_shortcodes fieldset p select{ width:auto;}
+
+.storelicious_shortcodes p select:focus,
+.storelicious_shortcodes p input:focus,
+.storelicious_shortcodes p textarea:focus{
+	outline-color:#09C;
+}
+
+.storelicious_shortcodes p textarea{
+	height:100px;
+	font-size:12px; line-height:180%;}
+
+.storelicious_shortcodes .mceActionPanel{
+	overflow:hidden;
+}
+.storelicious_shortcodes .mceActionPanel input#insert{float:right;}
+.storelicious_shortcodes .mceActionPanel input#cancel{float:left;}
