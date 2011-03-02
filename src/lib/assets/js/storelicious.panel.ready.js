@@ -35,11 +35,9 @@ $('.wpSliderOption').each(function(){
 		min: parseInt($('#'+id+'_min').val()), 
 		max: parseInt($('#'+id+'_max').val()), 
 		value: parseInt($('#'+id).val()),
-		slide: function(e, ui) { $('.wpSliderAmount_{$id}').val(ui.value); }
+		slide: function(e, ui) { $('#'+id).val(ui.value); }
 	}
-	console.log(opts);
 	$(this).slider(opts);
-	//$('#'+id).val($(this).slider("value"));
 });
 
 
