@@ -36,11 +36,6 @@ function add_theme_options_page()
     }
     /*
     // TODO manager de las metabox
-    foreach($this->subpages as $sub)
-    {
-        add_submenu_page(basename(__FILE__), _s($sub['pageTitle']), _s($sub['title']), 'edit_themes', $sub['slug'], $sub['function']);
-    }
-    
     if ($this->hasMetaBox())
     {
         add_meta_box('wpoptions_section', $this->themeName . ' :: '._s("Post Settings"), $this->getFunctionScope('renderMetaBox'), 'post', 'normal','high',array('type'=>'post'));
@@ -48,7 +43,22 @@ function add_theme_options_page()
         add_action('save_post', $this->getFunctionScope('savePostData'));
     }*/
 }
+
+function add_theme_options_subpages()
+{
+	$path = THEME_OPTIONS_ROOT.'pages/';
+	$pages = get_directory_files($path, '.php$');
+	foreach($pages as $page)
+	{
+		$headers = array('slug'=>'slug','title'=>'title','menu_title'=>'menu_title');
+		$data = get_file_data($path.$page, $headers );
+		add_submenu_page('storelicious', _s( $data['title'] ), _s( $data['menu_title'] ), 'edit_themes', 'storelicious/'.$data['slug'], create_function('',"require_once '{$path}{$page}';"));
+	}
+}
+
+
 add_action('admin_menu', 'add_theme_options_page');
+add_action('admin_menu', 'add_theme_options_subpages');
 
 
 function setup_options($manual_url, $forum_url, $home_url, $options, $icon = null, $more = null)
@@ -116,7 +126,7 @@ function update_storelicious_option($option)
             $value = $info['url'];
         }else
         {
-            return;  // evitar que se nos borren las imagenes si no subimos nada
+            return;  // evitar que se nos borren las imagenes cuando no se selecciona un archivo
         }
 	}
 	update_option($id,$value);

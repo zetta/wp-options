@@ -1,7 +1,7 @@
 <?php
 
 
-function get_directory_files($path, $mask)
+function get_directory_files($path, $mask=null)
 {
 	$results = array();
 	$handler = opendir($path);
@@ -9,7 +9,13 @@ function get_directory_files($path, $mask)
 	{
 		if ($file != "." && $file != "..")
 		{
-			$results[] = $file;
+			if(isset($mask))
+			{
+				if (preg_match('/'.$mask.'/i', $file) )
+					$results[] = $file;
+			}
+			else
+				$results[] = $file;
 		}
 	}
 	return array_combine($results,$results);
