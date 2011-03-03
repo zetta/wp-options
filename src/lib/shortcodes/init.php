@@ -71,7 +71,7 @@
 	add_action('admin_head', 'storelicious_css_admin_shortcodes');
 	function storelicious_css_admin_shortcodes() {
 		$output = '
-		<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/assets/css/storelicious.panel.gs.reset.css" />
+		
 		<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/assets/css/storelicious.panel.gs.css" />
 		<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/shortcodes/css/storelicious.panel.structure.css" />
 		<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/shortcodes/css/shortcodes.css" />

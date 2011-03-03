@@ -1,6 +1,6 @@
 <?php
 
-include "../../../../../../../wp-config.php";
+include "../../../../../../wp-config.php";
 $st_theme = get_bloginfo("template_url").'/';
 $root = get_bloginfo("wpurl").'/';
 

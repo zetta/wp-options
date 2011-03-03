@@ -393,7 +393,7 @@ var URL = null;
             case 'storelicious_button':
 				
                 var c = cm.createMenuButton('storelicious_split_button', {
-                    title : 'Uakami Shortcodes Framework',
+                    title : 'Storelicious Shortcodes Framework',
                     image : url + '/icons/storelicious.png',
 					icons : false,
                     onclick : function() {
@@ -404,7 +404,7 @@ var URL = null;
                 c.onRenderMenu.add(function(c, m) {
 					
 					
-					m.add({title : 'Uakami Shortcodes', 'class' : 'mceMenuItemTitle'}).setDisabled(1);
+					m.add({title : 'Storelicious Shortcodes', 'class' : 'mceMenuItemTitle'}).setDisabled(1);
 					
                    m.add({title : 'Button', onclick : function() {
 						tinyMCE.activeEditor.execCommand('mce_storelicious_buttons', false);

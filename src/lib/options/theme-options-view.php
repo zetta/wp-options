@@ -48,7 +48,7 @@ if (('admin.php' == $pagenow) && ('storelicious' == $_GET['page']))
 		$base = get_bloginfo('template_url').'/lib/assets';
 		echo "
 		<!-- theme options assets -->
-			<link rel='stylesheet' href='{$base}/css/storelicious.panel.gs.reset.css' type='text/css' media='screen' />
+			
 			<link rel='stylesheet' href='{$base}/css/storelicious.panel.gs.css' type='text/css' media='screen' />
 			<link rel='stylesheet' href='{$base}/css/elements.css' type='text/css' media='screen' />
 			<link rel='stylesheet' href='{$base}/css/storelicious.panel.structure.css' type='text/css' media='screen' />

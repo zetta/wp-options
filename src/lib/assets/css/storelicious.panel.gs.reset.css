@@ -1,1 +1,9 @@
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+.st div,.st span,.st applet,.st object,.st iframe,.st h1,.st h2,.st h3,.st h4,.st h5,.st h6,.st p,.st blockquote,.st pre,.st a,.st abbr,.st acronym,.st address,.st big,.st cite,.st code,.st del,.st dfn,.st em,.st font,.st img,.st ins,.st kbd,.st q,.st s,.st samp,.st small,.st strike,.st strong,.st sub,.st sup,.st tt,.st var,.st b,.st u,.st i,.st center,.st dl,.st dt,.st dd,.st ol,.st ul,.st li,.st fieldset,.st form,.st label,.st legend,.st table,.st caption,.st tbody,.st tfoot,.st thead,.st tr,.st th,.st td{border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;margin:0;padding:0}
+body{line-height:1}
+.st ol,.st ul{list-style:none}
+.st blockquote,.st q{quotes:none}
+.st blockquote:before,.st blockquote:after,.st q:before,q:after{content:none}
+.st :focus{outline:0}
+.st ins{text-decoration:none}
+.st del{text-decoration:line-through}
+.st table{border-collapse:collapse;border-spacing:0}
