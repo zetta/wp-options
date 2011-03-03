@@ -1,21 +1,14 @@
 <?php
 
-echo 'bootstraping';
 
-//if (!defined('WP_VERSION'))  define('WP_VERSION','3.0');
-
-/**
- * Mocking objects and functions
- */
-//require_once 'objects.php';
-///require_once 'functions.php';
-
-
-/**
- * Initialize wp-options
- */
-//require_once 'src/lib/includer.php';
-
-
+if (!defined('WP_INSTALATION'))
+{
+    define ("WP_INSTALATION",'/var/www/wordpress/');
+    set_include_path(get_include_path() . PATH_SEPARATOR . WP_INSTALATION);
+    
+    $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+    require_once "wp-config.php";
+    //error_reporting(-1);
+}
 
 

@@ -27,6 +27,10 @@ class WpOptionsTest extends PHPUnit_Framework_TestCase
    
     public function testSomething()
     {
+    
+        //$opt = get_option('text');
+        //$this->assertEquals('same text', $opt);
+    
         $this->assertTrue(true);
     }
     

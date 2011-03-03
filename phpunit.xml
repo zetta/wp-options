@@ -8,7 +8,8 @@
          convertWarningsToExceptions="true"
          processIsolation="true"
          stopOnFailure="false"
-         syntaxCheck="false"
+         syntaxCheck="true"
+         storText="test/report"
          bootstrap="test/bootstrap.php"
 >
   <testsuites>
