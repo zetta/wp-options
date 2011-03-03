@@ -6,11 +6,8 @@ slug: buy
 order:1
  */
  
-
- 
- $xml = simplexml_load_file("http://storelicious.com/browse/themes/feed/");
- 
- 
+$xml = simplexml_load_file("http://feeds.feedburner.com/StoreliciousThemes?format=xml");
+  
 ?>
 
 <div id='storelicious-page-outer' class='st'>
