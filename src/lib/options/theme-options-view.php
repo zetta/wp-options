@@ -40,7 +40,7 @@ function render_options_page()
 }
 
 
-if (('admin.php' == $pagenow) && ('storelicious' == $_GET['page']))
+if (('admin.php' == $pagenow) && (preg_match('/^storelicious/',$_GET['page'])))
 {
     add_action('admin_head', 'add_theme_options_meta');
 	function add_theme_options_meta()

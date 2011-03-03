@@ -73,7 +73,6 @@
 		$output = '
 		
 		<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/assets/css/storelicious.panel.gs.css" />
-		<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/shortcodes/css/storelicious.panel.structure.css" />
 		<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/shortcodes/css/shortcodes.css" />
 		<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/shortcodes/css/shortcodes_admin.css" />
 		';
