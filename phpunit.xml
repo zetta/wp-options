@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
+<phpunit backupGlobals="FALSE"
+         backupStaticAttributes="FALSE"
          colors="false"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
@@ -9,7 +9,7 @@
          processIsolation="true"
          stopOnFailure="false"
          syntaxCheck="true"
-         storText="test/report"
+         storyText="test/report"
          bootstrap="test/bootstrap.php"
 >
   <testsuites>
