@@ -8,7 +8,7 @@ class st_misc_buttons {
 		if(is_admin()){
 			if ( current_user_can('edit_posts') && current_user_can('edit_pages') && get_user_option('rich_editing') == 'true')
 			{
-				add_filter('tiny_mce_version', array(&$this, 'st_tiny_mce_version'));
+				//add_filter('tiny_mce_version', array(&$this, 'st_tiny_mce_version'));
 				add_filter("mce_external_plugins", array(&$this, "st_mce_external_plugins"));
 				add_filter('mce_buttons_2', array(&$this, 'st_mce_buttons'));
 			}
@@ -26,6 +26,7 @@ class st_misc_buttons {
 		return ++$version;
 	}
 }
+
 add_action('init', 'st_misc_buttons');
 function st_misc_buttons(){
 	global $st_misc_buttons;
@@ -35,5 +36,3 @@ function st_misc_buttons(){
 
 
 	
-
-?>

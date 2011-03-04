@@ -2,7 +2,9 @@ var URL = null;
 (function() {
 	
 	// Load plugin specific language pack
-	tinymce.PluginManager.requireLangPack('storelicious_tinymce');
+	//tinymce.PluginManager.requireLangPack('storelicious_tinymce');
+	// este requireLangPack no deja que funcionen los shortcodes en wp 3.1
+	// es necesario mas documentacion para agregar de forma adecuada el langPack
 	
 	tinymce.create('tinymce.plugins.storelicious_tinymce', {	
 		 
