@@ -22,7 +22,7 @@ $compare = version_compare($current_version, $latest_version);
 ?>
 <div id='storelicious-page-outer' class='st'>
   <div id='st-body' class='container_12'>
-	<h1><?= _s("Storelicios Framework Version") ?></h1>
+	<h1><?= _s("Storelicious Framework Version") ?></h1>
 
 		<ul>
 			<li><?= _s("Instaled Version") ?>: <?php echo $current_version ?></li>

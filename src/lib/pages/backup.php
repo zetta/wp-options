@@ -11,8 +11,7 @@ order:2
 	<h1><?= _s("Backup Storelicious Theme") ?></h1>
 
 
-<p>backupeando =) </p>
-
+		
 
 	</div>
 </div>
