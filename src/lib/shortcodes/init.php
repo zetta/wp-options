@@ -67,85 +67,93 @@ function storelicious_js_shortcodes() {
  
  /*
  ESTAS SOLO TENDRIAN QUE CARGAR EN LAS PAGINAS CREADAS
+ y que hacemos con estas? esas solo deberían cargar en las que tienen /storelicious/
+ pero y esa que dice shortcode.css??
+  también bro, porque son para documentación, ejemplos, etc.. dentro del admin, los shortcodes en el theme ya cargan de manera independiente
+  entonces mejor los movemos a la otra carpeta?? o ahi estan bien?? como consideras tu== ahí están bien ¿no? que esté dividido, porque el motor de
+  los shortcodes es otra madre que estaré "alimenando
+zzaz  "
+listo!!! =) 
  */
- 
-add_action('admin_head', 'storelicious_css_admin_shortcodes');
-function storelicious_css_admin_shortcodes() {
-	$output = '
-	
-	<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/assets/css/storelicious.panel.gs.css" />
-	<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/shortcodes/css/shortcodes.css" />
-	<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/shortcodes/css/shortcodes_admin.css" />
-	';
-	echo $output;
-}
 
-add_action('init', 'storelicious_js_admin_shortcodes');
-function storelicious_js_admin_shortcodes() {
-		wp_register_script('storeliciousShortcodes', get_bloginfo('template_url').'/lib/shortcodes/js/shortcodes.js');
-		wp_register_script('storeliciousModernizr', get_bloginfo('template_url').'/lib/assets/js/modernizr-1.6.min.js');
-		wp_register_script('storeliciousTipsy', get_bloginfo('template_url').'/lib/assets/js/jquery.tipsy.pack.js');
-		wp_register_script('storeliciousSwfObject', get_bloginfo('template_url').'/lib/assets/js/swfobject.js');
+if (('admin.php' == $pagenow) && (preg_match('/^storelicious/',$_GET['page'])))
+{
+	add_action('admin_head', 'storelicious_css_admin_shortcodes');
+	function storelicious_css_admin_shortcodes() {
+		$output = '
 		
-		wp_enqueue_script('storeliciousModernizr');
-		wp_enqueue_script('storeliciousSwfObject');
-		wp_enqueue_script('storeliciousTipsy');
-		wp_enqueue_script('storeliciousShortcodes');
+		<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/assets/css/storelicious.panel.gs.css" />
+		<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/shortcodes/css/shortcodes.css" />
+		<link type="text/css" media="screen" rel="stylesheet" href="'.get_bloginfo('template_url').'/lib/shortcodes/css/shortcodes_admin.css" />
+		';
+		echo $output;
+	}
+	
+	add_action('init', 'storelicious_js_admin_shortcodes');
+	function storelicious_js_admin_shortcodes() {
+			wp_register_script('storeliciousShortcodes', get_bloginfo('template_url').'/lib/shortcodes/js/shortcodes.js');
+			wp_register_script('storeliciousModernizr', get_bloginfo('template_url').'/lib/assets/js/modernizr-1.6.min.js');
+			wp_register_script('storeliciousTipsy', get_bloginfo('template_url').'/lib/assets/js/jquery.tipsy.pack.js');
+			wp_register_script('storeliciousSwfObject', get_bloginfo('template_url').'/lib/assets/js/swfobject.js');
+			
+			wp_enqueue_script('storeliciousModernizr');
+			wp_enqueue_script('storeliciousSwfObject');
+			wp_enqueue_script('storeliciousTipsy');
+			wp_enqueue_script('storeliciousShortcodes');
+	}
 }
 /************************************************************************************		
  * ADD SHORTCODES JAVASCRIPT
  ************************************************************************************/
  
-  /*
- ESTAS SOLO TENDRIAN QUE CARGAR EN LAS PAGINAS CREADAS
- */
- 
-add_action('admin_footer', 'storelicious_shortcodes_functions');
-add_action('wp_footer', 'storelicious_shortcodes_functions');
-function storelicious_shortcodes_functions() {
-	$output = "
-	<script type=\"text/javascript\">
-		jQuery(document).ready(function() {
-			
-			jQuery('.storeliciousToggle-open, .storeliciousToggle-closed').each(function() {
-				jQuery(this).storeliciousToggle();
+if (('admin.php' == $pagenow) && (preg_match('/^storelicious/',$_GET['page'])))
+{ 
+	add_action('admin_footer', 'storelicious_shortcodes_functions'); //carga en el admin
+} 
+	add_action('wp_footer', 'storelicious_shortcodes_functions'); //carga en el front
+	function storelicious_shortcodes_functions() {
+		$output = "
+		<script type=\"text/javascript\">
+			jQuery(document).ready(function() {
+				
+				jQuery('.storeliciousToggle-open, .storeliciousToggle-closed').each(function() {
+					jQuery(this).storeliciousToggle();
+				});
+				
+				jQuery('.stImgSlide').each(function() {
+					jQuery(this).storeliciousSlideImage();
+				});
+	
+				jQuery('.stNotification').each(function() {
+					jQuery(this).closeNotification();
+				});
+				
+				jQuery('.stGallery').each(function() {
+					jQuery(this).storeliciousGallery();
+				});
+				
+				jQuery('.stTooltip').each(function() {
+					jQuery(this).storeliciousTooltips();
+				});
+				
+				jQuery('.tabbedContent').each(function() {
+					jQuery(this).storeliciousTabs();
+				});
+				
+				jQuery('.stAccordion').each(function() {
+					jQuery(this).storeliciousAccordion();
+				});
+				
+				
+				jQuery('ol li:first').addClass('first');
+				jQuery('ol li:last').addClass('last');
+				jQuery('ol li').wrapInner('<\p>');
+				
+				
 			});
-			
-			jQuery('.stImgSlide').each(function() {
-				jQuery(this).storeliciousSlideImage();
-			});
-
-			jQuery('.stNotification').each(function() {
-				jQuery(this).closeNotification();
-			});
-			
-			jQuery('.stGallery').each(function() {
-				jQuery(this).storeliciousGallery();
-			});
-			
-			jQuery('.stTooltip').each(function() {
-				jQuery(this).storeliciousTooltips();
-			});
-			
-			jQuery('.tabbedContent').each(function() {
-				jQuery(this).storeliciousTabs();
-			});
-			
-			jQuery('.stAccordion').each(function() {
-				jQuery(this).storeliciousAccordion();
-			});
-			
-			
-			jQuery('ol li:first').addClass('first');
-			jQuery('ol li:last').addClass('last');
-			jQuery('ol li').wrapInner('<\p>');
-			
-			
-		});
-	</script>";
-	echo $output;
-}
-
+		</script>";
+		echo $output;
+	}
 
 //if open in fancybox
 function ifFancy($fancybox) {

@@ -39,7 +39,10 @@ function render_options_page()
 </div>';
 }
 
-
+// esats solo se agregan cuando esta la pagina de options  o una subpage,
+// porque todos los slugs de las subpages se limitan a storelicious/SLUG 
+// entonces si quiero cargar esa madre para código el syntax no se que... lo puedo hacer usando esa variable ¿no? pa' que eso solo cargue en las páginas que yo le especifique?
+// asi mismo!!
 if (('admin.php' == $pagenow) && (preg_match('/^storelicious/',$_GET['page'])))
 {
     add_action('admin_head', 'add_theme_options_meta');
@@ -84,19 +87,24 @@ if (('admin.php' == $pagenow) && (preg_match('/^storelicious/',$_GET['page'])))
 		wp_enqueue_script('storeliciousFancybox');
 		wp_enqueue_script('storeliciousColorPicker');
 		
-		/*syntax highlighter (no se para que)
-		wp_register_script('storeliciousShCore', $base.'/js/shCore.js');
-		wp_register_script('storeliciousShLegacy', $base.'/js/shLegacy.js');
-		wp_register_script('storeliciousShCss', $base.'/js/shBrushCss.js');
-		wp_register_script('storeliciousShJs', $base.'/js/shBrushJScript.js');
-		wp_register_script('storeliciousShPhp', $base.'/js/shBrushPhp.js');
-		wp_register_script('storeliciousShXml', $base.'/js/shBrushXml.js');
-		wp_enqueue_script('storeliciousShCore');
-		wp_enqueue_script('storeliciousShLegacy');
-		wp_enqueue_script('storeliciousShCss');
-		wp_enqueue_script('storeliciousShJs');
-		wp_enqueue_script('storeliciousShPhp');
-		wp_enqueue_script('storeliciousShXml');*/
+	    /**
+	     * estas deberian entrar cuando la subpagina tiene un slug tipo docs/abcd...
+	     */
+		if(preg_match('#^storelicious/docs/#',$_GET['page']))
+		{
+			wp_register_script('storeliciousShCore', $base.'/js/shCore.js');
+			wp_register_script('storeliciousShLegacy', $base.'/js/shLegacy.js');
+			wp_register_script('storeliciousShCss', $base.'/js/shBrushCss.js');
+			wp_register_script('storeliciousShJs', $base.'/js/shBrushJScript.js');
+			wp_register_script('storeliciousShPhp', $base.'/js/shBrushPhp.js');
+			wp_register_script('storeliciousShXml', $base.'/js/shBrushXml.js');
+			wp_enqueue_script('storeliciousShCore');
+			wp_enqueue_script('storeliciousShLegacy');
+			wp_enqueue_script('storeliciousShCss');
+			wp_enqueue_script('storeliciousShJs');
+			wp_enqueue_script('storeliciousShPhp');
+			wp_enqueue_script('storeliciousShXml');
+		}
 		
 		wp_register_script('storeliciousPanelReady', $base.'/js/storelicious.panel.ready.js');
 		wp_enqueue_script('storeliciousPanelReady');
