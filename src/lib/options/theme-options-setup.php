@@ -45,6 +45,10 @@ $options[] = array( "name" => "Textarea",
 					"std" => "",
 					"options" => array('cols' => 44), // optional claro
 					"type" => "textarea");
+
+$options[] = array( "name" => _s("Selects"),
+                    "type" => "tab");
+
 					
 $options[] = array( "name" => "Select (with short options)",
 					"desc" => $cras,
@@ -150,7 +154,7 @@ $options[] = array( "name" => "Select (List // Browsing) Automatic",
 					"desc" => $cras,
 					"id" => "selectlistbrowsing-auto",
 					"path" => get_bloginfo('template_url').'/sample/',
-					"fs" => THEME_OPTIONS_ROOT.'../sample/',
+					"fs" => THEME_OPTIONS_ROOT.'../sample/',  // se le envia fs para que busque automaticamente en el filesystem
 					"std" => "feed.png",
 					"type" => "select-list-browsing");				
 					
@@ -165,6 +169,15 @@ $options[] = array( "name" => "Select (List // Browsing Multiple)",
 						'logo.png' => "LogoStorelicious",
 						), 
 					"type" => "select-list-browsing-multiple");
+
+
+$options[] = array( "name" => "Select post-type",
+					"desc" => $cras,
+					"id" => "select-post-type",
+					"std" => "op2",
+					"type" => "select-post-type");
+
+
 
 //  --- NEW TAB --- 
 $options[] = array( "name" => _s("Checks & Radio Buttons"),

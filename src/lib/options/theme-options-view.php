@@ -242,6 +242,8 @@ function get_theme_options_option($value)
 			$cols = isset($value['options']['cols']) ? $value['options']['cols'] : 40 ;
 			$output .= "<textarea rows='12' cols='{$cols}' name='{$id}' id='{$id}'>{$val}</textarea>";
 		break;
+		case 'select-post-type':
+			$value['options'] = array_combine( get_post_types(), get_post_types() ) ;
 		case 'select-list':
 		case 'select-list-browsing':
 		case 'select-list-browsing-multiple':
