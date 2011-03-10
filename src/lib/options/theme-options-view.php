@@ -242,45 +242,6 @@ function get_theme_options_option($value)
 			$cols = isset($value['options']['cols']) ? $value['options']['cols'] : 40 ;
 			$output .= "<textarea rows='12' cols='{$cols}' name='{$id}' id='{$id}'>{$val}</textarea>";
 		break;
-		case 'select-post-type':
-			$value['options'] = array_combine( get_post_types(), get_post_types() ) ;
-		case 'select-list':
-		case 'select-list-browsing':
-		case 'select-list-browsing-multiple':
-			if('select-list' == $value['type']){
-				$attr = ' size="5" multiple="multiple" class="select-list" ';
-				$m = '[]';
-			}else if('select-list-browsing' == $value['type']){
-				$attr = ' size="5" class="select-list-browsing" ';
-			}else{
-				$attr = ' size="5" multiple="multiple" class="select-list-browsing-multiple" ';
-				$m = '[]';
-			}
-		case 'select':
-			if(!isset($value['options']) && isset($value['fs']))
-			{
-				$value['options'] = get_directory_files(realpath($value['fs']), isset($value['mask'])?$value['mask']:null);
-			}
-			$attr = ($attr) ? $attr : ''; // para evitar warnings, no me gustan
-			$m = ($m) ? $m : ''; 
-			$val = get_option($id) ? get_option($id) : $value['std'];
-			$label = (isset($value['label']) ? $value['label'] : _s("Select one option"));
-			$output .= "<div class='rowForm rowSelect'><div class='controls clearfix'><label for='{$id}'>{$value['name']}:</label>\n";
-			$output .= "<select name='{$id}{$m}' id='{$id}' {$attr}>\n";
-			if('select'==$value['type'])
-				$output .= "<option value='0'>&mdash; ".$label." &mdash;</option>";
-			$output .= get_select_options($value['options'], $val);
-			$output .= "</select>";
-			if( preg_match('/select-list-browsing/',$value['type']) )
-			{
-				$output .= "<code class='codeblock'><strong>Path:</strong> <span id='{$id}_path'>{$value['path']}</span></code>";
-				if('select-list-browsing'==$value['type'])
-				{
-					$output .= "<span class='st-currentFile-preview'>
-               		<span class='stOverlay'>&nbsp;</span><img src='{$value['path']}/{$val}' id='{$id}_viewer'  alt='' /></span>";
-               	}
-			}
-		break;
 		case 'checkbox':
 			$val = get_option($id) ? get_option($id) : $value['std'];
 			$output .= "<div class='rowForm rowCheck'><span class='label'>{$value['name']}</span><div class='controls lbls clearfix'>";
@@ -347,6 +308,56 @@ function get_theme_options_option($value)
 				$output .= "<span class='st-currentFile-preview'>
            		   <span class='stOverlay'>&nbsp;</span><img src='".get_template_directory_uri()."/lib/scripts/timthumb.php?src={$val}&amp;w={$value['width']}&amp;h={$value['height']}&amp;zc=1&amp;q=60&amp;a=t' id='{$id}_viewer'  alt='' /></span>";
             }
+		break;
+		// los selects!!!! o_O
+		case 'select-post-type':
+		case 'select-taxonomies':
+		case 'select-list':
+		case 'select-list-browsing':
+		case 'select-list-browsing-multiple':
+			if('select-list' == $value['type']){
+				$attr = ' size="5" multiple="multiple" class="select-list" ';
+				$m = '[]';
+			}else if('select-list-browsing' == $value['type']){
+				$attr = ' size="5" class="select-list-browsing" ';
+			}else if('select-list-browsing-multiple' == $value['type']){
+				$attr = ' size="5" multiple="multiple" class="select-list-browsing-multiple" ';
+				$m = '[]';
+			}
+			else if(isset($value['multiple']) && $value['multiple'])
+			{
+				$attr = ' size="5" multiple="multiple" class="select-list-browsing-multiple"';
+				$m = '[]';
+			}
+		case 'select':
+			if(!isset($value['options']) && isset($value['fs']))
+			{
+				$value['options'] = get_directory_files(realpath($value['fs']), isset($value['mask'])?$value['mask']:null);
+			}else if('select-post-type' == $value['type'])
+			{
+				$value['options'] = array_combine( get_post_types(), get_post_types() );
+			}else if('taxonomies' == $value['type']){
+				$value['options'] = array_combine( get_taxonomies(), get_taxonomies() );
+			}
+			$attr = ($attr) ? $attr : ''; // para evitar warnings, no me gustan
+			$m = ($m) ? $m : ''; 
+			$val = get_option($id) ? get_option($id) : $value['std'];
+			$label = (isset($value['label']) ? $value['label'] : _s("Select one option"));
+			$output .= "<div class='rowForm rowSelect'><div class='controls clearfix'><label for='{$id}'>{$value['name']}:</label>\n";
+			$output .= "<select name='{$id}{$m}' id='{$id}' {$attr}>\n";
+			if('select'==$value['type'])
+				$output .= "<option value='0'>&mdash; ".$label." &mdash;</option>";
+			$output .= get_select_options($value['options'], $val);
+			$output .= "</select>";
+			if( preg_match('/select-list-browsing/',$value['type']) )
+			{
+				$output .= "<code class='codeblock'><strong>Path:</strong> <span id='{$id}_path'>{$value['path']}</span></code>";
+				if('select-list-browsing'==$value['type'])
+				{
+					$output .= "<span class='st-currentFile-preview'>
+               		<span class='stOverlay'>&nbsp;</span><img src='{$value['path']}/{$val}' id='{$id}_viewer'  alt='' /></span>";
+               	}
+			}
 		break;
 	}
 		

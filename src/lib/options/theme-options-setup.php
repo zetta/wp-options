@@ -46,6 +46,15 @@ $options[] = array( "name" => "Textarea",
 					"options" => array('cols' => 44), // optional claro
 					"type" => "textarea");
 
+
+
+
+
+
+
+// ---------> Selects!! 
+
+
 $options[] = array( "name" => _s("Selects"),
                     "type" => "tab");
 
@@ -171,11 +180,37 @@ $options[] = array( "name" => "Select (List // Browsing Multiple)",
 					"type" => "select-list-browsing-multiple");
 
 
-$options[] = array( "name" => "Select post-type",
+$options[] = array( "name" => "Select post-type (Multiple)",
 					"desc" => $cras,
 					"id" => "select-post-type",
+					'multiple' => true,
 					"std" => "op2",
 					"type" => "select-post-type");
+					
+$options[] = array( "name" => "Select post-type ",
+					"desc" => $cras,
+					"id" => "select-post-type2",
+					'multiple' => false,
+					"std" => "op2",
+					"type" => "select-post-type");
+
+
+
+$options[] = array( "name" => "Select taxonomy ",
+					"desc" => $cras,
+					"id" => "select-taxonomies",
+					'multiple' => true,
+					"std" => "op2",
+					"type" => "select-taxonomies");
+
+
+
+
+
+
+
+
+
 
 
 
